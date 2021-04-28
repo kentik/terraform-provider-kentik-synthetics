@@ -48,3 +48,16 @@ func makeNestedObjectSchema(mode schemaMode, properties map[string]*schema.Schem
 		},
 	}
 }
+
+// makeReadOnlyNestedObjectSchema returns a list of 1 element to emulate nested object.
+// The object is read-only - only provided by the server.
+// See: https://learn.hashicorp.com/tutorials/terraform/provider-create?in=terraform/providers#define-order-schema
+func makeReadOnlyNestedObjectSchema(properties map[string]*schema.Schema) *schema.Schema {
+	return &schema.Schema{
+		Type:     schema.TypeList,
+		Computed: true,
+		Elem: &schema.Resource{
+			Schema: properties,
+		},
+	}
+}
