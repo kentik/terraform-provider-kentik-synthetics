@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	itemsKey = "items"
+	itemsKey              = "items"
 	invalidAgentsCountKey = "invalid_agents_count"
 )
 
@@ -23,14 +23,14 @@ func dataSourceAgents() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			itemsKey: {
 				Type:     schema.TypeList,
-				Computed: true,
+				Computed: computedOnRead(readList),
 				Elem: &schema.Resource{
-					Schema: makeAgentSchema(),
+					Schema: makeAgentSchema(readList),
 				},
 			},
 			invalidAgentsCountKey: {
-				Type: schema.TypeInt,
-				Computed: true,
+				Type:     schema.TypeInt,
+				Computed: computedOnRead(readList),
 			},
 		},
 	}

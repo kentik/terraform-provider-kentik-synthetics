@@ -1,17 +1,15 @@
 package synthetics
 
 import (
-	"net/http"
-	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 // Note: values checked in tests below are provided by stub API Server from test-data.json (running in background)
 
 func TestDataSourceAgents(t *testing.T) {
+	t.Parallel()
 	resource.UnitTest(t, resource.TestCase{
 		PreCheck:          func() { checkAPIServerConnection(t) },
 		ProviderFactories: providerFactories(),
@@ -79,23 +77,3 @@ const (
 		data "kentik-synthetics_agents" "dummy-agents" {}
 	`
 )
-
-func checkAPIServerConnection(t *testing.T) {
-	apiURL, ok := os.LookupEnv("KTAPI_URL")
-	if !ok {
-		t.Fatal("KTAPI_URL env variable not set")
-	}
-
-	_, err := http.Get(apiURL)
-	if err != nil {
-		t.Fatalf("failed to connect to the API Server on URL %q: %v", apiURL, err)
-	}
-}
-
-func providerFactories() map[string]func() (*schema.Provider, error) {
-	return map[string]func() (*schema.Provider, error){
-		"kentik-synthetics": func() (*schema.Provider, error) {
-			return NewProvider(), nil
-		},
-	}
-}

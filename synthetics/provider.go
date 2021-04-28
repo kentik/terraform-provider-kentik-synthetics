@@ -44,6 +44,7 @@ func NewProvider() *schema.Provider {
 			},
 		},
 		DataSourcesMap: map[string]*schema.Resource{
+			"kentik-synthetics_agent":  dataSourceAgent(),
 			"kentik-synthetics_agents": dataSourceAgents(),
 		},
 		ConfigureContextFunc: configure,
@@ -64,8 +65,8 @@ func configure(_ context.Context, d *schema.ResourceData) (interface{}, diag.Dia
 
 func newClient(email, token, url string) *kentikapi.Client {
 	return kentikapi.NewClient(kentikapi.Config{
-		SyntheticsAPIURL:    url,
-		AuthEmail: email,
-		AuthToken: token,
+		SyntheticsAPIURL: url,
+		AuthEmail:        email,
+		AuthToken:        token,
 	})
 }
