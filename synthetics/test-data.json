@@ -1,0 +1,958 @@
+{
+  "Tests": [
+    {
+      "id": "1",
+      "name": "github.com ip test",
+      "type": "ip-address",
+      "deviceId": "75702",
+      "status": "TEST_STATUS_PAUSED",
+      "settings": {
+        "ip": {
+          "targets": [
+            "140.82.121.3"
+          ]
+        },
+        "agentIds": [
+          "817"
+        ],
+        "period": 0,
+        "count": 0,
+        "expiry": 0,
+        "limit": 0,
+        "tasks": [
+          "ping",
+          "traceroute"
+        ],
+        "healthSettings": {
+          "latencyCritical": 0,
+          "latencyWarning": 0,
+          "packetLossCritical": 0,
+          "packetLossWarning": 0,
+          "jitterCritical": 0,
+          "jitterWarning": 0,
+          "httpLatencyCritical": 0,
+          "httpLatencyWarning": 0,
+          "httpValidCodes": [
+          ],
+          "dnsValidCodes": [
+          ]
+        },
+        "monitoringSettings": {
+          "activationGracePeriod": "2",
+          "activationTimeUnit": "m",
+          "activationTimeWindow": "5",
+          "activationTimes": "3",
+          "notificationChannels": [
+          ]
+        },
+        "ping": {
+          "period": 60,
+          "count": 5,
+          "expiry": 3000
+        },
+        "trace": {
+          "period": 60,
+          "count": 3,
+          "protocol": "udp",
+          "port": 33434,
+          "expiry": 22500,
+          "limit": 30
+        },
+        "port": 443,
+        "protocol": "icmp",
+        "family": "IP_FAMILY_DUAL",
+        "servers": [
+        ],
+        "targetType": "",
+        "targetValue": "",
+        "useLocalIp": false,
+        "reciprocal": false,
+        "rollupLevel": 1
+      },
+      "expiresOn": "2021-04-08T12:24:19.765Z",
+      "cdate": "2021-04-08T12:24:18.750Z",
+      "edate": "2021-04-13T09:20:23.819Z"
+    },
+    {
+      "id": "2",
+      "name": "metoffice.gov.uk ip test",
+      "type": "ip-address",
+      "deviceId": "75702",
+      "status": "TEST_STATUS_ACTIVE",
+      "settings": {
+        "ip": {
+          "targets": [
+            "104.81.232.223"
+          ]
+        },
+        "agentIds": [
+          "825"
+        ],
+        "period": 0,
+        "count": 0,
+        "expiry": 0,
+        "limit": 0,
+        "tasks": [
+          "ping",
+          "traceroute"
+        ],
+        "healthSettings": {
+          "latencyCritical": 0,
+          "latencyWarning": 0,
+          "packetLossCritical": 0,
+          "packetLossWarning": 0,
+          "jitterCritical": 0,
+          "jitterWarning": 0,
+          "httpLatencyCritical": 0,
+          "httpLatencyWarning": 0,
+          "httpValidCodes": [
+          ],
+          "dnsValidCodes": [
+          ]
+        },
+        "monitoringSettings": {
+          "activationGracePeriod": "2",
+          "activationTimeUnit": "m",
+          "activationTimeWindow": "5",
+          "activationTimes": "3",
+          "notificationChannels": [
+          ]
+        },
+        "ping": {
+          "period": 60,
+          "count": 5,
+          "expiry": 3000
+        },
+        "trace": {
+          "period": 60,
+          "count": 3,
+          "protocol": "udp",
+          "port": 33434,
+          "expiry": 22500,
+          "limit": 30
+        },
+        "port": 443,
+        "protocol": "icmp",
+        "family": "IP_FAMILY_V6",
+        "servers": [
+        ],
+        "targetType": "",
+        "targetValue": "",
+        "useLocalIp": false,
+        "reciprocal": false,
+        "rollupLevel": 1
+      },
+      "expiresOn": "2021-04-08T12:00:03.097Z",
+      "cdate": "2021-04-08T12:00:02.084Z",
+      "edate": "2021-04-16T08:14:35.217Z"
+    }
+  ],
+  "Agents": [
+    {
+      "id": "968",
+      "name": "global-agent",
+      "status": "AGENT_STATUS_WAIT",
+      "alias": "probe-4-ams-1",
+      "type": "global",
+      "os": "Linux probe-4-ams-1 4.9.0-12-amd64 #1 SMP Debian 4.9.210-1+deb9u1 (2020-06-07) x86_64",
+      "ip": "95.179.136.58",
+      "lat": 52.374031,
+      "long": 4.88969,
+      "family": "IP_FAMILY_DUAL",
+      "asn": 20473,
+      "siteId": "0",
+      "version": "0.0.2",
+      "challenge": "",
+      "city": "Amsterdam",
+      "region": "Noord-Holland",
+      "country": "Netherlands",
+      "testIds": [
+        "13",
+        "133",
+        "1337"
+      ],
+      "localIp": "",
+      "lastAuthed": "2020-07-09T21:29:43.826Z"
+    },
+    {
+      "id": "1717",
+      "name": "private-agent",
+      "status": "AGENT_STATUS_OK",
+      "alias": "ip-172-31-0-198",
+      "type": "private",
+      "os": "Linux ip-172-31-0-198 5.4.0-1029-aws #30-Ubuntu SMP Tue Oct 20 10:06:38 UTC 2020 x86_64",
+      "ip": "18.144.28.163",
+      "lat": 37.774929,
+      "long": -122.419418,
+      "family": "IP_FAMILY_V4",
+      "asn": 16509,
+      "siteId": "7970",
+      "version": "0.0.9",
+      "challenge": "0f5243bbc1585a86711a5eca37ea4fd35fd859155246e11dc85c52af006eb679",
+      "city": "San Francisco",
+      "region": "Oregon",
+      "country": "US",
+      "testIds": [],
+      "localIp": "",
+      "lastAuthed": "2020-12-17T07:13:31.620Z"
+    }
+  ],
+  "Health": [
+    {
+      "testId": "3336",
+      "tasks": [
+        {
+          "task": {
+            "id": "1079022",
+            "testId": "3336",
+            "deviceId": "0",
+            "state": "TASK_STATE_CREATED",
+            "status": "",
+            "family": "IP_FAMILY_V4",
+            "http": {
+              "target": "https://codilime.com/",
+              "period": 60,
+              "expiry": 5000
+            }
+          },
+          "agents": [
+            {
+              "agent": {
+                "id": "806",
+                "name": "",
+                "status": "AGENT_STATUS_OK",
+                "alias": "Dublin, Ireland",
+                "type": "global",
+                "os": "",
+                "ip": "13.79.26.113",
+                "lat": 53.34399,
+                "long": -6.26719,
+                "family": "IP_FAMILY_V4",
+                "asn": 8075,
+                "siteId": "0",
+                "version": "0.0.12",
+                "challenge": "",
+                "city": "Dublin",
+                "region": "Dublin",
+                "country": "IE",
+                "testIds": [
+                ],
+                "localIp": "",
+                "lastAuthed": "2021-04-20T06:52:39Z"
+              },
+              "health": [
+                {
+                  "srcIp": "",
+                  "dstIp": "63.33.239.42",
+                  "packetLoss": 0,
+                  "avgLatency": 338911,
+                  "avgWeightedLatency": 0,
+                  "rollingAvgLatency": 339885,
+                  "rollingStddevLatency": 74898,
+                  "rollingAvgWeightedLatency": 0,
+                  "latencyHealth": "healthy",
+                  "packetLossHealth": "healthy",
+                  "overallHealth": {
+                    "health": "healthy",
+                    "time": "2021-04-19T11:40:00Z"
+                  },
+                  "avgJitter": 0,
+                  "rollingAvgJitter": 0,
+                  "rollingStdJitter": 0,
+                  "jitterHealth": "healthy",
+                  "data": "",
+                  "size": 603934,
+                  "status": 200,
+                  "taskType": "http",
+                  "time": "2021-04-19T11:40:00Z"
+                }
+              ],
+              "overallHealth": {
+                "health": "healthy",
+                "time": "2021-04-19T11:40:00Z"
+              }
+            },
+            {
+              "agent": {
+                "id": "670",
+                "name": "",
+                "status": "AGENT_STATUS_OK",
+                "alias": "London, United Kingdom",
+                "type": "global",
+                "os": "",
+                "ip": "18.130.247.68",
+                "lat": 51.50853,
+                "long": -0.12574,
+                "family": "IP_FAMILY_DUAL",
+                "asn": 16509,
+                "siteId": "0",
+                "version": "0.0.12",
+                "challenge": "",
+                "city": "London",
+                "region": "England",
+                "country": "GB",
+                "testIds": [
+                ],
+                "localIp": "",
+                "lastAuthed": "2021-04-20T07:55:40Z"
+              },
+              "health": [
+                {
+                  "srcIp": "",
+                  "dstIp": "63.33.239.42",
+                  "packetLoss": 0,
+                  "avgLatency": 469213,
+                  "avgWeightedLatency": 0,
+                  "rollingAvgLatency": 421144,
+                  "rollingStddevLatency": 94933,
+                  "rollingAvgWeightedLatency": 0,
+                  "latencyHealth": "healthy",
+                  "packetLossHealth": "healthy",
+                  "overallHealth": {
+                    "health": "healthy",
+                    "time": "2021-04-19T11:40:00Z"
+                  },
+                  "avgJitter": 0,
+                  "rollingAvgJitter": 0,
+                  "rollingStdJitter": 0,
+                  "jitterHealth": "healthy",
+                  "data": "",
+                  "size": 603934,
+                  "status": 200,
+                  "taskType": "http",
+                  "time": "2021-04-19T11:40:00Z"
+                }
+              ],
+              "overallHealth": {
+                "health": "healthy",
+                "time": "2021-04-19T11:40:00Z"
+              }
+            },
+            {
+              "agent": {
+                "id": "640",
+                "name": "",
+                "status": "AGENT_STATUS_OK",
+                "alias": "Zurich, Switzerland",
+                "type": "global",
+                "os": "",
+                "ip": "34.65.255.226",
+                "lat": 47.36667,
+                "long": 8.55,
+                "family": "IP_FAMILY_V4",
+                "asn": 15169,
+                "siteId": "0",
+                "version": "0.0.12",
+                "challenge": "",
+                "city": "Zurich",
+                "region": "Zurich",
+                "country": "CH",
+                "testIds": [
+                ],
+                "localIp": "",
+                "lastAuthed": "2021-04-20T09:06:18Z"
+              },
+              "health": [
+                {
+                  "srcIp": "",
+                  "dstIp": "63.33.239.42",
+                  "packetLoss": 0,
+                  "avgLatency": 444778,
+                  "avgWeightedLatency": 0,
+                  "rollingAvgLatency": 451391,
+                  "rollingStddevLatency": 75729,
+                  "rollingAvgWeightedLatency": 0,
+                  "latencyHealth": "healthy",
+                  "packetLossHealth": "healthy",
+                  "overallHealth": {
+                    "health": "healthy",
+                    "time": "2021-04-19T11:40:00Z"
+                  },
+                  "avgJitter": 0,
+                  "rollingAvgJitter": 0,
+                  "rollingStdJitter": 0,
+                  "jitterHealth": "healthy",
+                  "data": "",
+                  "size": 603934,
+                  "status": 200,
+                  "taskType": "http",
+                  "time": "2021-04-19T11:40:00Z"
+                }
+              ],
+              "overallHealth": {
+                "health": "healthy",
+                "time": "2021-04-19T11:40:00Z"
+              }
+            }
+          ],
+          "overallHealth": {
+            "health": "healthy",
+            "time": "2021-04-19T11:40:00Z"
+          }
+        }
+      ],
+      "overallHealth": {
+        "health": "healthy",
+        "time": "2021-04-19T11:40:00Z"
+      },
+      "healthTs": [
+        {
+          "health": "healthy",
+          "time": "2021-04-19T11:40:00Z"
+        }
+      ],
+      "agentTaskConfig": [
+      ],
+      "mesh": [
+      ]
+    }
+  ],
+  "IpInfo": [
+    {
+      "ip": "63.33.239.42",
+      "asn": {
+        "id": 16509,
+        "name": "AMAZON-02,US"
+      },
+      "geo": {
+        "country": {
+          "code": "IE",
+          "name": "Ireland"
+        },
+        "region": {
+          "id": "829",
+          "name": "Dublin"
+        },
+        "city": {
+          "id": "848",
+          "name": "Dublin",
+          "latitude": 53.34399,
+          "longitude": -6.26719
+        }
+      },
+      "dns": {
+        "name": "ec2-63-33-239-42.eu-west-1.compute.amazonaws.com"
+      }
+    }
+  ],
+  "traceRoutes": [
+    {
+      "traces": [
+        {
+          "hops": [
+            {
+              "agent": true,
+              "agentId": "agent-640",
+              "ttl": 0,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": false
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 1,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 2,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 3,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 4,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 5,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 6,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 7,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 8,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 9,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 10,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 11,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 12,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 13,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 14,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 15,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 16,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 17,
+              "ip": "63.33.239.42",
+              "latencies": [
+                "26835"
+              ],
+              "timeout": false
+            }
+          ],
+          "target": "63.33.239.42",
+          "ips": [
+            "63.33.239.42"
+          ]
+        },
+        {
+          "hops": [
+            {
+              "agent": true,
+              "agentId": "agent-640",
+              "ttl": 0,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": false
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 1,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 2,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 3,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 4,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 5,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 6,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 7,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 8,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 9,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 10,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 11,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 12,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 13,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 14,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 15,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 16,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 17,
+              "ip": "63.33.239.42",
+              "latencies": [
+                "26538"
+              ],
+              "timeout": false
+            }
+          ],
+          "target": "63.33.239.42",
+          "ips": [
+            "63.33.239.42"
+          ]
+        },
+        {
+          "hops": [
+            {
+              "agent": true,
+              "agentId": "agent-640",
+              "ttl": 0,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": false
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 1,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 2,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 3,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 4,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 5,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 6,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 7,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 8,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 9,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 10,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 11,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 12,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 13,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 14,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 15,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 16,
+              "ip": "",
+              "latencies": [
+              ],
+              "timeout": true
+            },
+            {
+              "agent": false,
+              "agentId": "",
+              "ttl": 17,
+              "ip": "63.33.239.42",
+              "latencies": [
+                "26974"
+              ],
+              "timeout": false
+            }
+          ],
+          "target": "63.33.239.42",
+          "ips": [
+            "63.33.239.42"
+          ]
+        }
+      ],
+      "time": "2021-04-19T11:40:00Z"
+    }
+  ]
+}
