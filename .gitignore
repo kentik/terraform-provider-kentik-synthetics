@@ -2,7 +2,7 @@
 .terraform.lock.hcl
 .terraform/
 bin/
-localhost_apiserver
 terraform-provider-kentik-synthetics
 terraform.tfplan
 terraform.tfstate
+test_api_server

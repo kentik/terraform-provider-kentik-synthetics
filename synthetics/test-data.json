@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "github.com ip test",
-      "type": "ip-address",
+      "type": "ip",
       "deviceId": "75702",
       "status": "TEST_STATUS_PAUSED",
       "settings": {
@@ -76,7 +76,7 @@
     {
       "id": "2",
       "name": "metoffice.gov.uk ip test",
-      "type": "ip-address",
+      "type": "ip",
       "deviceId": "75702",
       "status": "TEST_STATUS_ACTIVE",
       "settings": {
