@@ -25,9 +25,10 @@ In order to run the full suite of tests, run `make test`.
 
 Implemented endpoint:
 - /synthetics/v202101beta1/agents GET
+- /synthetics/v202101beta1/agents/{agent.id} GET
 
 TODO endpoints:
-- /synthetics/v202101beta1/agents/{agent.id} PATCH, GET, DELETE
+- /synthetics/v202101beta1/agents/{agent.id} PATCH, DELETE
 - /synthetics/v202101beta1/health/tests POST
 - /synthetics/v202101beta1/tests GET, POST
 - /synthetics/v202101beta1/tests/{id} GET, DELETE, PATCH
