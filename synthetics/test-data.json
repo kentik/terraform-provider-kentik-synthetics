@@ -7,34 +7,62 @@
       "deviceId": "75702",
       "status": "TEST_STATUS_PAUSED",
       "settings": {
+        "hostname": {
+          "target": "dummy-ht"
+        },
         "ip": {
           "targets": [
             "140.82.121.3"
           ]
         },
+        "agent": {
+          "target": "dummy-at"
+        },
+        "flow": {
+          "target": "dummy-ft",
+          "targetRefreshIntervalMillis": 1,
+          "maxTasks": 2,
+          "type": "dummy-ftt"
+        },
+        "site": {
+          "target": "dummy-st"
+        },
+        "tag": {
+          "target": "dummy-tt"
+        },
+        "dns": {
+          "target": "dummy-dt"
+        },
+        "url": {
+          "target": "dummy-ut"
+        },
         "agentIds": [
           "817"
         ],
-        "period": 0,
-        "count": 0,
-        "expiry": 0,
-        "limit": 0,
+        "period": 1,
+        "count": 2,
+        "expiry": 3,
+        "limit": 4,
         "tasks": [
           "ping",
           "traceroute"
         ],
         "healthSettings": {
-          "latencyCritical": 0,
-          "latencyWarning": 0,
-          "packetLossCritical": 0,
-          "packetLossWarning": 0,
-          "jitterCritical": 0,
-          "jitterWarning": 0,
-          "httpLatencyCritical": 0,
-          "httpLatencyWarning": 0,
+          "latencyCritical": 1,
+          "latencyWarning": 2,
+          "packetLossCritical": 3,
+          "packetLossWarning": 4,
+          "jitterCritical": 5,
+          "jitterWarning": 6,
+          "httpLatencyCritical": 7,
+          "httpLatencyWarning": 8,
           "httpValidCodes": [
+            200,
+            201
           ],
           "dnsValidCodes": [
+            21,
+            37
           ]
         },
         "monitoringSettings": {
@@ -43,6 +71,8 @@
           "activationTimeWindow": "5",
           "activationTimes": "3",
           "notificationChannels": [
+            "nc-one",
+            "nc-two"
           ]
         },
         "ping": {
@@ -62,16 +92,28 @@
         "protocol": "icmp",
         "family": "IP_FAMILY_DUAL",
         "servers": [
+          "server-one",
+          "server-two"
         ],
-        "targetType": "",
-        "targetValue": "",
+        "targetType": "dummy-tt",
+        "targetValue": "dummy-tv",
         "useLocalIp": false,
         "reciprocal": false,
         "rollupLevel": 1
       },
       "expiresOn": "2021-04-08T12:24:19.765Z",
       "cdate": "2021-04-08T12:24:18.750Z",
-      "edate": "2021-04-13T09:20:23.819Z"
+      "edate": "2021-04-13T09:20:23.819Z",
+      "createdBy": {
+        "id": "dummy-id",
+        "email": "dummy-email",
+        "fullName": "dummy-fn"
+      },
+      "lastUpdatedBy": {
+        "id": "dummy-id-2",
+        "email": "dummy-email-2",
+        "fullName": "dummy-fn-2"
+      }
     },
     {
       "id": "2",
