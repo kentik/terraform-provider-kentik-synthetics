@@ -5,4 +5,4 @@ bin/
 terraform-provider-kentik-synthetics
 terraform.tfplan
 terraform.tfstate
-test_api_server
+test-api-server

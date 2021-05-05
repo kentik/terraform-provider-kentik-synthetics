@@ -2,17 +2,19 @@
 # The script applies the example Terraform configuration.
 # The provider uses stub Kentik API server by default.
 # Production Kentik API server can be used by passing "production" positional argument to the script.
+# TODO(dfurman): deduplicate with run.sh functions in other examples
 
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 REPO_DIR=$(cd -- "$SCRIPT_DIR" && cd ../../../ && pwd)
 
-PRODUCTION_FLAG="production"
 TEST_API_SERVER_ENDPOINT=${TEST_API_SERVER_ENDPOINT:-"localhost:9955"}
 
+source "$REPO_DIR/tools/utility_functions.sh" || exit 1
+
 function run() {
-    if [[ $1 == "$PRODUCTION_FLAG" ]]; then
+    if [[ $1 == "production" ]]; then
         stage "Running the example using production Kentik API server"
-        warn "Warning: Kentik production resources might be modified and paid actions might be invoked"
+        warn "Warning: Kentik production resources might be modified"
         pause
     else
         stage "Running the example using test API server"
@@ -51,32 +53,6 @@ function check_env() {
         echo "KTAPI_AUTH_TOKEN env variable must be set to Kentik API authorization token"
         die
     fi
-}
-
-function stage() {
-    BOLD_BLUE="\e[1m\e[96m"
-    RESET="\e[0m"
-    msg="$1"
-
-    echo
-    echo -e "$BOLD_BLUE$msg$RESET"
-}
-
-function warn() {
-    RED="\e[31m"
-    RESET="\e[0m"
-    msg="$1"
-
-    echo -e "$RED$msg$RESET"
-}
-
-function pause() {
-    read -r -p "Press any key to continue..."
-}
-
-function die() {
-    echo "Error. Exit 1"
-    exit 1
 }
 
 run "$1"
