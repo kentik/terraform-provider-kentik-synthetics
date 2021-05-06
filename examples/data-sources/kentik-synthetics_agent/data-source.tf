@@ -1,5 +1,5 @@
 data "kentik-synthetics_agent" "agent" {
-  id = "824"
+  id = "968" # ID of Amsterdam Agent in test-data.json
 }
 
 output "agent_get" {

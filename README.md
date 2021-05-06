@@ -5,9 +5,9 @@
 - [Go](https://golang.org/doc/install) >= 1.16
 - [Terraform](https://www.terraform.io/downloads.html) >= 0.13
 
-## Install
+## Installation
 
-Build and install the plugin so that Terraform can find and use it:
+Build and install the provider so that Terraform can use it:
 
 ```bash
 make install
@@ -15,11 +15,19 @@ make install
 
 ## Development
 
-If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (see [Requirements](#requirements) above).
+Anybody who wants to contribute to development is welcome to provide pull requests.
 
-To install the provider, run `make install`. This will place the compiled provider binary under `~/.terraform.d/plugins/`.
+To work on the provider, install tools listed in [requirements section](#requirements).
 
-In order to run the full suite of tests, run `make test`.
+Optional tools:
+- _golangci-lint_: [local installation](https://golangci-lint.run/usage/install/#local-installation)
+
+Development steps:
+- Build the provider: `make build`
+- Build and install the provider locally: `make install`
+- Run tests: `make test`
+- Run linter: `golangci-lint run`
+- Format the code: `go fmt ./...`
 
 ### Development state
 
