@@ -22,6 +22,15 @@ function pause() {
     read -r -p "Press any key to continue or use Ctrl-C to stop..."
 }
 
+function pause_and_run() {
+    YELLOW="\e[33m"
+    RESET="\e[0m"
+
+    echo -e "Press any key to run $YELLOW'$*'$RESET or use Ctrl-C to stop..."
+    read -r
+    "$@"
+}
+
 function die() {
     echo "Error. Exit 1"
     exit 1
