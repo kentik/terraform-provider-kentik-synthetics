@@ -46,6 +46,8 @@ func NewProvider() *schema.Provider {
 		DataSourcesMap: map[string]*schema.Resource{
 			"kentik-synthetics_agent":  dataSourceAgent(),
 			"kentik-synthetics_agents": dataSourceAgents(),
+			"kentik-synthetics_tests":  dataSourceTests(),
+			"kentik-synthetics_test":   dataSourceTest(),
 		},
 		ConfigureContextFunc: configure,
 	}

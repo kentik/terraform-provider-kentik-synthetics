@@ -34,12 +34,13 @@ Development steps:
 Implemented endpoint:
 - /synthetics/v202101beta1/agents GET
 - /synthetics/v202101beta1/agents/{agent.id} GET
+- /synthetics/v202101beta1/tests GET
+  /synthetics/v202101beta1/tests/{id} GET
 
 TODO endpoints:
-- /synthetics/v202101beta1/agents/{agent.id} PATCH, DELETE
 - /synthetics/v202101beta1/health/tests POST
-- /synthetics/v202101beta1/tests GET, POST
-- /synthetics/v202101beta1/tests/{id} GET, DELETE, PATCH
+- /synthetics/v202101beta1/tests POST
+- /synthetics/v202101beta1/tests/{id} DELETE, PATCH
 - /synthetics/v202101beta1/tests/{id}/results/trace POST
 - /synthetics/v202101beta1/tests/{id}/status PUT
 
