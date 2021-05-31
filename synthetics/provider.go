@@ -12,6 +12,7 @@ const (
 	apiURLKey = "api_url"
 	emailKey  = "email"
 	tokenKey  = "token"
+	debugKey  = "debug"
 )
 
 func init() {
@@ -27,20 +28,27 @@ func NewProvider() *schema.Provider {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("KTAPI_URL", nil),
-				Description: "Custom API server url can be specified either by api_url attribute or KTAPI_URL environment variable. If not specified, default of <https://synthetics.api.kentik.com> will be used",
+				Description: "Synthetics API server URL (optional). Can also be specified with KTAPI_URL environment variable.",
 			},
 			emailKey: {
 				Type:        schema.TypeString,
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("KTAPI_AUTH_EMAIL", nil),
-				Description: "Authorization. Either email attribute or KTAPI_AUTH_EMAIL environment variable is required",
+				Description: "Authorization email (required). Can also be specified with KTAPI_AUTH_EMAIL environment variable.",
 			},
 			tokenKey: {
 				Type:        schema.TypeString,
 				Sensitive:   true,
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("KTAPI_AUTH_TOKEN", nil),
-				Description: "Authorization. Either token attribute or KTAPI_AUTH_TOKEN environment variable is required",
+				Description: "Authorization token (required). Can also be specified with KTAPI_AUTH_TOKEN environment variable.",
+			},
+			debugKey: {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("TF_SYNTHETICS_DEBUG", false),
+				Description: "Debug flag enables verbose debug logs of requests and responses (optional). " +
+					"Can also be specified with TF_SYNTHETICS_DEBUG environment variable.",
 			},
 		},
 		DataSourcesMap: map[string]*schema.Resource{
@@ -54,21 +62,19 @@ func NewProvider() *schema.Provider {
 }
 
 func configure(_ context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
-	email := d.Get(emailKey).(string)
-	token := d.Get(tokenKey).(string)
-
-	apiURL, ok := d.GetOk(apiURLKey)
-	if !ok {
-		return newClient(email, token, ""), nil
-	}
-
-	return newClient(email, token, apiURL.(string)), nil
+	return kentikapi.NewClient(kentikapi.Config{
+		SyntheticsAPIURL: getURL(d),
+		AuthEmail:        d.Get(emailKey).(string),
+		AuthToken:        d.Get(tokenKey).(string),
+		Debug:            d.Get(debugKey).(bool),
+	}), nil
 }
 
-func newClient(email, token, url string) *kentikapi.Client {
-	return kentikapi.NewClient(kentikapi.Config{
-		SyntheticsAPIURL: url,
-		AuthEmail:        email,
-		AuthToken:        token,
-	})
+func getURL(d *schema.ResourceData) string {
+	var url string
+	apiURL, ok := d.GetOk(apiURLKey)
+	if ok {
+		url = apiURL.(string)
+	}
+	return url
 }

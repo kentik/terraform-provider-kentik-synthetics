@@ -14,7 +14,7 @@ func TestDataSourceTest(t *testing.T) {
 		PreCheck:          func() { checkAPIServerConnection(t) },
 		ProviderFactories: providerFactories(),
 		Steps: []resource.TestStep{{
-			Config: dataSourceTestTestConfig,
+			Config: dataSourceTestConfig,
 			Check: resource.ComposeTestCheckFunc(
 				resource.TestCheckResourceAttr(testDS, "id", "1"),
 				resource.TestCheckResourceAttr(testDS, "name", "github.com ip test"),
@@ -98,8 +98,8 @@ func TestDataSourceTest(t *testing.T) {
 }
 
 const (
-	testDS                   = "data.kentik-synthetics_test.github-test"
-	dataSourceTestTestConfig = `
+	testDS               = "data.kentik-synthetics_test.github-test"
+	dataSourceTestConfig = `
 		data "kentik-synthetics_test" "github-test" {
 			id = "1"
 		}

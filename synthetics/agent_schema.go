@@ -4,9 +4,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+// TODO(dfurman): provide descriptions, when they are specified in the OpenAPI definitions
+
 func makeAgentSchema(mode schemaMode) map[string]*schema.Schema {
 	return map[string]*schema.Schema{
-		"id": {
+		idKey: {
 			Type:     schema.TypeString,
 			Computed: computedOnCreateAndReadList(mode),
 			Required: requiredOnReadSingle(mode),

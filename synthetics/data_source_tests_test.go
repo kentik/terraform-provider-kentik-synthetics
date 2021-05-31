@@ -14,7 +14,7 @@ func TestDataSourceTests(t *testing.T) {
 		PreCheck:          func() { checkAPIServerConnection(t) },
 		ProviderFactories: providerFactories(),
 		Steps: []resource.TestStep{{
-			Config: dataSourceTestsTestConfig,
+			Config: dataSourceTestsConfig,
 			Check: resource.ComposeTestCheckFunc(
 				// nested properties, such as settings, are verified in TestDataSourceTest
 				resource.TestCheckResourceAttr(testsDS, "items.0.id", "1"),
@@ -49,8 +49,8 @@ func TestDataSourceTests(t *testing.T) {
 }
 
 const (
-	testsDS                   = "data.kentik-synthetics_tests.dummy-tests"
-	dataSourceTestsTestConfig = `
+	testsDS               = "data.kentik-synthetics_tests.dummy-tests"
+	dataSourceTestsConfig = `
 		provider "kentik-synthetics" {}
 		data "kentik-synthetics_tests" "dummy-tests" {}
 	`

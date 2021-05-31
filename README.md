@@ -13,6 +13,24 @@ Build and install the provider so that Terraform can use it:
 make install
 ```
 
+## Usage
+
+The provider can be configured with parameters or environment variables:
+
+```terraform
+provider "kentik-synthetics" {
+  // Synthetics API server URL. Can also be specified with KTAPI_URL environment variable.
+  api_url = "https://synthetics.api.kentik.com"
+  // Authorization email (required). Can also be specified with KTAPI_AUTH_EMAIL environment variable.
+  email = "dummy@acme.com"
+  // Authorization token (required). Can also be specified with KTAPI_AUTH_TOKEN environment variable.
+  token = "token"
+  // Debug flag enables verbose debug logs of requests and responses (optional).
+  // Can also be specified with TF_SYNTHETICS_DEBUG environment variable.
+  debug = true
+}
+```
+
 ## Development
 
 Anybody who wants to contribute to development is welcome to provide pull requests.
@@ -30,19 +48,6 @@ Development steps:
 - Format the code: `go fmt ./...`
 
 ### Development state
-
-Implemented endpoint:
-- /synthetics/v202101beta1/agents GET
-- /synthetics/v202101beta1/agents/{agent.id} GET
-- /synthetics/v202101beta1/tests GET
-  /synthetics/v202101beta1/tests/{id} GET
-
-TODO endpoints:
-- /synthetics/v202101beta1/health/tests POST
-- /synthetics/v202101beta1/tests POST
-- /synthetics/v202101beta1/tests/{id} DELETE, PATCH
-- /synthetics/v202101beta1/tests/{id}/results/trace POST
-- /synthetics/v202101beta1/tests/{id}/status PUT
 
 TODO non-functional:
 - release process

@@ -1,9 +1,11 @@
 package synthetics
 
 import (
-	"time"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
+
+const (
+	idKey = "id"
 )
 
 // schemaMode determines if we want a schema for:
@@ -18,6 +20,14 @@ const (
 	create
 )
 
+func optionalOnCreate(mode schemaMode) bool {
+	return mode == create
+}
+
+func requiredOnReadSingle(mode schemaMode) bool {
+	return mode == readSingle
+}
+
 func computedOnCreateAndReadList(mode schemaMode) bool {
 	return mode == create || mode == readList
 }
@@ -26,25 +36,15 @@ func computedOnRead(mode schemaMode) bool {
 	return mode == readSingle || mode == readList
 }
 
-func requiredOnReadSingle(mode schemaMode) bool {
-	return mode == readSingle
-}
-
 // makeNestedObjectSchema returns a list of 1 element to emulate a nested object.
 // See: https://learn.hashicorp.com/tutorials/terraform/provider-create?in=terraform/providers#define-order-schema
 func makeNestedObjectSchema(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
 	return &schema.Schema{
 		Type:     schema.TypeList,
+		Optional: optionalOnCreate(mode),
 		Computed: computedOnRead(mode),
 		Elem: &schema.Resource{
 			Schema: properties,
 		},
 	}
-}
-
-func formatTime(t *time.Time) string {
-	if t == nil {
-		return ""
-	}
-	return t.Format(time.RFC3339Nano)
 }
