@@ -19,13 +19,12 @@ func dataSourceAgent() *schema.Resource {
 }
 
 func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	agentID := d.Get(idKey).(string)
-	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.AgentGet(ctx, agentID).Execute()
+	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+		AgentGet(ctx, d.Get(idKey).(string)).
+		Execute()
 	if err != nil {
 		return detailedDiagError("failed to read agent", err, httpResp)
 	}
-
-	d.SetId(resp.Agent.GetId())
 
 	for k, v := range agentToMap(resp.Agent) {
 		if err = d.Set(k, v); err != nil {
@@ -33,6 +32,7 @@ func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interfac
 		}
 	}
 
+	d.SetId(resp.Agent.GetId())
 	return nil
 }
 

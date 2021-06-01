@@ -1,4 +1,104 @@
+# Configuration reference: https://golangci-lint.run/usage/configuration/
+# Linters reference: https://golangci-lint.run/usage/linters/
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
-# TODO(dfurman): enable more linters
+  exclude:
+    # EXC0002 golint: Annoying issue about not having a comment. The rare codebase has such comments
+    - (comment on exported (method|function|type|const)|should have( a package)? comment|comment should be of the form)
+  exclude-use-default: false
+
+# Disabled linters:
+# - cyclop - duplicates functionality of gocyclo
+# - exhaustivestruct - breaks "Make the zero value useful" proverb, meant to be used only for special cases
+# - godox - requires all TODOs to be removed - too strict
+# - gomoddirectives - does not allow "replace" directives - too strict
+# - goerr113 - following check is too strict: "do not define dynamic errors, use wrapped static errors instead",
+#              the check cannot be disabled
+# - interfacer - deprecated (since v1.38.0) due to: The repository of the linter has been archived by the owner
+# - maligned - deprecated (since v1.38.0) due to: The repository of the linter has been archived by the owner
+# - nlreturn - leads to using too many line breaks
+# - scopelint - deprecated (since v1.39.0) due to: The repository of the linter has been deprecated by the owner
+# - thelper - enforcing t.Helper() everywhere is too strict
+# - wsl - leads to using too many line breaks
+linters:
+  enable:
+    - asciicheck
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - durationcheck
+    - errcheck
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - forbidigo
+    - forcetypeassert
+    - funlen
+    - gci
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - gofmt
+    - gofumpt
+    - goheader
+    - goimports
+    - golint
+    - gomnd
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ifshort
+    - importas
+    - ineffassign
+    - lll
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - noctx
+    - nolintlint
+    - paralleltest
+    - prealloc
+    - predeclared
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - testpackage
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - wastedassign
+    - whitespace
+    - wrapcheck
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+  errorlint:
+    # Check whether fmt.Errorf uses the %w verb for formatting errors - too strict
+    errorf: false
+  gocyclo:
+    min-complexity: 10
+  golint:
+    min-confidence: 0
+  govet:
+    enable-all: true
+  nakedret:
+    max-func-lines: 5
