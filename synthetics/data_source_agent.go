@@ -19,7 +19,7 @@ func dataSourceAgent() *schema.Resource {
 }
 
 func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	agentID := d.Get("id").(string)
+	agentID := d.Get(idKey).(string)
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.AgentGet(ctx, agentID).Execute()
 	if err != nil {
 		return detailedDiagError("failed to read agent", err, httpResp)
@@ -42,7 +42,7 @@ func agentToMap(obj *synthetics.V202101beta1Agent) map[string]interface{} {
 	}
 
 	m := make(map[string]interface{})
-	m["id"] = obj.Id
+	m[idKey] = obj.Id
 	m["name"] = obj.Name
 	m["status"] = obj.Status
 	m["alias"] = obj.Alias

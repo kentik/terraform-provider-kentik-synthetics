@@ -37,9 +37,6 @@ func dataSourceAgents() *schema.Resource {
 }
 
 func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	// use UNIX time as ID to force list update every time Terraform asks for the list
-	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
-
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.AgentsList(ctx).Execute()
 	if err != nil {
 		return detailedDiagError("failed to read agents", err, httpResp)
@@ -59,6 +56,8 @@ func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interfa
 		}
 	}
 
+	// use UNIX time as ID to force list update every time Terraform asks for the list
+	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
 	return nil
 }
 

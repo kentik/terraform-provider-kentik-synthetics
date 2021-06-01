@@ -14,7 +14,7 @@ func TestDataSourceAgents(t *testing.T) {
 		PreCheck:          func() { checkAPIServerConnection(t) },
 		ProviderFactories: providerFactories(),
 		Steps: []resource.TestStep{{
-			Config: dataSourceAgentsTestConfig,
+			Config: dataSourceAgentsConfig,
 			Check: resource.ComposeTestCheckFunc(
 				resource.TestCheckResourceAttr(agentsDS, "items.0.id", "968"),
 				resource.TestCheckResourceAttr(agentsDS, "items.0.name", "global-agent"),
@@ -69,8 +69,8 @@ func TestDataSourceAgents(t *testing.T) {
 }
 
 const (
-	agentsDS                   = "data.kentik-synthetics_agents.dummy-agents"
-	dataSourceAgentsTestConfig = `
+	agentsDS               = "data.kentik-synthetics_agents.dummy-agents"
+	dataSourceAgentsConfig = `
 		provider "kentik-synthetics" {}
 		data "kentik-synthetics_agents" "dummy-agents" {}
 	`
