@@ -51,6 +51,9 @@ func NewProvider() *schema.Provider {
 					"Can also be specified with TF_SYNTHETICS_DEBUG environment variable.",
 			},
 		},
+		ResourcesMap: map[string]*schema.Resource{
+			"kentik-synthetics_test": resourceTest(),
+		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"kentik-synthetics_agent":  dataSourceAgent(),
 			"kentik-synthetics_agents": dataSourceAgents(),
