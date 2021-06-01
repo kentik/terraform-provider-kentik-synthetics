@@ -254,6 +254,7 @@ func resourceDataToTest(d *schema.ResourceData) (*synthetics.V202101beta1Test, e
 	return test, nil
 }
 
+// nolint: gocyclo, funlen
 func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestSettings, error) {
 	m, err := getObjectFromNestedResourceData(data)
 	if err != nil {
@@ -364,6 +365,7 @@ func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestS
 	obj.SetUseLocalIp(m["use_local_ip"].(bool))
 	obj.SetReciprocal(m["reciprocal"].(bool))
 	obj.SetRollupLevel(int64(m["rollup_level"].(int)))
+
 	return obj, nil
 }
 
@@ -378,6 +380,7 @@ func resourceDataToTestHostname(data interface{}) (*synthetics.V202101beta1Hostn
 
 	obj := synthetics.NewV202101beta1HostnameTest()
 	obj.SetTarget(m["target"].(string))
+
 	return obj, nil
 }
 
@@ -392,6 +395,7 @@ func resourceDataToTestIP(data interface{}) (*synthetics.V202101beta1IpTest, err
 
 	obj := synthetics.NewV202101beta1IpTest()
 	obj.SetTargets(ifSliceToStringSlice(m["targets"].([]interface{})))
+
 	return obj, nil
 }
 
@@ -406,6 +410,7 @@ func resourceDataToTestAgent(data interface{}) (*synthetics.V202101beta1AgentTes
 
 	obj := synthetics.NewV202101beta1AgentTest()
 	obj.SetTarget(m["target"].(string))
+
 	return obj, nil
 }
 
@@ -423,6 +428,7 @@ func resourceDataToTestFlow(data interface{}) (*synthetics.V202101beta1FlowTest,
 	obj.SetTargetRefreshIntervalMillis(int64(m["target_refresh_interval_millis"].(int)))
 	obj.SetMaxTasks(int64(m["max_tasks"].(int)))
 	obj.SetType(m["type"].(string))
+
 	return obj, nil
 }
 
@@ -437,6 +443,7 @@ func resourceDataToTestSite(data interface{}) (*synthetics.V202101beta1SiteTest,
 
 	obj := synthetics.NewV202101beta1SiteTest()
 	obj.SetTarget(m["target"].(string))
+
 	return obj, nil
 }
 
@@ -451,6 +458,7 @@ func resourceDataToTestTag(data interface{}) (*synthetics.V202101beta1TagTest, e
 
 	obj := synthetics.NewV202101beta1TagTest()
 	obj.SetTarget(m["target"].(string))
+
 	return obj, nil
 }
 
@@ -465,6 +473,7 @@ func resourceDataToTestDNS(data interface{}) (*synthetics.V202101beta1DnsTest, e
 
 	obj := synthetics.NewV202101beta1DnsTest()
 	obj.SetTarget(m["target"].(string))
+
 	return obj, nil
 }
 
@@ -479,6 +488,7 @@ func resourceDataToTestURL(data interface{}) (*synthetics.V202101beta1UrlTest, e
 
 	obj := synthetics.NewV202101beta1UrlTest()
 	obj.SetTarget(m["target"].(string))
+
 	return obj, nil
 }
 
@@ -502,6 +512,7 @@ func resourceDataToTestHealthSettings(data interface{}) (*synthetics.V202101beta
 	obj.SetHttpLatencyWarning(float32(m["http_latency_warning"].(float64)))
 	obj.SetHttpValidCodes(ifSliceToInt64Slice(m["http_valid_codes"].([]interface{})))
 	obj.SetDnsValidCodes(ifSliceToInt64Slice(m["dns_valid_codes"].([]interface{})))
+
 	return obj, nil
 }
 
@@ -520,6 +531,7 @@ func resourceDataToTestMonitoringSettings(data interface{}) (*synthetics.V202101
 	obj.SetActivationTimeWindow(m["activation_time_window"].(string))
 	obj.SetActivationTimes(m["activation_times"].(string))
 	obj.SetNotificationChannels(ifSliceToStringSlice(m["notification_channels"].([]interface{})))
+
 	return obj, nil
 }
 
@@ -536,6 +548,7 @@ func resourceDataToTestPing(data interface{}) (*synthetics.V202101beta1TestPingS
 	obj.SetPeriod(float32(m["period"].(float64)))
 	obj.SetCount(float32(m["count"].(float64)))
 	obj.SetExpiry(float32(m["expiry"].(float64)))
+
 	return obj, nil
 }
 
@@ -555,5 +568,6 @@ func resourceDataToTestTrace(data interface{}) (*synthetics.V202101beta1TestTrac
 	obj.SetPort(float32(m["port"].(float64)))
 	obj.SetExpiry(float32(m["expiry"].(float64)))
 	obj.SetLimit(float32(m["limit"].(float64)))
+
 	return obj, nil
 }

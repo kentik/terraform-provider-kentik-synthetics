@@ -62,8 +62,8 @@ func dataSourceTestsRead(ctx context.Context, d *schema.ResourceData, m interfac
 
 func testsToMaps(tests []synthetics.V202101beta1Test) []interface{} {
 	result := make([]interface{}, len(tests))
-	for i, e := range tests {
-		result[i] = testToMap(&e)
+	for i := range tests {
+		result[i] = testToMap(&tests[i])
 	}
 	return result
 }

@@ -95,7 +95,7 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 }
 
 // patchTestFields returns updatable fields for PATCH operation.
-// TODO(dfurman): use JSON struct tags
+// TODO(dfurman): use JSON struct tags.
 func patchTestFields(test *synthetics.V202101beta1Test) []string {
 	return append(
 		commonPatchTestFields(),
@@ -151,6 +151,7 @@ func commonPatchTestFields() []string {
 	}
 }
 
+// nolint: gocyclo
 func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 	var fields []string
 

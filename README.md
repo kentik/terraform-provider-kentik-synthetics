@@ -45,7 +45,7 @@ Development steps:
 - Build and install the provider locally: `make install`
 - Run tests: `make test`
 - Run linter: `golangci-lint run`
-- Format the code: `go fmt ./...`
+- Format the code: `./tools/fmt.sh`
 
 ### Development state
 

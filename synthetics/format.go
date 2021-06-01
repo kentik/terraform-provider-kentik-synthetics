@@ -38,7 +38,7 @@ func ifSliceToStringSlice(s []interface{}) []string {
 		return nil
 	}
 
-	var result []string
+	result := make([]string, 0, len(s))
 	for _, v := range s {
 		result = append(result, v.(string))
 	}
@@ -50,7 +50,7 @@ func ifSliceToInt64Slice(s []interface{}) []int64 {
 		return nil
 	}
 
-	var result []int64
+	result := make([]int64, 0, len(s))
 	for _, v := range s {
 		result = append(result, int64(v.(int)))
 	}

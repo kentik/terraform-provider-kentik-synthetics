@@ -15,11 +15,6 @@ const (
 	debugKey  = "debug"
 )
 
-func init() {
-	// Set descriptions to support markdown syntax, this will be used in document generation and the language server.
-	schema.DescriptionKind = schema.StringMarkdown
-}
-
 // NewProvider returns new Synthetics provider.
 func NewProvider() *schema.Provider {
 	return &schema.Provider{
@@ -77,7 +72,7 @@ func getURL(d *schema.ResourceData) string {
 	var url string
 	apiURL, ok := d.GetOk(apiURLKey)
 	if ok {
-		url = apiURL.(string)
+		url = apiURL.(string) // nolint: errcheck, forcetypeassert // type enforced by TF schema
 	}
 	return url
 }

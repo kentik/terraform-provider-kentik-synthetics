@@ -63,8 +63,8 @@ func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interfa
 
 func agentsToMaps(agents []synthetics.V202101beta1Agent) []interface{} {
 	result := make([]interface{}, len(agents))
-	for i, e := range agents {
-		result[i] = agentToMap(&e)
+	for i := range agents {
+		result[i] = agentToMap(&agents[i])
 	}
 	return result
 }

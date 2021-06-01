@@ -54,6 +54,7 @@ func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 	}
 }
 
+// nolint: funlen
 func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 	return makeNestedObjectSchema(mode, map[string]*schema.Schema{
 		"hostname": makeTestHostnameSchema(mode),
