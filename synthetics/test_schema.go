@@ -9,7 +9,7 @@ import (
 
 func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 	return map[string]*schema.Schema{
-		"id": {
+		idKey: {
 			Type:     schema.TypeString,
 			Required: requiredOnReadSingle(mode),
 			Computed: computedOnCreateAndReadList(mode),
@@ -54,7 +54,7 @@ func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 	}
 }
 
-// nolint: funlen
+//nolint: funlen
 func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 	return makeNestedObjectSchema(mode, map[string]*schema.Schema{
 		"hostname": makeTestHostnameSchema(mode),
@@ -406,7 +406,7 @@ func makeTestTraceSchema(mode schemaMode) *schema.Schema {
 
 func makeUserInfoSchema() *schema.Schema {
 	return makeReadOnlyNestedObjectSchema(map[string]*schema.Schema{
-		"id": {
+		idKey: {
 			Type:     schema.TypeString,
 			Computed: true,
 		},
