@@ -34,9 +34,9 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 	req := *synthetics.NewV202101beta1CreateTestRequest()
 	req.SetTest(*test)
 
-	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestCreate(ctx).
-		V202101beta1CreateTestRequest(req).
+		Body(req).
 		Execute()
 	if err != nil {
 		return detailedDiagError("failed to create test", err, httpResp)
@@ -54,7 +54,7 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 }
 
 func resourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {
@@ -86,9 +86,9 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 		req.SetTest(*test)
 		req.SetMask(strings.Join(patchTestFields(test), ","))
 
-		_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+		_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 			TestPatch(ctx, d.Get(idKey).(string)).
-			V202101beta1PatchTestRequest(req).
+			Body(req).
 			Execute()
 		if err != nil {
 			return detailedDiagError("failed to patch test", err, httpResp)
@@ -200,7 +200,7 @@ func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 }
 
 func resourceTestDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+	_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestDelete(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {

@@ -53,7 +53,9 @@ func checkDataSourceTests() resource.TestCheckFunc {
 const (
 	testsDS               = "data.kentik-synthetics_tests.dummy-tests"
 	dataSourceTestsConfig = `
-		provider "kentik-synthetics" {}
+		provider "kentik-synthetics" {
+			log_payloads = true
+		}
 		data "kentik-synthetics_tests" "dummy-tests" {}
 	`
 )

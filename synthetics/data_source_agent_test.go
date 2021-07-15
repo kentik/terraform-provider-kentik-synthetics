@@ -53,6 +53,10 @@ func checkDataSourceAgent() resource.TestCheckFunc {
 const (
 	agentDS               = "data.kentik-synthetics_agent.amsterdam-agent"
 	dataSourceAgentConfig = `
+		provider "kentik-synthetics" {
+			log_payloads = true
+		}
+	
 		data "kentik-synthetics_agent" "amsterdam-agent" {
 			id = "968"
 		}
