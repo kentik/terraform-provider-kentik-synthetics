@@ -55,3 +55,9 @@ TODO non-functional:
 - document the release process, testing, debugging in the README
 - document how to run examples
 - acceptance tests
+
+
+### Documentation
+
+To generate documentation invoke:
+`go generate`
