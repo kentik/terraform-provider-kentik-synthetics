@@ -3,7 +3,7 @@
 # Data sources for Agents and Tests are shown.
 
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
-REPO_DIR=$(cd -- "$SCRIPT_DIR" && cd ../../ && pwd)
+REPO_DIR=$(cd -- "$SCRIPT_DIR" && cd ../../../ && pwd)
 
 source "$REPO_DIR/tools/utility_functions.sh" || exit 1
 

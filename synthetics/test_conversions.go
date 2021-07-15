@@ -249,7 +249,7 @@ func resourceDataToTest(d *schema.ResourceData) (*synthetics.V202101beta1Test, e
 	return test, nil
 }
 
-//nolint: gocyclo, funlen
+//nolint: gocyclo
 func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestSettings, error) {
 	m, err := getObjectFromNestedResourceData(data)
 	if err != nil {
