@@ -95,8 +95,6 @@ func checkResourceTestCreate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.#", "2"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "server-one"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.1", "server-two"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.target_type", "dummy-tt"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.target_value", "dummy-tv"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.use_local_ip", "true"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.reciprocal", "false"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.rollup_level", "1"),
@@ -171,8 +169,6 @@ func checkResourceTestUpdate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.family", "IP_FAMILY_V6"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.#", "1"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "server-one"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.target_type", "updated-tt"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.target_value", "updated-tv"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.use_local_ip", "false"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.reciprocal", "true"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.rollup_level", "10"),
@@ -283,8 +279,6 @@ const (
 					"server-one",
 					"server-two",
 				])
-				target_type  = "dummy-tt"
-				target_value = "dummy-tv"
 				use_local_ip = true
 				reciprocal   = false
 				rollup_level = 1
@@ -393,8 +387,6 @@ const (
 				servers = tolist([
 					"server-one"
 				])
-				target_type  = "updated-tt"
-				target_value = "updated-tv"
 				use_local_ip = false
 				reciprocal   = true
 				rollup_level = 10

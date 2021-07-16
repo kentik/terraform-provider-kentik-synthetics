@@ -70,10 +70,6 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       "server-one",
       "server-two",
     ])
-    // Notice: specific values expected
-    // TODO(dfurman): provide allowed values
-    // target_type  = ""
-    // target_value = ""
     use_local_ip = true
     reciprocal   = false
     rollup_level = 1
