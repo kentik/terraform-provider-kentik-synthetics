@@ -17,8 +17,6 @@ locals {
 }
 
 resource "kentik-synthetics_test" "private-agents-test" {
-  for_each = toset(local.private_agents_ids)
-
   name      = "private-agents-test"
   type      = "hostname"
   device_id = "75702"
@@ -27,7 +25,7 @@ resource "kentik-synthetics_test" "private-agents-test" {
     hostname {
       target = "www.example.com"
     }
-    agent_ids = [each.value]
+    agent_ids = local.private_agents_ids
     period = 61
     count  = 2
     expiry = 5001
