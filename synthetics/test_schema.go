@@ -129,16 +129,6 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 				Type: schema.TypeString,
 			},
 		},
-		"target_type": {
-			Type:     schema.TypeString,
-			Optional: optionalOnCreate(mode),
-			Computed: computedOnRead(mode),
-		},
-		"target_value": {
-			Type:     schema.TypeString,
-			Optional: optionalOnCreate(mode),
-			Computed: computedOnRead(mode),
-		},
 		"use_local_ip": {
 			Type:     schema.TypeBool,
 			Optional: optionalOnCreate(mode),
