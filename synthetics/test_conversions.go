@@ -219,40 +219,21 @@ func userInfoToMapSlice(obj *synthetics.V202101beta1UserInfo) []map[string]inter
 // resourceDataToTest converts TF resource data to Test object. Only user-writable attributes are set.
 func resourceDataToTest(d *schema.ResourceData) (*synthetics.V202101beta1Test, error) {
 	test := synthetics.NewV202101beta1Test()
+	test.SetName(d.Get("name").(string))
+	test.SetType(d.Get("type").(string))
+	test.SetDeviceId(d.Get("device_id").(string))
+	test.SetStatus(synthetics.V202101beta1TestStatus(d.Get("status").(string)))
 
-	if id, ok := d.GetOk(idKey); ok {
-		test.SetId(id.(string))
+	s, err := resourceDataToTestSettings(d.Get("settings"))
+	if err != nil {
+		return nil, err
 	}
-
-	if n, ok := d.GetOk("name"); ok {
-		test.SetName(n.(string))
-	}
-
-	if t, ok := d.GetOk("type"); ok {
-		test.SetType(t.(string))
-	}
-
-	if di, ok := d.GetOk("device_id"); ok {
-		test.SetDeviceId(di.(string))
-	}
-
-	if s, ok := d.GetOk("status"); ok {
-		test.SetStatus(synthetics.V202101beta1TestStatus(s.(string)))
-	}
-
-	if ss, ok := d.GetOk("settings"); ok {
-		settingsObj, err := resourceDataToTestSettings(ss)
-		if err != nil {
-			return nil, err
-		}
-
-		test.Settings = settingsObj
-	}
+	test.Settings = s
 
 	return test, nil
 }
 
-// nolint: gocyclo, funlen
+//nolint: gocyclo, funlen
 func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestSettings, error) {
 	m, err := getObjectFromNestedResourceData(data)
 	if err != nil {

@@ -72,7 +72,7 @@ func getURL(d *schema.ResourceData) string {
 	var url string
 	apiURL, ok := d.GetOk(apiURLKey)
 	if ok {
-		url = apiURL.(string) // nolint: errcheck, forcetypeassert // type enforced by TF schema
+		url = apiURL.(string) //nolint: errcheck, forcetypeassert // type enforced by TF schema
 	}
 	return url
 }

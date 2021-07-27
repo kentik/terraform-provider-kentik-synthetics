@@ -1,9 +1,9 @@
-HOSTNAME=kentik.com
-NAMESPACE=automation
-NAME=kentik-synthetics
-BINARY=terraform-provider-${NAME}
-VERSION=0.1.0
-OS_ARCH=linux_amd64
+HOSTNAME = kentik
+NAMESPACE = automation
+NAME = kentik-synthetics
+BINARY = terraform-provider-${NAME}
+VERSION := 0.1.0
+OS_ARCH := $(shell printf "%s_%s" `go env GOHOSTOS` `go env GOHOSTARCH`)
 TEST_API_SERVER_ENDPOINT=localhost:9955
 
 default: install

@@ -28,7 +28,7 @@ func TestResourceTest(t *testing.T) {
 	})
 }
 
-// nolint: funlen
+//nolint: funlen
 func checkResourceTestCreate() resource.TestCheckFunc {
 	return resource.ComposeTestCheckFunc(
 		resource.TestCheckResourceAttrSet(testResource, "id"),
@@ -101,7 +101,7 @@ func checkResourceTestCreate() resource.TestCheckFunc {
 	)
 }
 
-// nolint: funlen
+//nolint: funlen
 func checkResourceTestUpdate() resource.TestCheckFunc {
 	return resource.ComposeTestCheckFunc(
 		resource.TestCheckResourceAttrSet(testResource, "id"),
