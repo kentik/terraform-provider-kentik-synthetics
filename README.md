@@ -46,12 +46,12 @@ Development steps:
 - Run tests: `make test`
 - Run linter: `golangci-lint run`
 - Format the code: `./tools/fmt.sh`
+- Generate or update documentation: `go generate`
 
 ### Development state
 
 TODO non-functional:
 - release process
-- generate documentation
 - document the release process, testing, debugging in the README
 - document how to run examples
 - acceptance tests
