@@ -193,14 +193,6 @@ func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 		fields = append(fields, "test.settings.url.target")
 	}
 
-	if test.Settings.HasTargetType() {
-		fields = append(fields, "test.settings.target_type")
-	}
-
-	if test.Settings.HasTargetValue() {
-		fields = append(fields, "test.settings.target_value")
-	}
-
 	return fields
 }
 

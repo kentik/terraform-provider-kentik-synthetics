@@ -55,8 +55,6 @@ func testSettingsToMapSlice(obj *synthetics.V202101beta1TestSettings) []map[stri
 		"protocol":            obj.Protocol,
 		"family":              obj.Family,
 		"servers":             obj.Servers,
-		"target_type":         obj.TargetType,
-		"target_value":        obj.TargetValue,
 		"use_local_ip":        obj.UseLocalIp,
 		"reciprocal":          obj.Reciprocal,
 		"rollup_level":        obj.RollupLevel,
@@ -334,14 +332,6 @@ func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestS
 	}
 
 	obj.SetServers(ifSliceToStringSlice(m["servers"].([]interface{})))
-
-	if tt, ok := m["target_type"]; ok && tt != "" {
-		obj.SetTargetType(tt.(string))
-	}
-
-	if tv, ok := m["target_value"]; ok && tv != "" {
-		obj.SetTargetValue(tv.(string))
-	}
 
 	obj.SetUseLocalIp(m["use_local_ip"].(bool))
 	obj.SetReciprocal(m["reciprocal"].(bool))

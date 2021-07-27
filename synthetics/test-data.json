@@ -95,8 +95,6 @@
           "server-one",
           "server-two"
         ],
-        "targetType": "dummy-tt",
-        "targetValue": "dummy-tv",
         "useLocalIp": false,
         "reciprocal": false,
         "rollupLevel": 1

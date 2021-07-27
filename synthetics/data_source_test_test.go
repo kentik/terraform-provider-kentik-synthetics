@@ -85,8 +85,6 @@ func checkDataSourceTest() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testDS, "settings.0.servers.#", "2"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.servers.0", "server-one"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.servers.1", "server-two"),
-		resource.TestCheckResourceAttr(testDS, "settings.0.target_type", "dummy-tt"),
-		resource.TestCheckResourceAttr(testDS, "settings.0.target_value", "dummy-tv"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.use_local_ip", "false"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.reciprocal", "false"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.rollup_level", "1"),
