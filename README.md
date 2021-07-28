@@ -35,6 +35,17 @@ This will:
 2. Run tests (communication with `localhost_apiserver`)
 3. Shut down `localhost_apiserver`
 
+## Debug
+
+For debugging use https://github.com/go-delve/delve
+```bash
+make build
+dlv exec ./terraform-provider-kentik-cloudexport
+r -debug
+c
+# attach with terraform following the just-printed out instruction in your terminal
+```
+
 ## Usage
 
 The provider can be configured with parameters or environment variables:
