@@ -40,7 +40,7 @@ This will:
 For debugging use https://github.com/go-delve/delve
 ```bash
 make build
-dlv exec ./terraform-provider-kentik-cloudexport
+dlv exec ./terraform-provider-kentik-synthetics
 r -debug
 c
 # attach with terraform following the just-printed out instruction in your terminal
