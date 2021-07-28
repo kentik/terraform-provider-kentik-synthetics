@@ -48,7 +48,9 @@ c
 
 ## Usage
 
-The provider can be configured with parameters or environment variables:
+Go to folder with Terraform `.tf` definition files for synthetic resources/data sources(`/examples/*`):
+
+1. Configure provider with parameters:
 
 ```terraform
 provider "kentik-synthetics" {
@@ -63,6 +65,22 @@ provider "kentik-synthetics" {
   debug = true
 }
 ```
+
+or environment variables:
+
+```bash
+export KTAPI_AUTH_EMAIL="john@acme.com"
+export KTAPI_AUTH_TOKEN="token123"
+export KTAPI_URL="http://localhost:8080" # custom apiserver
+```
+
+2. Invoke:
+
+```bash
+terraform init
+terraform apply
+```
+
 
 ## Development
 
