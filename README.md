@@ -55,3 +55,12 @@ TODO non-functional:
 - document the release process, testing, debugging in the README
 - document how to run examples
 - acceptance tests
+
+## Release process
+
+Release process for the provider is based on github repo tags. Every tag with format v[0-9].[0-9].[0-9] will trigger automatic build of package and publish it in registry.terraform.io.
+
+To build and release package:
+1. Make sure that all code that you want to release is in master branch
+2. Create tag with format v[0-9].[0-9].[0-9] in github. [Releases](https://github.com/kentik/terraform-provider-kentik-synthetics/releases) -> Draft a new release -> Put tag version, name and description
+3. Go to [Github Actions](https://github.com/kentik/terraform-provider-kentik-synthetics/actions)
