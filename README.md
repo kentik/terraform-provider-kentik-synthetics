@@ -37,7 +37,7 @@ This will:
 
 ## Debug
 
-For debugging use https://github.com/go-delve/delve
+For debugging use [Delve debugger](https://github.com/go-delve/delve)
 ```bash
 make build
 dlv exec ./terraform-provider-kentik-synthetics
