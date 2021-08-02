@@ -13,39 +13,6 @@ Build and install the provider so that Terraform can use it:
 make install
 ```
 
-## Test
-
-### Unit tests
-
-Unit tests run the provider against a `localhost_apiserver` that serves data read from `/synthetics/test-data.json`
-
-This allows to:
-- avoid the necessity of providing valid API credentials
-- avoid creating resources on remote server
-- make the test results more reliable
-
-
-To run unit tests:
-```bash
-make test
-```
-
-This will:
-1. Build and run `localhost_apiserver` that is a stub for kentik apiv6 server
-2. Run tests (communication with `localhost_apiserver`)
-3. Shut down `localhost_apiserver`
-
-## Debug
-
-For debugging use [Delve debugger](https://github.com/go-delve/delve)
-```bash
-make build
-dlv exec ./terraform-provider-kentik-synthetics
-r -debug
-c
-# attach with terraform following the just-printed out instruction in your terminal
-```
-
 ## Usage
 
 Go to folder with Terraform `.tf` definition files for synthetic resources/data sources(`/examples/*`):
@@ -97,6 +64,37 @@ Development steps:
 - Run tests: `make test`
 - Run linter: `golangci-lint run`
 - Format the code: `./tools/fmt.sh`
+
+### Test
+
+Unit tests run the provider against a `localhost_apiserver` that serves data read from `/synthetics/test-data.json`
+
+This allows to:
+- avoid the necessity of providing valid API credentials
+- avoid creating resources on remote server
+- make the test results more reliable
+
+
+To run unit tests:
+```bash
+make test
+```
+
+This will:
+1. Build and run `localhost_apiserver` that is a stub for kentik apiv6 server
+2. Run tests (communication with `localhost_apiserver`)
+3. Shut down `localhost_apiserver`
+
+### Debug
+
+For debugging use [Delve debugger](https://github.com/go-delve/delve)
+```bash
+make build
+dlv exec ./terraform-provider-kentik-synthetics
+r -debug
+c
+# attach with terraform following the just-printed out instruction in your terminal
+```
 
 ### Development state
 
