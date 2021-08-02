@@ -95,12 +95,3 @@ r -debug
 c
 # attach with terraform following the just-printed out instruction in your terminal
 ```
-
-### Development state
-
-TODO non-functional:
-- release process
-- generate documentation
-- document the release process, testing, debugging in the README
-- document how to run examples
-- acceptance tests
