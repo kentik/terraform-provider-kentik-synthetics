@@ -151,7 +151,6 @@ func commonPatchTestFields() []string {
 	}
 }
 
-// nolint: gocyclo
 func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 	var fields []string
 
@@ -191,14 +190,6 @@ func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 
 	if test.Settings.HasUrl() {
 		fields = append(fields, "test.settings.url.target")
-	}
-
-	if test.Settings.HasTargetType() {
-		fields = append(fields, "test.settings.target_type")
-	}
-
-	if test.Settings.HasTargetValue() {
-		fields = append(fields, "test.settings.target_value")
 	}
 
 	return fields

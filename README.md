@@ -64,6 +64,7 @@ Development steps:
 - Run tests: `make test`
 - Run linter: `golangci-lint run`
 - Format the code: `./tools/fmt.sh`
+- Generate or update documentation: `go generate`
 
 ### Test
 

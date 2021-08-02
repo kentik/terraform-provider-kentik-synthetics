@@ -1,5 +1,23 @@
-resource "kentik-synthetics_test" "example-hostname-test" {
-  name      = "example-hostname-test"
+// Bulk synthetic tests create use cases:
+// 1. Customer wants to automatically create synthetic tests from a set of agents
+//    to addresses of interfaces classified as “external”.
+// 2. Customer wants to automatically create synthetic tests to his applications hosted in AWS
+//    from all of his private agents.
+// Use case #2 below.
+
+data "kentik-synthetics_agents" "agents" {}
+
+locals {
+  agents = [
+    for agent in data.kentik-synthetics_agents.agents:
+      agent
+  ]
+  agents_data = local.agents[2]
+  private_agents_ids = compact([for agent in local.agents_data : agent.type == "private" ? agent.id : ""])
+}
+
+resource "kentik-synthetics_test" "private-agents-test" {
+  name      = "private-agents-test"
   type      = "hostname"
   device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
@@ -7,11 +25,7 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     hostname {
       target = "www.example.com"
     }
-    agent_ids = tolist([
-      "817",
-      "818",
-      "819"
-    ])
+    agent_ids = local.private_agents_ids
     period = 61
     count  = 2
     expiry = 5001
@@ -44,11 +58,6 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       activation_time_unit    = "m"
       activation_time_window  = "5"
       activation_times        = "3"
-      // Notice: currently "notification_channels" field cannot be manipulated
-      //      notification_channels = tolist([
-      //        "dummy-channel-1",
-      //        "dummy-channel-2",
-      //      ])
     }
     ping {
       period = 60
@@ -76,6 +85,6 @@ resource "kentik-synthetics_test" "example-hostname-test" {
   }
 }
 
-output "hostname-test" {
-  value = kentik-synthetics_test.example-hostname-test
+output "private-agents-test-output" {
+  value = kentik-synthetics_test.private-agents-test
 }
