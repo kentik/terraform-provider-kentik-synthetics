@@ -67,7 +67,7 @@ Development steps:
 
 ### Test
 
-Unit tests run the provider against a `localhost_apiserver` that serves data read from `/synthetics/test-data.json`
+Unit tests run the provider against a `test-api-server` that serves data read from `/synthetics/test-data.json`
 
 This allows to:
 - avoid the necessity of providing valid API credentials
@@ -81,9 +81,9 @@ make test
 ```
 
 This will:
-1. Build and run `localhost_apiserver` that is a stub for kentik apiv6 server
-2. Run tests (communication with `localhost_apiserver`)
-3. Shut down `localhost_apiserver`
+1. Build and run `test-api-server` that is a stub for kentik apiv6 server
+2. Run tests (communication with `test-api-server`)
+3. Shut down `test-api-server`
 
 ### Debug
 
