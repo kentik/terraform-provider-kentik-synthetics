@@ -67,7 +67,7 @@ Development steps:
 
 ### Test
 
-Unit tests run the provider against a `test-api-server` that serves data read from `/synthetics/test-data.json`
+Tests run the provider against a `test-api-server` that serves data read from `/synthetics/test-data.json`
 
 This allows to:
 - avoid the necessity of providing valid API credentials
@@ -75,13 +75,8 @@ This allows to:
 - make the test results more reliable
 
 
-To run unit tests:
-```bash
-make test
-```
-
-This will:
-1. Build and run `test-api-server` that is a stub for kentik apiv6 server
+Running `make test` will:
+1. Build and run test-api-server which emulates Kentik API v6 by returning static preconfigured responses
 2. Run tests (communication with `test-api-server`)
 3. Shut down `test-api-server`
 
