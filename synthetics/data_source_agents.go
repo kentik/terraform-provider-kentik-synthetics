@@ -14,6 +14,9 @@ import (
 const (
 	itemsKey              = "items"
 	invalidAgentsCountKey = "invalid_agents_count"
+	latitudeKey           = "latitude"
+	longitudeKey          = "longitude"
+	distanceKey           = "distance"
 )
 
 func dataSourceAgents() *schema.Resource {
@@ -32,6 +35,18 @@ func dataSourceAgents() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: computedOnRead(readList),
 			},
+			latitudeKey: {
+				Type:     schema.TypeFloat,
+				Optional: true,
+			},
+			longitudeKey: {
+				Type:     schema.TypeFloat,
+				Optional: true,
+			},
+			distanceKey: {
+				Type:     schema.TypeFloat,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -43,7 +58,17 @@ func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interfa
 	}
 
 	if resp.Agents != nil {
-		err = d.Set(itemsKey, agentsToMaps(*resp.Agents))
+		lat, latExists := d.GetOk(latitudeKey)
+		lon, lonExists := d.GetOk(longitudeKey)
+		dist, distExists := d.GetOk(distanceKey)
+		agents := *resp.Agents
+
+		if latExists && lonExists && distExists {
+			agents = filterAgentsByDistance(*resp.Agents, lat.(float64), lon.(float64), dist.(float64))
+		}
+
+		agentsMap := agentsToMaps(agents)
+		err = d.Set(itemsKey, agentsMap)
 		if err != nil {
 			return diag.FromErr(err)
 		}
