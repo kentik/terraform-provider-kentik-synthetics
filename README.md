@@ -15,7 +15,9 @@ make install
 
 ## Usage
 
-The provider can be configured with parameters or environment variables:
+Go to folder with Terraform `.tf` definition files for synthetic resources/data sources(`/examples/*`):
+
+1. Configure provider with parameters:
 
 ```terraform
 provider "kentik-synthetics" {
@@ -30,6 +32,22 @@ provider "kentik-synthetics" {
   debug = true
 }
 ```
+
+or environment variables:
+
+```bash
+export KTAPI_AUTH_EMAIL="john@acme.com"
+export KTAPI_AUTH_TOKEN="token123"
+export KTAPI_URL="http://localhost:8080" # custom apiserver
+```
+
+2. Invoke:
+
+```bash
+terraform init
+terraform apply
+```
+
 
 ## Development
 
@@ -48,19 +66,28 @@ Development steps:
 - Format the code: `./tools/fmt.sh`
 - Generate or update documentation: `go generate`
 
-### Development state
+### Test
 
-TODO non-functional:
-- release process
-- document the release process, testing, debugging in the README
-- document how to run examples
-- acceptance tests
+Tests run the provider against a `test-api-server` that serves data read from `/synthetics/test-data.json`
 
-## Release process
+This allows to:
+- avoid the necessity of providing valid API credentials
+- avoid creating resources on remote server
+- make the test results more reliable
 
-Release process for the provider is based on github repo tags. Every tag with format v[0-9].[0-9].[0-9] will trigger automatic build of package and publish it in registry.terraform.io.
 
-To build and release package:
-1. Make sure that all code that you want to release is in master branch
-2. Create tag with format v[0-9].[0-9].[0-9] in github. [Releases](https://github.com/kentik/terraform-provider-kentik-synthetics/releases) -> Draft a new release -> Put tag version, name and description
-3. Go to [Github Actions](https://github.com/kentik/terraform-provider-kentik-synthetics/actions)
+Running `make test` will:
+1. Build and run test-api-server which emulates Kentik API v6 by returning static preconfigured responses
+2. Run tests (communication with `test-api-server`)
+3. Shut down `test-api-server`
+
+### Debug
+
+For debugging use [Delve debugger](https://github.com/go-delve/delve)
+```bash
+make build
+dlv exec ./terraform-provider-kentik-synthetics
+r -debug
+c
+# attach with terraform following the just-printed out instruction in your terminal
+```
