@@ -5,7 +5,7 @@
 # TODO(dfurman): deduplicate with run.sh functions in other examples
 
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
-REPO_DIR=$(cd -- "$SCRIPT_DIR" && cd ../../../ && pwd)
+REPO_DIR=$(cd -- "$SCRIPT_DIR" && cd ../../../../ && pwd)
 
 TEST_API_SERVER_ENDPOINT=${TEST_API_SERVER_ENDPOINT:-"localhost:9955"}
 

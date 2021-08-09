@@ -1,19 +1,11 @@
-// Bulk synthetic tests create use cases:
-// 1. Customer wants to automatically create synthetic tests from a set of agents
-//    to addresses of interfaces classified as “external”.
-// 2. Customer wants to automatically create synthetic tests to his applications hosted in AWS
-//    from all of his private agents.
-// Use case #2 below.
+// Create a test with list of agents that are located within given radius from coordinates.
+// Inputs: agentType
 
 data "kentik-synthetics_agents" "agents" {}
 
 locals {
-  agents = [
-    for agent in data.kentik-synthetics_agents.agents:
-      agent
-  ]
-  agents_data = local.agents[2]
-  private_agents_ids = compact([for agent in local.agents_data : agent.type == "private" ? agent.id : ""])
+  agentType = "global" // [private/global]
+  private_agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items : agent.type == local.agentType ? agent.id : ""])
 }
 
 resource "kentik-synthetics_test" "private-agents-test" {
