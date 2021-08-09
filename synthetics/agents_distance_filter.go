@@ -12,7 +12,7 @@ func filterAgentsByDistance(agents []synthetics.V202101beta1Agent,
 	for _, agent := range agents {
 		agentCoordinates := geo.NewPoint(*agent.Lat, *agent.Long)
 		dist := referencePoint.GreatCircleDistance(agentCoordinates)
-		if dist < distConstr {
+		if dist <= distConstr {
 			filteredAgents = append(filteredAgents, agent)
 		}
 	}
