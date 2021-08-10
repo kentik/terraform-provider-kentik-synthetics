@@ -1,9 +1,10 @@
 package synthetics
 
 import (
+	"strings"
+
 	geo "github.com/kellydunn/golang-geo"
 	"github.com/kentik/community_sdk_golang/apiv6/kentikapi/synthetics"
-	"strings"
 )
 
 func filterAgentsByDistance(agents []synthetics.V202101beta1Agent,

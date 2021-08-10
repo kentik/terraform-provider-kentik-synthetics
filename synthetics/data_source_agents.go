@@ -17,7 +17,7 @@ const (
 	latitudeKey           = "latitude"
 	longitudeKey          = "longitude"
 	distanceKey           = "distance"
-	nameSubstringKey	  = "name_substring"
+	nameSubstringKey      = "name_substring"
 )
 
 func dataSourceAgents() *schema.Resource {
@@ -49,7 +49,7 @@ func dataSourceAgents() *schema.Resource {
 				Optional: true,
 			},
 			nameSubstringKey: {
-				Type: schema.TypeString,
+				Type:     schema.TypeString,
 				Optional: true,
 			},
 		},
