@@ -9,8 +9,8 @@ locals {
   agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id]
 }
 
-resource "kentik-synthetics_test" "private-agents-test" {
-  name      = "name-filtered-agents-test"
+resource "kentik-synthetics_test" "agents-filtered-by-name-test" {
+  name      = "agents-filtered-by-name-test"
   type      = "hostname"
   device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
@@ -49,6 +49,6 @@ resource "kentik-synthetics_test" "private-agents-test" {
   }
 }
 
-output "private-agents-test-output" {
-  value = kentik-synthetics_test.private-agents-test
+output "agents-filtered-by-name-test-output" {
+  value = kentik-synthetics_test.agents-filtered-by-name-test
 }
