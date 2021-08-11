@@ -1,16 +1,16 @@
 // Create a test with list of agents that have given ASN.
-// Inputs: list of asns
+// Inputs: list of ASNs
 
 data "kentik-synthetics_agents" "agents" {}
 
 locals {
-  asnList = [20473, 11111, 12333]
+  asn_list = [20473, 11111, 12333]
 
   agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items:
-                          contains(local.asnList, agent.asn) ? agent.id : ""])
+                          contains(local.asn_list, agent.asn) ? agent.id : ""])
 }
 
-resource "kentik-synthetics_test" "private-agents-test" {
+resource "kentik-synthetics_test" "agents-filtered-by-asn-test" {
   name      = "agents-filtered-by-asn-test"
   type      = "hostname"
   device_id = "75702"
@@ -51,6 +51,6 @@ resource "kentik-synthetics_test" "private-agents-test" {
   }
 }
 
-output "private-agents-test-output" {
-  value = kentik-synthetics_test.private-agents-test
+output "agents-filtered-by-asn-output" {
+  value = kentik-synthetics_test.agents-filtered-by-asn-test
 }
