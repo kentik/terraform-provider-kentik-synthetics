@@ -1,5 +1,5 @@
 // Create a test with list of agents that are located within given radius from coordinates.
-// Inputs: latitude, longitude, radius.
+// Inputs: latitude, longitude, distance.
 
 data "kentik-synthetics_agents" "agents" {
   latitude  = 50.55
@@ -11,7 +11,7 @@ locals {
   agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id]
 }
 
-resource "kentik-synthetics_test" "private-agents-test" {
+resource "kentik-synthetics_test" "agents-within-radius-test" {
   name      = "agents-within-radius-test"
   type      = "hostname"
   device_id = "75702"
@@ -51,6 +51,6 @@ resource "kentik-synthetics_test" "private-agents-test" {
   }
 }
 
-output "private-agents-test-output" {
-  value = kentik-synthetics_test.private-agents-test
+output "agents-within-radius-test-output" {
+  value = kentik-synthetics_test.agents-within-radius-test
 }
