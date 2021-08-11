@@ -1,15 +1,15 @@
-// Create a test with list of agents that are located within given radius from coordinates.
+// Create a test with list of agents of given type.
 // Inputs: agentType
 
 data "kentik-synthetics_agents" "agents" {}
 
 locals {
   agentType = "global" // [private/global]
-  private_agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items : agent.type == local.agentType ? agent.id : ""])
+  agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items : agent.type == local.agentType ? agent.id : ""])
 }
 
-resource "kentik-synthetics_test" "private-agents-test" {
-  name      = "private-agents-test"
+resource "kentik-synthetics_test" "agents-filtered-by-type-test" {
+  name      = "agents-filtered-by-type-test"
   type      = "hostname"
   device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
@@ -17,7 +17,7 @@ resource "kentik-synthetics_test" "private-agents-test" {
     hostname {
       target = "www.example.com"
     }
-    agent_ids = local.private_agents_ids
+    agent_ids = local.agents_ids
     tasks = tolist([
       "ping",
       "traceroute"
@@ -48,6 +48,6 @@ resource "kentik-synthetics_test" "private-agents-test" {
   }
 }
 
-output "private-agents-test-output" {
-  value = kentik-synthetics_test.private-agents-test
+output "agents-filtered-by-type-test-output" {
+  value = kentik-synthetics_test.agents-filtered-by-type-test
 }
