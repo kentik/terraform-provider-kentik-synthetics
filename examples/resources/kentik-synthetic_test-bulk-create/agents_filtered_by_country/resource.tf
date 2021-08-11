@@ -4,14 +4,13 @@
 data "kentik-synthetics_agents" "agents" {}
 
 locals {
-  countryList = ["Poland", "Polska", "Netherlands"]
-
+  country_list = ["Poland", "United Kingdom", "Netherlands"]
   agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items:
-                          contains(local.countryList, agent.country) ? agent.id : ""])
+                          contains(local.country_list, agent.country) ? agent.id : ""])
 }
 
-resource "kentik-synthetics_test" "private-agents-test" {
-  name      = "agents-filtered-by-asn-test"
+resource "kentik-synthetics_test" "agents-filtered-by-country-test" {
+  name      = "agents-filtered-by-country-test"
   type      = "hostname"
   device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
@@ -51,6 +50,6 @@ resource "kentik-synthetics_test" "private-agents-test" {
   }
 }
 
-output "private-agents-test-output" {
-  value = kentik-synthetics_test.private-agents-test
+output "agents-filtered-by-country-output" {
+  value = kentik-synthetics_test.agents-filtered-by-country-test
 }
