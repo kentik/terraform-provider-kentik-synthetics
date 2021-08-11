@@ -19,7 +19,7 @@ func main() {
 	opts := &plugin.ServeOpts{ProviderFunc: synthetics.NewProvider}
 
 	if debugMode {
-		err := plugin.Debug(context.Background(), "registry.terraform.io/providers/kentik/kentik-synthetics", opts)
+		err := plugin.Debug(context.Background(), "kentik/automation/kentik-synthetics", opts)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
