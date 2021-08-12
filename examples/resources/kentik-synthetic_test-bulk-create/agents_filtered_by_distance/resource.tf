@@ -1,17 +1,18 @@
-// Create a test with list of agents that are located within given radius from coordinates.
-// Inputs: latitude, longitude, distance.
+// Create a test with list of agents that are located within given distance constraints from coordinates.
+// Inputs: latitude, longitude, min_distance, max_distance.
 
 data "kentik-synthetics_agents" "agents" {
   latitude  = 50.55
   longitude = 5.5
-  distance  = 9000
+  min_distance = 1000
+  max_distance = 9000
 }
 
 locals {
   agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id]
 }
 
-resource "kentik-synthetics_test" "agents-within-radius-test" {
+resource "kentik-synthetics_test" "agents-within-distance-test" {
   name      = "agents-within-radius-test"
   type      = "hostname"
   device_id = "75702"
@@ -51,6 +52,6 @@ resource "kentik-synthetics_test" "agents-within-radius-test" {
   }
 }
 
-output "agents-within-radius-test-output" {
-  value = kentik-synthetics_test.agents-within-radius-test
+output "agents-within-distance-test-output" {
+  value = kentik-synthetics_test.agents-within-distance-test
 }
