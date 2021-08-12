@@ -17,7 +17,6 @@ const (
 	latitudeKey           = "latitude"
 	longitudeKey          = "longitude"
 	distanceKey           = "distance"
-	nameSubstringKey      = "name_substring"
 )
 
 func dataSourceAgents() *schema.Resource {
@@ -48,10 +47,6 @@ func dataSourceAgents() *schema.Resource {
 				Type:     schema.TypeFloat,
 				Optional: true,
 			},
-			nameSubstringKey: {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 		},
 	}
 }
@@ -70,11 +65,6 @@ func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interfa
 
 		if latExists && lonExists && distExists {
 			agents = filterAgentsByDistance(*resp.Agents, lat.(float64), lon.(float64), dist.(float64))
-		}
-
-		nameSubstring, nameSubstringExists := d.GetOk(nameSubstringKey)
-		if nameSubstringExists {
-			agents = filterAgentsByName(agents, nameSubstring.(string))
 		}
 
 		agentsMap := agentsToMaps(agents)

@@ -1,12 +1,12 @@
 // Create a test with list of agents that have a name containing given substring.
 // Inputs: name substring
 
-data "kentik-synthetics_agents" "agents" {
-  name_substring = "global-agent"
-}
+data "kentik-synthetics_agents" "agents" {}
 
 locals {
-  agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id]
+  name_substring = "private"
+  agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items:
+                          length(regexall(local.name_substring, agent.name)) > 0 ? agent.id : ""])
 }
 
 resource "kentik-synthetics_test" "agents-filtered-by-name-test" {
