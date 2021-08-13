@@ -2,6 +2,7 @@ package synthetics
 
 import (
 	"context"
+	"math"
 	"strconv"
 	"time"
 
@@ -20,7 +21,6 @@ const (
 	minDistanceKey        = "min_distance"
 	maxDistanceKey        = "max_distance"
 
-	MaxDistDefault = 41000.0
 	MinDistDefault = 0.0
 )
 
@@ -105,7 +105,7 @@ func filterAgents(agents []synthetics.V202101beta1Agent, d *schema.ResourceData)
 		minDist = MinDistDefault
 	}
 	if !maxDistExists {
-		maxDist = MaxDistDefault
+		maxDist = math.Inf(0)
 	}
 
 	if latExists && lonExists {
