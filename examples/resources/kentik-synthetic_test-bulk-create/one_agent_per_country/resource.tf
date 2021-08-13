@@ -4,7 +4,7 @@ data "kentik-synthetics_agents" "agents" {}
 
 locals {
   country_to_ids_map = {for agent in data.kentik-synthetics_agents.agents.items: agent.country => agent.id...}
-  agent_ids = [for key, val in local.country_to_ids_map: val[0]]
+  agent_ids = [for key, val in local.country_to_ids_map: sort(val)[0]]
 }
 
 resource "kentik-synthetics_test" "one_agent_per_country-test" {
