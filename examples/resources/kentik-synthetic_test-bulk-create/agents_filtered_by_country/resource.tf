@@ -5,8 +5,8 @@ data "kentik-synthetics_agents" "agents" {}
 
 locals {
   country_list = ["Poland", "United Kingdom", "Netherlands"]
-  agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items:
-                          contains(local.country_list, agent.country) ? agent.id : ""])
+  agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id
+                  if contains(local.country_list, agent.country)]
 }
 
 resource "kentik-synthetics_test" "agents-filtered-by-country-test" {

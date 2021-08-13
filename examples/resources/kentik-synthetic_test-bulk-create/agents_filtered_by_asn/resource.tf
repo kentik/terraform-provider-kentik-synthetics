@@ -5,9 +5,8 @@ data "kentik-synthetics_agents" "agents" {}
 
 locals {
   asn_list = [20473, 11111, 12333]
-
-  agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items:
-                          contains(local.asn_list, agent.asn) ? agent.id : ""])
+  agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id
+                  if contains(local.asn_list, agent.asn)]
 }
 
 resource "kentik-synthetics_test" "agents-filtered-by-asn-test" {

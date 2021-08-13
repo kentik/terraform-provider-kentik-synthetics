@@ -5,8 +5,8 @@ data "kentik-synthetics_agents" "agents" {}
 
 locals {
   name_substring = "private"
-  agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items:
-                          length(regexall(local.name_substring, agent.name)) > 0 ? agent.id : ""])
+  agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id
+                  if length(regexall(local.name_substring, agent.name)) > 0]
 }
 
 resource "kentik-synthetics_test" "agents-filtered-by-name-test" {

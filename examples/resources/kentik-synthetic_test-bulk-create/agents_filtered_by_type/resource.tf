@@ -5,7 +5,7 @@ data "kentik-synthetics_agents" "agents" {}
 
 locals {
   agentType = "global" // [private/global]
-  agents_ids = compact([for agent in data.kentik-synthetics_agents.agents.items : agent.type == local.agentType ? agent.id : ""])
+  agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id if agent.type == local.agentType]
 }
 
 resource "kentik-synthetics_test" "agents-filtered-by-type-test" {
