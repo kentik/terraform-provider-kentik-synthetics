@@ -52,5 +52,5 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
 }
 
 output "one_agent_per_country-test-output" {
-  value = sort(data.kentik-synthetics_agents.agents.items.id)
+  value = kentik-synthetics_test.one_agent_per_country-test
 }
