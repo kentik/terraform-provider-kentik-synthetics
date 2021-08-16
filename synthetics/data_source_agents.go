@@ -20,8 +20,6 @@ const (
 	longitudeKey          = "longitude"
 	minDistanceKey        = "min_distance"
 	maxDistanceKey        = "max_distance"
-
-	MinDistDefault = 0.0
 )
 
 func dataSourceAgents() *schema.Resource {
@@ -102,7 +100,7 @@ func filterAgents(agents []synthetics.V202101beta1Agent, d *schema.ResourceData)
 	maxDist, maxDistExists := d.GetOk(maxDistanceKey)
 
 	if !minDistExists {
-		minDist = MinDistDefault
+		minDist = 0.0
 	}
 	if !maxDistExists {
 		maxDist = math.Inf(0)
