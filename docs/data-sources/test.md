@@ -88,8 +88,6 @@ Read-Only:
 - **servers** (List of String)
 - **site** (List of Object) (see [below for nested schema](#nestedobjatt--settings--site))
 - **tag** (List of Object) (see [below for nested schema](#nestedobjatt--settings--tag))
-- **target_type** (String)
-- **target_value** (String)
 - **tasks** (List of String)
 - **trace** (List of Object) (see [below for nested schema](#nestedobjatt--settings--trace))
 - **url** (List of Object) (see [below for nested schema](#nestedobjatt--settings--url))

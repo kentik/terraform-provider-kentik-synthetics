@@ -26,6 +26,10 @@ output "agents_list" {
 ### Optional
 
 - **id** (String) The ID of this resource.
+- **latitude** (Number)
+- **longitude** (Number)
+- **max_distance** (Number)
+- **min_distance** (Number)
 
 ### Read-Only
 
