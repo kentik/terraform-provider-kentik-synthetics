@@ -24,7 +24,6 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
       "ping",
       "traceroute"
     ])
-    health_settings {}
     monitoring_settings {
       activation_grace_period = "2"
       activation_time_unit    = "m"
