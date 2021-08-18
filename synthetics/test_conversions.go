@@ -16,7 +16,6 @@ func testToMap(obj *synthetics.V202101beta1Test) map[string]interface{} {
 		idKey:             obj.Id,
 		"name":            obj.Name,
 		"type":            obj.Type,
-		"device_id":       obj.DeviceId,
 		"status":          obj.Status,
 		"settings":        testSettingsToMapSlice(obj.Settings),
 		"expires_on":      formatTime(obj.ExpiresOn),
@@ -221,7 +220,7 @@ func resourceDataToTest(d *schema.ResourceData) (*synthetics.V202101beta1Test, e
 	test := synthetics.NewV202101beta1Test()
 	test.SetName(d.Get("name").(string))
 	test.SetType(d.Get("type").(string))
-	test.SetDeviceId(d.Get("device_id").(string))
+	test.SetDeviceId("0")
 	test.SetStatus(synthetics.V202101beta1TestStatus(d.Get("status").(string)))
 
 	s, err := resourceDataToTestSettings(d.Get("settings"))

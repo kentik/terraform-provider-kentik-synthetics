@@ -26,7 +26,6 @@ func checkDataSourceTest() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testDS, "id", "1"),
 		resource.TestCheckResourceAttr(testDS, "name", "github.com ip test"),
 		resource.TestCheckResourceAttr(testDS, "type", "ip"),
-		resource.TestCheckResourceAttr(testDS, "device_id", "75702"),
 		resource.TestCheckResourceAttr(testDS, "status", "TEST_STATUS_PAUSED"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.hostname.0.target", "dummy-ht"),
 		resource.TestCheckResourceAttr(testDS, "settings.0.ip.0.targets.#", "1"),

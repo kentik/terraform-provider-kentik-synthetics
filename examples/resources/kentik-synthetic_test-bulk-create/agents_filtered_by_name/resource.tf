@@ -12,7 +12,6 @@ locals {
 resource "kentik-synthetics_test" "agents-filtered-by-name-test" {
   name      = "agents-filtered-by-name-test"
   type      = "hostname"
-  device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
