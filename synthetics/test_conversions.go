@@ -220,7 +220,7 @@ func resourceDataToTest(d *schema.ResourceData) (*synthetics.V202101beta1Test, e
 	test := synthetics.NewV202101beta1Test()
 	test.SetName(d.Get("name").(string))
 	test.SetType(d.Get("type").(string))
-	test.SetDeviceId("0")
+	test.SetDeviceId("0") // 'device_id' parameter is required by the API, but ignored, hence we always set it to 0
 	test.SetStatus(synthetics.V202101beta1TestStatus(d.Get("status").(string)))
 
 	s, err := resourceDataToTestSettings(d.Get("settings"))
