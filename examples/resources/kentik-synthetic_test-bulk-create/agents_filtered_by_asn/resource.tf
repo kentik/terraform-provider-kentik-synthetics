@@ -23,7 +23,6 @@ resource "kentik-synthetics_test" "agents-filtered-by-asn-test" {
       "ping",
       "traceroute"
     ])
-    health_settings {}
     monitoring_settings {
       activation_grace_period = "2"
       activation_time_unit    = "m"
