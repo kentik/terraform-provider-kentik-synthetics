@@ -107,7 +107,6 @@ func commonPatchTestFields() []string {
 	return []string{
 		"test.name",
 		"test.type",
-		"test.deviceId",
 		"test.status",
 		"test.settings.agentIds",
 		"test.settings.period",

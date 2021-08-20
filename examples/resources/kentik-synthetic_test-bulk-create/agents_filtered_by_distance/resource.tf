@@ -15,7 +15,6 @@ locals {
 resource "kentik-synthetics_test" "agents-within-distance-test" {
   name      = "agents-within-radius-test"
   type      = "hostname"
-  device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
   settings {
     hostname {

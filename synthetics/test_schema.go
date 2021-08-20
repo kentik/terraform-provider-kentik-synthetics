@@ -24,11 +24,6 @@ func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 			Optional: optionalOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
-		"device_id": {
-			Type:     schema.TypeString,
-			Optional: optionalOnCreate(mode),
-			Computed: computedOnRead(mode),
-		},
 		"status": {
 			Type:     schema.TypeString,
 			Optional: optionalOnCreate(mode),

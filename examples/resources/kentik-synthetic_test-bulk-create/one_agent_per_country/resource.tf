@@ -13,7 +13,6 @@ locals {
 resource "kentik-synthetics_test" "one_agent_per_country-test" {
   name      = "agents-filtered-by-country-test"
   type      = "hostname"
-  device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
   settings {
     hostname {

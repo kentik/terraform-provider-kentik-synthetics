@@ -34,7 +34,6 @@ func checkResourceTestCreate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttrSet(testResource, "id"),
 		resource.TestCheckResourceAttr(testResource, "name", "dummy-name"),
 		resource.TestCheckResourceAttr(testResource, "type", "dummy-type"),
-		resource.TestCheckResourceAttr(testResource, "device_id", "2137"),
 		resource.TestCheckResourceAttr(testResource, "status", "TEST_STATUS_ACTIVE"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.hostname.0.target", "dummy-ht"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.ip.0.targets.#", "1"),
@@ -107,7 +106,6 @@ func checkResourceTestUpdate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttrSet(testResource, "id"),
 		resource.TestCheckResourceAttr(testResource, "name", "updated-name"),
 		resource.TestCheckResourceAttr(testResource, "type", "updated-type"),
-		resource.TestCheckResourceAttr(testResource, "device_id", "21370"),
 		resource.TestCheckResourceAttr(testResource, "status", "TEST_STATUS_PAUSED"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.hostname.0.target", "updated-ht"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.ip.0.targets.#", "2"),
@@ -186,7 +184,6 @@ const (
 		resource "kentik-synthetics_test" "dummy-test" {
 			name      = "dummy-name"
 			type      = "dummy-type"
-			device_id = "2137"
 			status    = "TEST_STATUS_ACTIVE"
 			settings {
 				hostname {
@@ -293,7 +290,6 @@ const (
 		resource "kentik-synthetics_test" "dummy-test" {
 			name      = "updated-name"
 			type      = "updated-type"
-			device_id = "21370"
 			status    = "TEST_STATUS_PAUSED"
 			settings {
 				hostname {
