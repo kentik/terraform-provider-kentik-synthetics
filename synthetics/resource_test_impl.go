@@ -57,6 +57,10 @@ func resourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {
+		if httpResp.StatusCode == 404 {
+			d.SetId("")
+			return nil
+		}
 		return detailedDiagError("failed to read test", err, httpResp)
 	}
 
