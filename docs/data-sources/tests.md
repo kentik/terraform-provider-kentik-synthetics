@@ -39,7 +39,6 @@ Read-Only:
 
 - **cdate** (String)
 - **created_by** (List of Object) (see [below for nested schema](#nestedobjatt--items--created_by))
-- **device_id** (String)
 - **edate** (String)
 - **expires_on** (String)
 - **id** (String)

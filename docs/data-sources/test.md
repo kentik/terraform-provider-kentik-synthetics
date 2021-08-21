@@ -33,7 +33,6 @@ output "test_get" {
 
 - **cdate** (String)
 - **created_by** (List of Object) (see [below for nested schema](#nestedatt--created_by))
-- **device_id** (String)
 - **edate** (String)
 - **expires_on** (String)
 - **last_updated_by** (List of Object) (see [below for nested schema](#nestedatt--last_updated_by))

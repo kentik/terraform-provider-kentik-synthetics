@@ -101,7 +101,6 @@ output "hostname-test" {
 
 ### Optional
 
-- **device_id** (String)
 - **name** (String)
 - **settings** (Block List) (see [below for nested schema](#nestedblock--settings))
 - **status** (String)
