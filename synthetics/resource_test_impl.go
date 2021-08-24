@@ -2,6 +2,7 @@ package synthetics
 
 import (
 	"context"
+	"net/http"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -57,6 +58,10 @@ func resourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {
+		if httpResp.StatusCode == http.StatusNotFound {
+			d.SetId("")
+			return nil
+		}
 		return detailedDiagError("failed to read test", err, httpResp)
 	}
 
