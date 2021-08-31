@@ -467,11 +467,23 @@ func resourceDataToTestHealthSettings(data interface{}) (*synthetics.V202101beta
 	if err != nil {
 		return nil, fmt.Errorf("resourceDataToTestHealthSettings: %v", err)
 	}
-	if m == nil {
-		return nil, nil
-	}
 
 	obj := synthetics.NewV202101beta1HealthSettings()
+
+	if m == nil {
+		obj.SetLatencyCritical(0)
+		obj.SetLatencyWarning(0)
+		obj.SetPacketLossCritical(0)
+		obj.SetPacketLossWarning(0)
+		obj.SetJitterCritical(0)
+		obj.SetJitterWarning(0)
+		obj.SetHttpLatencyCritical(0)
+		obj.SetHttpLatencyWarning(0)
+		obj.SetHttpValidCodes([]int64{})
+		obj.SetDnsValidCodes([]int64{})
+		return obj, nil
+	}
+
 	obj.SetLatencyCritical(float32(m["latency_critical"].(float64)))
 	obj.SetLatencyWarning(float32(m["latency_warning"].(float64)))
 	obj.SetPacketLossCritical(float32(m["packet_loss_critical"].(float64)))
