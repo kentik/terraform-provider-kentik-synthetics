@@ -16,7 +16,6 @@ Resource representing synthetic test
 resource "kentik-synthetics_test" "example-hostname-test" {
   name      = "example-hostname-test"
   type      = "hostname"
-  device_id = "75702"
   status    = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
