@@ -7,19 +7,19 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     hostname {
       target = "www.example.com"
     }
-    agent_ids = tolist([
+    agent_ids = [
       "817",
       "818",
       "819"
-    ])
+    ]
     period = 61
     count  = 2
     expiry = 5001
     limit  = 4
-    tasks = tolist([
+    tasks = [
       "ping",
       "traceroute"
-    ])
+    ]
     health_settings {
       latency_critical      = 1
       latency_warning       = 2
@@ -29,15 +29,15 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       jitter_warning        = 6
       http_latency_critical = 7
       http_latency_warning  = 8
-      http_valid_codes = tolist([
+      http_valid_codes = [
         200,
         201
-      ])
-      dns_valid_codes = tolist([
+      ]
+      dns_valid_codes = [
         1,
         2,
         3
-      ])
+      ]
     }
     monitoring_settings {
       activation_grace_period = "2"
@@ -45,10 +45,10 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       activation_time_window  = "5"
       activation_times        = "3"
       // Notice: currently "notification_channels" field cannot be manipulated
-      //      notification_channels = tolist([
+      //      notification_channels = [
       //        "dummy-channel-1",
       //        "dummy-channel-2",
-      //      ])
+      //      ]
     }
     ping {
       period = 60
@@ -66,10 +66,10 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     port     = 443
     protocol = "icmp"
     family   = "IP_FAMILY_V6"
-    servers = tolist([
+    servers = [
       "server-one",
       "server-two",
-    ])
+    ]
     use_local_ip = true
     reciprocal   = false
     rollup_level = 1
