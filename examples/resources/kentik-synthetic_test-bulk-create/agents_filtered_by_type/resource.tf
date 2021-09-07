@@ -17,10 +17,10 @@ resource "kentik-synthetics_test" "agents-filtered-by-type-test" {
       target = "www.example.com"
     }
     agent_ids = local.agents_ids
-    tasks = tolist([
+    tasks = [
       "ping",
       "traceroute"
-    ])
+    ]
     monitoring_settings {
       activation_grace_period = "2"
       activation_time_unit    = "m"

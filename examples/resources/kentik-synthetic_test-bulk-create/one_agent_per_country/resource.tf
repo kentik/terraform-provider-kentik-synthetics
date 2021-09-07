@@ -19,10 +19,10 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
       target = "www.example.com"
     }
     agent_ids = local.agent_ids
-    tasks = tolist([
+    tasks = [
       "ping",
       "traceroute"
-    ])
+    ]
     monitoring_settings {
       activation_grace_period = "2"
       activation_time_unit    = "m"
