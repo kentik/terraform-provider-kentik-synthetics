@@ -119,16 +119,6 @@ func commonPatchTestFields() []string {
 		"test.settings.expiry",
 		"test.settings.limit",
 		"test.settings.tasks",
-		"test.settings.healthSettings.latencyCritical",
-		"test.settings.healthSettings.latencyWarning",
-		"test.settings.healthSettings.packetLossCritical",
-		"test.settings.healthSettings.packetLossWarning",
-		"test.settings.healthSettings.jitterCritical",
-		"test.settings.healthSettings.jitterWarning",
-		"test.settings.healthSettings.httpLatencyCritical",
-		"test.settings.healthSettings.httpLatencyWarning",
-		"test.settings.healthSettings.httpValidCodes",
-		"test.settings.healthSettings.dnsValidCodes",
 		"test.settings.monitoringSettings.activationGracePeriod",
 		"test.settings.monitoringSettings.activationTimeUnit",
 		"test.settings.monitoringSettings.activationTimeWindow",
@@ -148,7 +138,6 @@ func commonPatchTestFields() []string {
 		"test.settings.port",
 		"test.settings.protocol",
 		"test.settings.family",
-		"test.settings.servers",
 		"test.settings.useLocalIp",
 		"test.settings.reciprocal",
 		"test.settings.rollupLevel",
@@ -194,6 +183,50 @@ func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 
 	if test.Settings.HasUrl() {
 		fields = append(fields, "test.settings.url.target")
+	}
+
+	if test.Settings.HasServers() && len(*test.Settings.Servers) != 0 {
+		fields = append(fields, "test.settings.servers")
+	}
+
+	if test.Settings.HealthSettings.HasLatencyCritical() {
+		fields = append(fields, "test.settings.healthSettings.latencyCritical")
+	}
+
+	if test.Settings.HealthSettings.HasLatencyWarning() {
+		fields = append(fields, "test.settings.healthSettings.latencyWarning")
+	}
+
+	if test.Settings.HealthSettings.HasPacketLossCritical() {
+		fields = append(fields, "test.settings.healthSettings.packetLossCritical")
+	}
+
+	if test.Settings.HealthSettings.HasPacketLossWarning() {
+		fields = append(fields, "test.settings.healthSettings.packetLossWarning")
+	}
+
+	if test.Settings.HealthSettings.HasJitterCritical() {
+		fields = append(fields, "test.settings.healthSettings.jitterCritical")
+	}
+
+	if test.Settings.HealthSettings.HasJitterWarning() {
+		fields = append(fields, "test.settings.healthSettings.jitterWarning")
+	}
+
+	if test.Settings.HealthSettings.HasHttpLatencyCritical() {
+		fields = append(fields, "test.settings.healthSettings.httpLatencyCritical")
+	}
+
+	if test.Settings.HealthSettings.HasHttpLatencyWarning() {
+		fields = append(fields, "test.settings.healthSettings.httpLatencyWarning")
+	}
+
+	if test.Settings.HealthSettings.HasHttpValidCodes() {
+		fields = append(fields, "test.settings.healthSettings.httpValidCodes")
+	}
+
+	if test.Settings.HealthSettings.HasDnsValidCodes() {
+		fields = append(fields, "test.settings.healthSettings.dnsValidCodes")
 	}
 
 	return fields
