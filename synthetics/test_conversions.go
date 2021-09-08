@@ -472,16 +472,6 @@ func resourceDataToTestHealthSettings(data interface{}) (*synthetics.V202101beta
 
 	if m == nil {
 		// Kentik API requires health_settings object
-		obj.SetLatencyCritical(0)
-		obj.SetLatencyWarning(0)
-		obj.SetPacketLossCritical(0)
-		obj.SetPacketLossWarning(0)
-		obj.SetJitterCritical(0)
-		obj.SetJitterWarning(0)
-		obj.SetHttpLatencyCritical(0)
-		obj.SetHttpLatencyWarning(0)
-		obj.SetHttpValidCodes([]int64{})
-		obj.SetDnsValidCodes([]int64{})
 		return obj, nil
 	}
 
