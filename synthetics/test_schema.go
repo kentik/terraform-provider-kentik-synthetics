@@ -27,7 +27,7 @@ func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 		"status": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 			// enumeration: "TEST_STATUS_UNSPECIFIED", TEST_STATUS_ACTIVE", "TEST_STATUS_PAUSED",
 			// "TEST_STATUS_DELETED"
@@ -64,7 +64,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		"agent_ids": {
 			Type:     schema.TypeList,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
@@ -93,7 +93,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		"tasks": {
 			Type:     schema.TypeList,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
@@ -106,7 +106,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		"port": {
 			Type:     schema.TypeInt,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"protocol": {
@@ -117,7 +117,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		"family": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 			// enumeration: "IP_FAMILY_UNSPECIFIED", "IP_FAMILY_V4", "IP_FAMILY_V6", "IP_FAMILY_DUAL"
 		},
@@ -142,7 +142,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		"rollup_level": {
 			Type:     schema.TypeInt,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 	})
@@ -153,7 +153,7 @@ func makeTestHostnameSchema(mode schemaMode) *schema.Schema {
 		"target": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 	})
@@ -318,19 +318,19 @@ func makeTestMonitoringSettingsSchema(mode schemaMode) *schema.Schema {
 		"activation_time_unit": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"activation_time_window": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"activation_times": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"notification_channels": {
@@ -369,7 +369,7 @@ func makeTestTraceSchema(mode schemaMode) *schema.Schema {
 		"period": {
 			Type:     schema.TypeFloat,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"count": {
@@ -380,25 +380,25 @@ func makeTestTraceSchema(mode schemaMode) *schema.Schema {
 		"protocol": {
 			Type:     schema.TypeString,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"port": {
 			Type:     schema.TypeFloat,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"expiry": {
 			Type:     schema.TypeFloat,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"limit": {
 			Type:     schema.TypeFloat,
 			Optional: optionalOnRead(mode),
-            Required: requiredOnCreate(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 	})

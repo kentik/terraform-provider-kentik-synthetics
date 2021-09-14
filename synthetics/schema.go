@@ -20,7 +20,6 @@ const (
 	create
 )
 
-
 func optionalOnRead(mode schemaMode) bool {
 	return mode == readSingle || mode == readList
 }
