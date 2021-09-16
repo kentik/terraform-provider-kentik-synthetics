@@ -143,8 +143,25 @@ func testURLToMapSlice(obj *synthetics.V202101beta1UrlTest) []map[string]interfa
 	}}
 }
 
+//nolint: gocyclo
 func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []map[string]interface{} {
 	if obj == nil {
+		return nil
+	}
+
+	// Kentik API sets 0 values for nil fields
+	// Necessary conversion to nil, so Terraform configuration
+	// matches with actual state on the server
+	if *obj.LatencyCritical == 0 &&
+		*obj.LatencyWarning == 0 &&
+		*obj.PacketLossCritical == 0 &&
+		*obj.PacketLossWarning == 0 &&
+		*obj.JitterCritical == 0 &&
+		*obj.JitterWarning == 0 &&
+		*obj.HttpLatencyCritical == 0 &&
+		*obj.HttpLatencyWarning == 0 &&
+		len(*obj.HttpValidCodes) == 0 &&
+		len(*obj.DnsValidCodes) == 0 {
 		return nil
 	}
 
