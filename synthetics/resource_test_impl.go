@@ -186,7 +186,7 @@ func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 		fields = append(fields, "test.settings.url.target")
 	}
 
-	if test.Settings.HasServers() && len(*test.Settings.Servers) != 0 {
+	if test.Settings.HasServers() {
 		fields = append(fields, "test.settings.servers")
 	}
 
