@@ -143,7 +143,7 @@ func testURLToMapSlice(obj *synthetics.V202101beta1UrlTest) []map[string]interfa
 	}}
 }
 
-//nolint: gocyclo
+//nolint: gocyclo, gocognit
 func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []map[string]interface{} {
 	if obj == nil {
 		return nil
