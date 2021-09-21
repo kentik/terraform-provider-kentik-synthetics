@@ -149,6 +149,19 @@ func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []
 		return nil
 	}
 
+	if obj.LatencyCritical == nil &&
+		obj.LatencyWarning == nil &&
+		obj.PacketLossCritical == nil &&
+		obj.PacketLossWarning == nil &&
+		obj.JitterCritical == nil &&
+		obj.JitterWarning == nil &&
+		obj.HttpLatencyCritical == nil &&
+		obj.HttpLatencyWarning == nil &&
+		obj.HttpValidCodes == nil &&
+		obj.DnsValidCodes == nil {
+		return nil
+	}
+
 	// Kentik API sets 0 values for nil fields
 	// Necessary conversion to nil, so Terraform configuration
 	// matches with actual state on the server
