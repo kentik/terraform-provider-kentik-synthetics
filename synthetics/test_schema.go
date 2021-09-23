@@ -205,7 +205,7 @@ func makeTestFlowSchema(mode schemaMode) *schema.Schema {
 		"type": {
 			Type:     schema.TypeString,
 			Required: requiredOnCreate(mode),
-			Optional: optionalOnRead(mode2),
+			Optional: optionalOnRead(mode),
 			Computed: computedOnRead(mode),
 		},
 	})
@@ -366,7 +366,7 @@ func makeTestPingSchema(mode schemaMode) *schema.Schema {
 		"expiry": {
 			Type:     schema.TypeFloat,
 			Optional: optionalOnRead(mode),
-			Required: requiredOnCreate(mode2),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 	})
