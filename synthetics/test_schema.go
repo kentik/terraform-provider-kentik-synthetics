@@ -4,7 +4,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-// TODO(dfurman): mark required attributes, when they are specified in the OpenAPI definitions
 // TODO(dfurman): provide descriptions, when they are specified in the OpenAPI definitions
 
 func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
@@ -21,7 +20,8 @@ func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 		},
 		"type": {
 			Type:     schema.TypeString,
-			Optional: true,
+			Required: requiredOnCreate(mode),
+			Optional: optionalOnRead(mode),
 			Computed: computedOnRead(mode),
 		},
 		"status": {
@@ -111,7 +111,8 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		},
 		"protocol": {
 			Type:     schema.TypeString,
-			Optional: true,
+			Required: requiredOnCreate(mode),
+			Optional: optionalOnRead(mode),
 			Computed: computedOnRead(mode),
 		},
 		"family": {
@@ -163,7 +164,8 @@ func makeTestIPSchema(mode schemaMode) *schema.Schema {
 	return makeNestedObjectSchemaOptional(mode, map[string]*schema.Schema{
 		"targets": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Optional: optionalOnRead(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
@@ -176,7 +178,8 @@ func makeTestAgentSchema(mode schemaMode) *schema.Schema {
 	return makeNestedObjectSchemaOptional(mode, map[string]*schema.Schema{
 		"target": {
 			Type:     schema.TypeString,
-			Optional: true,
+			Required: requiredOnCreate(mode),
+			Optional: optionalOnRead(mode),
 			Computed: computedOnRead(mode),
 		},
 	})
@@ -201,7 +204,8 @@ func makeTestFlowSchema(mode schemaMode) *schema.Schema {
 		},
 		"type": {
 			Type:     schema.TypeString,
-			Optional: true,
+			Required: requiredOnCreate(mode),
+			Optional: optionalOnRead(mode2),
 			Computed: computedOnRead(mode),
 		},
 	})
@@ -335,7 +339,8 @@ func makeTestMonitoringSettingsSchema(mode schemaMode) *schema.Schema {
 		},
 		"notification_channels": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Optional: optionalOnRead(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
@@ -348,17 +353,20 @@ func makeTestPingSchema(mode schemaMode) *schema.Schema {
 	return makeNestedObjectSchemaOptional(mode, map[string]*schema.Schema{
 		"period": {
 			Type:     schema.TypeFloat,
-			Optional: true,
+			Optional: optionalOnRead(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"count": {
 			Type:     schema.TypeFloat,
-			Optional: true,
+			Optional: optionalOnRead(mode),
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"expiry": {
 			Type:     schema.TypeFloat,
-			Optional: true,
+			Optional: optionalOnRead(mode),
+			Required: requiredOnCreate(mode2),
 			Computed: computedOnRead(mode),
 		},
 	})
