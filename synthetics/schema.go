@@ -49,7 +49,7 @@ func makeNestedObjectSchemaRequired(mode schemaMode, properties map[string]*sche
 	}
 }
 
-// makeNestedObjectSchema returns a list of 1 element to emulate a nested object.
+// makeNestedObjectSchemaOptional returns a list of 1 element to emulate a nested object.
 // See: https://learn.hashicorp.com/tutorials/terraform/provider-create?in=terraform/providers#define-order-schema
 func makeNestedObjectSchemaOptional(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
 	return &schema.Schema{
