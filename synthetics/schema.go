@@ -20,10 +20,6 @@ const (
 	create
 )
 
-func optionalOnRead(mode schemaMode) bool {
-	return mode == readSingle || mode == readList
-}
-
 func requiredOnCreate(mode schemaMode) bool {
 	return mode == create
 }
@@ -45,7 +41,6 @@ func computedOnRead(mode schemaMode) bool {
 func makeNestedObjectSchemaRequired(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
 	return &schema.Schema{
 		Type:     schema.TypeList,
-		Optional: optionalOnRead(mode),
 		Required: requiredOnCreate(mode),
 		Computed: computedOnRead(mode),
 		Elem: &schema.Resource{
