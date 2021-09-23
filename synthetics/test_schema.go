@@ -142,7 +142,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 }
 
 func makeTestHostnameSchema(mode schemaMode) *schema.Schema {
-	return makeNestedObjectSchemaRequired(mode, map[string]*schema.Schema{
+	return makeNestedObjectSchemaOptional(mode, map[string]*schema.Schema{
 		"target": {
 			Type:     schema.TypeString,
 			Required: requiredOnCreate(mode),
