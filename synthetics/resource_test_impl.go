@@ -47,7 +47,7 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 		return diag.FromErr(err)
 	}
 
-	d.SetId(resp.Test.GetId())
+	d.SetId(resp.Test.GetId()) // create the resource in TF state
 
 	// read back the just-created resource to handle the case when server applies modifications to provided data
 	return resourceTestRead(ctx, d, m)
@@ -59,7 +59,7 @@ func resourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}
 		Execute()
 	if err != nil {
 		if httpResp.StatusCode == http.StatusNotFound {
-			d.SetId("")
+			d.SetId("") // delete the resource in TF state
 			return nil
 		}
 		return detailedDiagError("failed to read test", err, httpResp)
