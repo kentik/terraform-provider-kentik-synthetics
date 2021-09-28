@@ -102,6 +102,10 @@ func checkDataSourceTest() resource.TestCheckFunc {
 const (
 	testDS               = "data.kentik-synthetics_test.github-test"
 	dataSourceTestConfig = `
+		provider "kentik-synthetics" {
+			log_payloads = true
+		}
+
 		data "kentik-synthetics_test" "github-test" {
 			id = "1"
 		}

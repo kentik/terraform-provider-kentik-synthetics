@@ -20,7 +20,7 @@ func dataSourceTest() *schema.Resource {
 }
 
 func dataSourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {

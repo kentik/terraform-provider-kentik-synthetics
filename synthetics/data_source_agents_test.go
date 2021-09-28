@@ -81,7 +81,9 @@ func checkDataSourceAgents() resource.TestCheckFunc {
 const (
 	agentsDS               = "data.kentik-synthetics_agents.dummy-agents"
 	dataSourceAgentsConfig = `
-		provider "kentik-synthetics" {}
+		provider "kentik-synthetics" {
+			log_payloads = true
+		}
 		data "kentik-synthetics_agents" "dummy-agents" {}
 	`
 )

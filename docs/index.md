@@ -23,4 +23,4 @@ description: |-
 ### Optional
 
 - **api_url** (String) Synthetics API server URL (optional). Can also be specified with KTAPI_URL environment variable.
-- **debug** (Boolean) Debug flag enables verbose debug logs of requests and responses (optional). Can also be specified with TF_SYNTHETICS_DEBUG environment variable.
+- **log_payloads** (Boolean) Log payloads flag enables verbose debug logs of requests and responses (optional). Can also be specified with KTAPI_LOG_PAYLOADS environment variable.

@@ -36,7 +36,7 @@ func dataSourceTests() *schema.Resource {
 }
 
 func dataSourceTestsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.TestsList(ctx).Execute()
+	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.TestsList(ctx).Execute()
 	if err != nil {
 		return detailedDiagError("failed to read tests", err, httpResp)
 	}
@@ -56,7 +56,7 @@ func dataSourceTestsRead(ctx context.Context, d *schema.ResourceData, m interfac
 	}
 
 	// use UNIX time as ID to force list update every time Terraform asks for the list
-	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+	d.SetId(strconv.Itoa(int(time.Now().Unix())))
 	return nil
 }
 

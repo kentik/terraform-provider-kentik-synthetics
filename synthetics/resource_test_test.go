@@ -178,7 +178,7 @@ const (
 
 	resourceTestCreateConfig = `
 		provider "kentik-synthetics" {
-			debug = true
+			log_payloads = true
 		}
 
 		resource "kentik-synthetics_test" "dummy-test" {
@@ -285,7 +285,7 @@ const (
 
 	resourceTestUpdateConfig = `
 		provider "kentik-synthetics" {
-			debug = true
+			log_payloads = true
 		}
 		resource "kentik-synthetics_test" "dummy-test" {
 			name      = "updated-name"
@@ -392,7 +392,7 @@ const (
 
 	resourceTestDestroyConfig = `
 		provider "kentik-synthetics" {
-			debug = true
+			log_payloads = true
 		}
 	`
 )

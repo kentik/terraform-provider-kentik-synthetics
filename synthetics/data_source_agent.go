@@ -19,7 +19,7 @@ func dataSourceAgent() *schema.Resource {
 }
 
 func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceApi.
+	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		AgentGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {

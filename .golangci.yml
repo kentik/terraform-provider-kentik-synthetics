@@ -4,20 +4,23 @@ issues:
   max-issues-per-linter: 0
   max-same-issues: 0
   exclude:
-    # EXC0002 golint: Annoying issue about not having a comment. The rare codebase has such comments
+    # EXC0002 revive: Annoying issue about not having a comment. The rare codebase has such comments
     - (comment on exported (method|function|type|const)|should have( a package)? comment|comment should be of the form)
   exclude-use-default: false
 
 # Disabled linters:
 # - cyclop - duplicates functionality of gocyclo
 # - exhaustivestruct - breaks "Make the zero value useful" proverb, meant to be used only for special cases
+# - funlen - not needed - gocyclo ensures that functions complexity is not too high
 # - godox - requires all TODOs to be removed - too strict
+# - golint - deprecated (since v1.41.0) due to: The repository of the linter has been archived by the owner
 # - gomoddirectives - does not allow "replace" directives - too strict
 # - goerr113 - following check is too strict: "do not define dynamic errors, use wrapped static errors instead",
 #              the check cannot be disabled
 # - interfacer - deprecated (since v1.38.0) due to: The repository of the linter has been archived by the owner
 # - maligned - deprecated (since v1.38.0) due to: The repository of the linter has been archived by the owner
 # - nlreturn - leads to using too many line breaks
+# - paralleltest - considered a premature optimization
 # - scopelint - deprecated (since v1.39.0) due to: The repository of the linter has been deprecated by the owner
 # - thelper - enforcing t.Helper() everywhere is too strict
 # - wsl - leads to using too many line breaks
@@ -36,7 +39,6 @@ linters:
     - exportloopref
     - forbidigo
     - forcetypeassert
-    - funlen
     - gci
     - gochecknoglobals
     - gochecknoinits
@@ -49,7 +51,6 @@ linters:
     - gofumpt
     - goheader
     - goimports
-    - golint
     - gomnd
     - gomodguard
     - goprintffuncname
@@ -67,7 +68,6 @@ linters:
     - nilerr
     - noctx
     - nolintlint
-    - paralleltest
     - prealloc
     - predeclared
     - revive
@@ -96,9 +96,10 @@ linters-settings:
     errorf: false
   gocyclo:
     min-complexity: 10
-  golint:
-    min-confidence: 0
   govet:
+    disable:
+      # Reordering struct fields may decrease readability
+      - fieldalignment
     enable-all: true
   nakedret:
     max-func-lines: 5
