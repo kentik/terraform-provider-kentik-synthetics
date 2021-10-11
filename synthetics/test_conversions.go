@@ -143,8 +143,25 @@ func testURLToMapSlice(obj *synthetics.V202101beta1UrlTest) []map[string]interfa
 	}}
 }
 
+//nolint: gocyclo
 func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []map[string]interface{} {
 	if obj == nil {
+		return nil
+	}
+
+	// Kentik API sets 0 values for omitted optional fields.
+	// Necessary conversion to nil, so Terraform configuration
+	// matches with actual state on the server.
+	if obj.GetLatencyCritical() == 0 &&
+		obj.GetLatencyWarning() == 0 &&
+		obj.GetPacketLossCritical() == 0 &&
+		obj.GetPacketLossWarning() == 0 &&
+		obj.GetJitterCritical() == 0 &&
+		obj.GetJitterWarning() == 0 &&
+		obj.GetHttpLatencyCritical() == 0 &&
+		obj.GetHttpLatencyWarning() == 0 &&
+		len(obj.GetHttpValidCodes()) == 0 &&
+		len(obj.GetDnsValidCodes()) == 0 {
 		return nil
 	}
 
@@ -467,11 +484,14 @@ func resourceDataToTestHealthSettings(data interface{}) (*synthetics.V202101beta
 	if err != nil {
 		return nil, fmt.Errorf("resourceDataToTestHealthSettings: %v", err)
 	}
-	if m == nil {
-		return nil, nil
-	}
 
 	obj := synthetics.NewV202101beta1HealthSettings()
+
+	if m == nil {
+		// Kentik API requires health_settings object
+		return obj, nil
+	}
+
 	obj.SetLatencyCritical(float32(m["latency_critical"].(float64)))
 	obj.SetLatencyWarning(float32(m["latency_warning"].(float64)))
 	obj.SetPacketLossCritical(float32(m["packet_loss_critical"].(float64)))

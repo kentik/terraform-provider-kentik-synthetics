@@ -22,6 +22,10 @@ func getObjectFromNestedResourceData(data interface{}) (map[string]interface{}, 
 		return nil, nil
 	}
 
+	if dataSlice[0] == nil {
+		return nil, nil
+	}
+
 	m, ok := dataSlice[0].(map[string]interface{})
 	if !ok {
 		return nil, fmt.Errorf(
