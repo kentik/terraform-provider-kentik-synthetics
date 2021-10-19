@@ -102,7 +102,7 @@ func retryProperties() map[string]*schema.Schema {
 			Optional:    true,
 			DefaultFunc: schema.EnvDefaultFunc("KTAPI_RETRY_MIN_DELAY", nil),
 			Description: "Minimum delay before request retry. " +
-				"Expected Go time duration format, e.g. 1s (see: https://pkg.go.dev/time#ParseDuration). " +
+				"Expected Go time duration format, e.g. 1s (see: <https://pkg.go.dev/time#ParseDuration>). " +
 				"Default: 1s (1 second). " +
 				"Can also be specified with KTAPI_RETRY_MIN_DELAY environment variable.",
 		},
@@ -111,7 +111,7 @@ func retryProperties() map[string]*schema.Schema {
 			Optional:    true,
 			DefaultFunc: schema.EnvDefaultFunc("KTAPI_RETRY_MAX_DELAY", nil),
 			Description: "Maximum delay before request retry. " +
-				"Expected Go time duration format, e.g. 1s (see: https://pkg.go.dev/time#ParseDuration). " +
+				"Expected Go time duration format, e.g. 1s (see: <https://pkg.go.dev/time#ParseDuration>). " +
 				"Default: 5m (5 minutes). " +
 				"Can also be specified with KTAPI_RETRY_MAX_DELAY environment variable.",
 		},
