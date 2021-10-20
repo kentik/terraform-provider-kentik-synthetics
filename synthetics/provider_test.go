@@ -64,7 +64,7 @@ const (
 				max_attempts = 66
 				min_delay = "100ms"
 				max_delay = "1m"
-			  }
+			}
 			log_payloads = true
 		}
 		
@@ -79,7 +79,7 @@ const (
 				max_attempts = 66
 				min_delay = "100ms"
 				max_delay = "invalid-delay"
-			  }
+			}
 			log_payloads = true
 		}
 		

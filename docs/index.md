@@ -28,6 +28,6 @@ description: |-
 
 Optional:
 
-- **max_attempts** (Number) Maximum number of request retry attempts. Default: 100. Can also be specified with KTAPI_RETRY_MAX_ATTEMPTS environment variable.
+- **max_attempts** (Number) Maximum number of request retry attempts. Minimum valid value: 1 (0 fallbacks to default). Default: 100. Can also be specified with KTAPI_RETRY_MAX_ATTEMPTS environment variable.
 - **max_delay** (String) Maximum delay before request retry. Expected Go time duration format, e.g. 1s (see: <https://pkg.go.dev/time#ParseDuration>). Default: 5m (5 minutes). Can also be specified with KTAPI_RETRY_MAX_DELAY environment variable.
 - **min_delay** (String) Minimum delay before request retry. Expected Go time duration format, e.g. 1s (see: <https://pkg.go.dev/time#ParseDuration>). Default: 1s (1 second). Can also be specified with KTAPI_RETRY_MIN_DELAY environment variable.

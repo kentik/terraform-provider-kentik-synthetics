@@ -94,7 +94,8 @@ func retryProperties() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 			DefaultFunc: schema.EnvDefaultFunc("KTAPI_RETRY_MAX_ATTEMPTS", nil),
-			Description: "Maximum number of request retry attempts. Default: 100. " +
+			Description: "Maximum number of request retry attempts. " +
+				"Minimum valid value: 1 (0 fallbacks to default). Default: 100. " +
 				"Can also be specified with KTAPI_RETRY_MAX_ATTEMPTS environment variable.",
 		},
 		minDelayKey: {
