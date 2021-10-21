@@ -105,7 +105,7 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		},
 		"protocol": {
 			Type:     schema.TypeString,
-			Optional: true,
+			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
 		},
 		"family": {

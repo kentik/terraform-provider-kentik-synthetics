@@ -14,9 +14,9 @@ Resource representing synthetic test
 
 ```terraform
 resource "kentik-synthetics_test" "example-hostname-test" {
-  name      = "example-hostname-test"
-  type      = "hostname"
-  status    = "TEST_STATUS_PAUSED"
+  name   = "example-hostname-test"
+  type   = "hostname"
+  status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
       target = "www.example.com"
@@ -78,7 +78,7 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       limit    = 30
     }
     port     = 443
-    protocol = "icmp"
+    protocol = "tcp"
     family   = "IP_FAMILY_V6"
     servers = [
       "server-one",
@@ -95,9 +95,9 @@ output "hostname-test" {
 }
 
 resource "kentik-synthetics_test" "minimal-hostname-test" {
-  name      = "minimal-hostname-test"
-  type      = "hostname"
-  status    = "TEST_STATUS_PAUSED"
+  name   = "minimal-hostname-test"
+  type   = "hostname"
+  status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
       target = "www.example.com"
@@ -112,9 +112,9 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
       "traceroute"
     ]
     monitoring_settings {
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
+      activation_time_unit   = "m"
+      activation_time_window = "5"
+      activation_times       = "3"
     }
     ping {
       period = 60
@@ -123,15 +123,17 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
       period   = 60
       protocol = "udp"
     }
-    family   = "IP_FAMILY_V6"
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V6"
     rollup_level = 1
   }
 }
 
 resource "kentik-synthetics_test" "minimal-ip-test" {
-  name      = "minimal-ip-test"
-  type      = "ip"
-  status    = "TEST_STATUS_PAUSED"
+  name   = "minimal-ip-test"
+  type   = "ip"
+  status = "TEST_STATUS_PAUSED"
   settings {
     ip {
       targets = [
@@ -149,9 +151,9 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
       "traceroute"
     ]
     monitoring_settings {
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
+      activation_time_unit   = "m"
+      activation_time_window = "5"
+      activation_times       = "3"
     }
     ping {
       period = 60
@@ -160,15 +162,17 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
       period   = 60
       protocol = "udp"
     }
-    family   = "IP_FAMILY_V6"
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V6"
     rollup_level = 1
   }
 }
 
 resource "kentik-synthetics_test" "minimal-agent-test" {
-  name      = "minimal-agent-test"
-  type      = "agent"
-  status    = "TEST_STATUS_PAUSED"
+  name   = "minimal-agent-test"
+  type   = "agent"
+  status = "TEST_STATUS_PAUSED"
   settings {
     agent {
       target = "1717" # ID of private agent
@@ -183,9 +187,9 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
       "traceroute"
     ]
     monitoring_settings {
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
+      activation_time_unit   = "m"
+      activation_time_window = "5"
+      activation_times       = "3"
     }
     ping {
       period = 60
@@ -194,15 +198,17 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
       period   = 60
       protocol = "udp"
     }
-    family   = "IP_FAMILY_V6"
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V6"
     rollup_level = 1
   }
 }
 
 resource "kentik-synthetics_test" "minimal-url-test" {
-  name      = "minimal-url-test"
-  type      = "url"
-  status    = "TEST_STATUS_PAUSED"
+  name   = "minimal-url-test"
+  type   = "url"
+  status = "TEST_STATUS_PAUSED"
   settings {
     url {
       target = "https://dummy.url"
@@ -219,9 +225,9 @@ resource "kentik-synthetics_test" "minimal-url-test" {
       "traceroute"
     ]
     monitoring_settings {
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
+      activation_time_unit   = "m"
+      activation_time_window = "5"
+      activation_times       = "3"
     }
     ping {
       period = 60
@@ -230,7 +236,9 @@ resource "kentik-synthetics_test" "minimal-url-test" {
       period   = 60
       protocol = "udp"
     }
-    family   = "IP_FAMILY_V6"
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V6"
     rollup_level = 1
   }
 }
@@ -263,6 +271,7 @@ Required:
 - **agent_ids** (List of String)
 - **family** (String)
 - **monitoring_settings** (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings--monitoring_settings))
+- **protocol** (String)
 - **rollup_level** (Number)
 - **tasks** (List of String)
 - **trace** (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings--trace))
@@ -281,7 +290,6 @@ Optional:
 - **period** (Number)
 - **ping** (Block List) (see [below for nested schema](#nestedblock--settings--ping))
 - **port** (Number)
-- **protocol** (String)
 - **reciprocal** (Boolean)
 - **servers** (List of String)
 - **site** (Block List) (see [below for nested schema](#nestedblock--settings--site))

@@ -35,6 +35,7 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
       period   = 60
       protocol = "udp"
     }
+    port     = 443
     protocol = "tcp"
     family   = "IP_FAMILY_V6"
     rollup_level = 1
