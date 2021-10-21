@@ -20,7 +20,7 @@ const (
 	create
 )
 
-func optionalOnCreate(mode schemaMode) bool {
+func requiredOnCreate(mode schemaMode) bool {
 	return mode == create
 }
 
@@ -36,12 +36,25 @@ func computedOnRead(mode schemaMode) bool {
 	return mode == readSingle || mode == readList
 }
 
-// makeNestedObjectSchema returns a list of 1 element to emulate a nested object.
+// makeRequiredNestedObjectSchema returns a list of 1 element to emulate a nested object.
 // See: https://learn.hashicorp.com/tutorials/terraform/provider-create?in=terraform/providers#define-order-schema
-func makeNestedObjectSchema(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
+func makeRequiredNestedObjectSchema(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
 	return &schema.Schema{
 		Type:     schema.TypeList,
-		Optional: optionalOnCreate(mode),
+		Required: requiredOnCreate(mode),
+		Computed: computedOnRead(mode),
+		Elem: &schema.Resource{
+			Schema: properties,
+		},
+	}
+}
+
+// makeOptionalNestedObjectSchema returns a list of 1 element to emulate a nested object.
+// See: https://learn.hashicorp.com/tutorials/terraform/provider-create?in=terraform/providers#define-order-schema
+func makeOptionalNestedObjectSchema(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
+	return &schema.Schema{
+		Type:     schema.TypeList,
+		Optional: true,
 		Computed: computedOnRead(mode),
 		Elem: &schema.Resource{
 			Schema: properties,

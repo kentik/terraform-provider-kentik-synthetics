@@ -99,68 +99,39 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 	return resourceTestRead(ctx, d, m)
 }
 
-// patchTestFields returns updatable fields for PATCH operation.
+// patchTestFields returns all non-nil updatable fields for PATCH operation.
 // TODO(dfurman): use JSON struct tags.
 func patchTestFields(test *synthetics.V202101beta1Test) []string {
-	return append(
-		commonPatchTestFields(),
-		optionalPatchTestFields(test)...,
-	)
-}
+	var fields []string
 
-func commonPatchTestFields() []string {
-	return []string{
-		"test.name",
-		"test.type",
-		"test.status",
-		"test.settings.agentIds",
-		"test.settings.period",
-		"test.settings.count",
-		"test.settings.expiry",
-		"test.settings.limit",
-		"test.settings.tasks",
-		"test.settings.monitoringSettings.activationGracePeriod",
-		"test.settings.monitoringSettings.activationTimeUnit",
-		"test.settings.monitoringSettings.activationTimeWindow",
-		"test.settings.monitoringSettings.activationTimes",
-		// FIXME: cannot create or update notification channels - API returns HTTP 500:
-		// 500 Internal Server Error, body: {{"code":13,"message":"internal error (name:TypeError type:object)","details":[]}}
-		// "test.settings.monitoringSettings.notificationChannels",
-		"test.settings.ping.period",
-		"test.settings.ping.count",
-		"test.settings.ping.expiry",
-		"test.settings.trace.period",
-		"test.settings.trace.count",
-		"test.settings.trace.protocol",
-		"test.settings.trace.port",
-		"test.settings.trace.expiry",
-		"test.settings.trace.limit",
-		"test.settings.port",
-		"test.settings.protocol",
-		"test.settings.family",
-		"test.settings.useLocalIp",
-		"test.settings.reciprocal",
-		"test.settings.rollupLevel",
+	if test.HasName() {
+		fields = append(fields, "test.name")
 	}
+
+	if test.HasStatus() {
+		fields = append(fields, "test.status")
+	}
+
+	return append(fields, testSettingsFields(test.Settings)...)
 }
 
 //nolint: gocyclo
-func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
+func testSettingsFields(ts *synthetics.V202101beta1TestSettings) []string {
 	var fields []string
 
-	if test.Settings.HasHostname() {
+	if ts.HasHostname() {
 		fields = append(fields, "test.settings.hostname.target")
 	}
 
-	if test.Settings.HasIp() {
+	if ts.HasIp() {
 		fields = append(fields, "test.settings.ip.targets")
 	}
 
-	if test.Settings.HasAgent() {
-		fields = append(fields, "test.settings.agent.targets")
+	if ts.HasAgent() {
+		fields = append(fields, "test.settings.agent.target")
 	}
 
-	if test.Settings.HasFlow() {
+	if ts.HasFlow() {
 		fields = append(
 			fields,
 			"test.settings.flow.target",
@@ -170,64 +141,202 @@ func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 		)
 	}
 
-	if test.Settings.HasSite() {
+	if ts.HasSite() {
 		fields = append(fields, "test.settings.site.target")
 	}
 
-	if test.Settings.HasTag() {
+	if ts.HasTag() {
 		fields = append(fields, "test.settings.tag.target")
 	}
 
-	if test.Settings.HasDns() {
+	if ts.HasDns() {
 		fields = append(fields, "test.settings.dns.target")
 	}
 
-	if test.Settings.HasUrl() {
+	if ts.HasUrl() {
 		fields = append(fields, "test.settings.url.target")
 	}
 
-	if test.Settings.HasServers() {
+	if ts.HasAgentIds() {
+		fields = append(fields, "test.settings.agentIds")
+	}
+
+	if ts.HasPeriod() {
+		fields = append(fields, "test.settings.period")
+	}
+
+	if ts.HasCount() {
+		fields = append(fields, "test.settings.count")
+	}
+
+	if ts.HasExpiry() {
+		fields = append(fields, "test.settings.expiry")
+	}
+
+	if ts.HasLimit() {
+		fields = append(fields, "test.settings.limit")
+	}
+
+	if ts.HasTasks() {
+		fields = append(fields, "test.settings.tasks")
+	}
+
+	fields = append(fields, healthSettingsFields(ts.HealthSettings)...)
+	fields = append(fields, monitoringSettingsFields(ts.MonitoringSettings)...)
+	fields = append(fields, pingSettingsFields(ts.Ping)...)
+	fields = append(fields, traceSettingsFields(ts.Trace)...)
+
+	if ts.HasPort() {
+		fields = append(fields, "test.settings.port")
+	}
+
+	if ts.HasProtocol() {
+		fields = append(fields, "test.settings.protocol")
+	}
+
+	if ts.HasFamily() {
+		fields = append(fields, "test.settings.family")
+	}
+
+	// TODO(dfurman): remove list length check when API accepts such payload
+	if ts.HasServers() && len(ts.GetServers()) != 0 {
 		fields = append(fields, "test.settings.servers")
 	}
 
-	if test.Settings.HealthSettings.HasLatencyCritical() {
+	if ts.HasUseLocalIp() {
+		fields = append(fields, "test.settings.useLocalIp")
+	}
+
+	if ts.HasReciprocal() {
+		fields = append(fields, "test.settings.reciprocal")
+	}
+
+	if ts.HasRollupLevel() {
+		fields = append(fields, "test.settings.rollupLevel")
+	}
+	return fields
+}
+
+//nolint: gocyclo
+func healthSettingsFields(hs *synthetics.V202101beta1HealthSettings) []string {
+	var fields []string
+
+	if hs.HasLatencyCritical() {
 		fields = append(fields, "test.settings.healthSettings.latencyCritical")
 	}
 
-	if test.Settings.HealthSettings.HasLatencyWarning() {
+	if hs.HasLatencyWarning() {
 		fields = append(fields, "test.settings.healthSettings.latencyWarning")
 	}
 
-	if test.Settings.HealthSettings.HasPacketLossCritical() {
+	if hs.HasPacketLossCritical() {
 		fields = append(fields, "test.settings.healthSettings.packetLossCritical")
 	}
 
-	if test.Settings.HealthSettings.HasPacketLossWarning() {
+	if hs.HasPacketLossWarning() {
 		fields = append(fields, "test.settings.healthSettings.packetLossWarning")
 	}
 
-	if test.Settings.HealthSettings.HasJitterCritical() {
+	if hs.HasJitterCritical() {
 		fields = append(fields, "test.settings.healthSettings.jitterCritical")
 	}
 
-	if test.Settings.HealthSettings.HasJitterWarning() {
+	if hs.HasJitterWarning() {
 		fields = append(fields, "test.settings.healthSettings.jitterWarning")
 	}
 
-	if test.Settings.HealthSettings.HasHttpLatencyCritical() {
+	if hs.HasHttpLatencyCritical() {
 		fields = append(fields, "test.settings.healthSettings.httpLatencyCritical")
 	}
 
-	if test.Settings.HealthSettings.HasHttpLatencyWarning() {
+	if hs.HasHttpLatencyWarning() {
 		fields = append(fields, "test.settings.healthSettings.httpLatencyWarning")
 	}
 
-	if test.Settings.HealthSettings.HasHttpValidCodes() {
+	// TODO(dfurman): remove list length check when API accepts such payload
+	if hs.HasHttpValidCodes() && len(hs.GetHttpValidCodes()) != 0 {
 		fields = append(fields, "test.settings.healthSettings.httpValidCodes")
 	}
 
-	if test.Settings.HealthSettings.HasDnsValidCodes() {
+	// TODO(dfurman): remove list length check when API accepts such payload
+	if hs.HasDnsValidCodes() && len(hs.GetDnsValidCodes()) != 0 {
 		fields = append(fields, "test.settings.healthSettings.dnsValidCodes")
+	}
+
+	return fields
+}
+
+func monitoringSettingsFields(ms *synthetics.V202101beta1TestMonitoringSettings) []string {
+	var fields []string
+
+	if ms.HasActivationGracePeriod() {
+		fields = append(fields, "test.settings.monitoringSettings.activationGracePeriod")
+	}
+
+	if ms.HasActivationTimeUnit() {
+		fields = append(fields, "test.settings.monitoringSettings.activationTimeUnit")
+	}
+
+	if ms.HasActivationTimeWindow() {
+		fields = append(fields, "test.settings.monitoringSettings.activationTimeWindow")
+	}
+
+	if ms.HasActivationTimes() {
+		fields = append(fields, "test.settings.monitoringSettings.activationTimes")
+	}
+
+	// TODO(dfurman): remove list length check when API accepts such payload
+	if ms.HasNotificationChannels() &&
+		len(ms.GetNotificationChannels()) != 0 {
+		fields = append(fields, "test.settings.monitoringSettings.notificationChannels")
+	}
+
+	return fields
+}
+
+func pingSettingsFields(ps *synthetics.V202101beta1TestPingSettings) []string {
+	var fields []string
+
+	if ps.HasPeriod() {
+		fields = append(fields, "test.settings.ping.period")
+	}
+
+	if ps.HasCount() {
+		fields = append(fields, "test.settings.ping.count")
+	}
+
+	if ps.HasExpiry() {
+		fields = append(fields, "test.settings.ping.expiry")
+	}
+
+	return fields
+}
+
+func traceSettingsFields(ts *synthetics.V202101beta1TestTraceSettings) []string {
+	var fields []string
+
+	if ts.HasPeriod() {
+		fields = append(fields, "test.settings.trace.period")
+	}
+
+	if ts.HasCount() {
+		fields = append(fields, "test.settings.trace.count")
+	}
+
+	if ts.HasProtocol() {
+		fields = append(fields, "test.settings.trace.protocol")
+	}
+
+	if ts.HasPort() {
+		fields = append(fields, "test.settings.trace.port")
+	}
+
+	if ts.HasExpiry() {
+		fields = append(fields, "test.settings.trace.expiry")
+	}
+
+	if ts.HasLimit() {
+		fields = append(fields, "test.settings.trace.limit")
 	}
 
 	return fields
