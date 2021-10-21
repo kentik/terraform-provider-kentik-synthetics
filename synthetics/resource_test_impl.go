@@ -144,7 +144,7 @@ func commonPatchTestFields() []string {
 	}
 }
 
-//nolint: gocyclo, funlen
+//nolint: gocyclo
 func optionalPatchTestFields(test *synthetics.V202101beta1Test) []string {
 	var fields []string
 

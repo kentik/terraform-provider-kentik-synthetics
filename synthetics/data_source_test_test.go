@@ -20,7 +20,6 @@ func TestDataSourceTest(t *testing.T) {
 	})
 }
 
-//nolint: funlen
 func checkDataSourceTest() resource.TestCheckFunc {
 	return resource.ComposeTestCheckFunc(
 		resource.TestCheckResourceAttr(testDS, "id", "1"),

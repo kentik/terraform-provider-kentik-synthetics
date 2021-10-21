@@ -6,7 +6,6 @@ import (
 
 // TODO(dfurman): provide descriptions, when they are specified in the OpenAPI definitions
 
-//nolint: funlen
 func makeAgentSchema(mode schemaMode) map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		idKey: {
