@@ -5,7 +5,7 @@ data "kentik-synthetics_agents" "agents" {
   latitude  = 50.55
   longitude = 5.5
   min_distance = 1000
-  max_distance = 9000
+  max_distance = 2000
 }
 
 locals {
@@ -15,7 +15,7 @@ locals {
 resource "kentik-synthetics_test" "agents-within-distance-test" {
   name      = "agents-within-radius-test"
   type      = "hostname"
-  status    = "TEST_STATUS_ACTIVE"
+  status    = "TEST_STATUS_PAUSED"
   settings {
     hostname {
       target = "www.example.com"
@@ -26,26 +26,18 @@ resource "kentik-synthetics_test" "agents-within-distance-test" {
       "traceroute"
     ]
     monitoring_settings {
-      activation_grace_period = "2"
       activation_time_unit    = "m"
       activation_time_window  = "5"
       activation_times        = "3"
     }
     ping {
       period = 60
-      count  = 5
-      expiry = 3000
     }
     trace {
       period   = 60
-      count    = 3
       protocol = "udp"
-      port     = 33434
-      expiry   = 22500
-      limit    = 30
     }
-    port     = 443
-    protocol = "icmp"
+    protocol = "tcp"
     family   = "IP_FAMILY_V6"
     rollup_level = 1
   }

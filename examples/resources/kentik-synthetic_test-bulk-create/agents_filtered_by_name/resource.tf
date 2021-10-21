@@ -4,7 +4,7 @@
 data "kentik-synthetics_agents" "agents" {}
 
 locals {
-  name_substring = "private"
+  name_substring = "Alibaba"
   agents_ids = [for agent in data.kentik-synthetics_agents.agents.items: agent.id
                   if length(regexall(local.name_substring, agent.name)) > 0]
 }
@@ -12,7 +12,7 @@ locals {
 resource "kentik-synthetics_test" "agents-filtered-by-name-test" {
   name      = "agents-filtered-by-name-test"
   type      = "hostname"
-  status    = "TEST_STATUS_ACTIVE"
+  status    = "TEST_STATUS_PAUSED"
   settings {
     hostname {
       target = "www.example.com"
@@ -23,26 +23,18 @@ resource "kentik-synthetics_test" "agents-filtered-by-name-test" {
       "traceroute"
     ]
     monitoring_settings {
-      activation_grace_period = "2"
       activation_time_unit    = "m"
       activation_time_window  = "5"
       activation_times        = "3"
     }
     ping {
       period = 60
-      count  = 5
-      expiry = 3000
     }
     trace {
       period   = 60
-      count    = 3
       protocol = "udp"
-      port     = 33434
-      expiry   = 22500
-      limit    = 30
     }
-    port     = 443
-    protocol = "icmp"
+    protocol = "tcp"
     family   = "IP_FAMILY_V6"
     rollup_level = 1
   }

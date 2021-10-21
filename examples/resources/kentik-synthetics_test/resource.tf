@@ -1,7 +1,7 @@
 resource "kentik-synthetics_test" "example-hostname-test" {
   name      = "example-hostname-test"
   type      = "hostname"
-  status    = "TEST_STATUS_ACTIVE"
+  status    = "TEST_STATUS_PAUSED"
   settings {
     hostname {
       target = "www.example.com"
@@ -11,9 +11,9 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       "818",
       "819"
     ]
-    period = 61
+    period = 60
     count  = 2
-    expiry = 5001
+    expiry = 5000
     limit  = 4
     tasks = [
       "ping",
@@ -44,10 +44,10 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       activation_time_window  = "5"
       activation_times        = "3"
       // Notice: currently "notification_channels" field cannot be manipulated
-      //      notification_channels = [
-      //        "dummy-channel-1",
-      //        "dummy-channel-2",
-      //      ]
+      // notification_channels = [
+      //  "dummy-channel-1",
+      //  "dummy-channel-2",
+      // ]
     }
     ping {
       period = 60
@@ -77,4 +77,145 @@ resource "kentik-synthetics_test" "example-hostname-test" {
 
 output "hostname-test" {
   value = kentik-synthetics_test.example-hostname-test
+}
+
+resource "kentik-synthetics_test" "minimal-hostname-test" {
+  name      = "minimal-hostname-test"
+  type      = "hostname"
+  status    = "TEST_STATUS_PAUSED"
+  settings {
+    hostname {
+      target = "www.example.com"
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    monitoring_settings {
+      activation_time_unit    = "m"
+      activation_time_window  = "5"
+      activation_times        = "3"
+    }
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    family   = "IP_FAMILY_V6"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-ip-test" {
+  name      = "minimal-ip-test"
+  type      = "ip"
+  status    = "TEST_STATUS_PAUSED"
+  settings {
+    ip {
+      targets = [
+        "127.0.0.1",
+        "127.0.0.2"
+      ]
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    monitoring_settings {
+      activation_time_unit    = "m"
+      activation_time_window  = "5"
+      activation_times        = "3"
+    }
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    family   = "IP_FAMILY_V6"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-agent-test" {
+  name      = "minimal-agent-test"
+  type      = "agent"
+  status    = "TEST_STATUS_PAUSED"
+  settings {
+    agent {
+      target = "1717" # ID of private agent
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    monitoring_settings {
+      activation_time_unit    = "m"
+      activation_time_window  = "5"
+      activation_times        = "3"
+    }
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    family   = "IP_FAMILY_V6"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-url-test" {
+  name      = "minimal-url-test"
+  type      = "url"
+  status    = "TEST_STATUS_PAUSED"
+  settings {
+    url {
+      target = "https://dummy.url"
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    period = 60
+    expiry = 5000
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    monitoring_settings {
+      activation_time_unit    = "m"
+      activation_time_window  = "5"
+      activation_times        = "3"
+    }
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    family   = "IP_FAMILY_V6"
+    rollup_level = 1
+  }
 }
