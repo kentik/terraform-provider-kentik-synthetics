@@ -4,16 +4,18 @@
 data "kentik-synthetics_agents" "agents" {}
 
 locals {
-  country_list = ["PL", "GB", "NL"]
-  country_to_ids_map = {for agent in data.kentik-synthetics_agents.agents.items: agent.country => agent.id...
-                          if contains(local.country_list, agent.country)}
-  agent_ids = [for key, val in local.country_to_ids_map: sort(val)[0]]
+  country_list = ["PL", "KH", "TR"]
+  country_to_ids_map = {
+    for agent in data.kentik-synthetics_agents.agents.items : agent.country => agent.id...
+    if contains(local.country_list, agent.country)
+  }
+  agent_ids = [for key, val in local.country_to_ids_map : sort(val)[0]]
 }
 
 resource "kentik-synthetics_test" "one_agent_per_country-test" {
-  name      = "agents-filtered-by-country-test"
-  type      = "hostname"
-  status    = "TEST_STATUS_PAUSED"
+  name   = "agents-filtered-by-country-test"
+  type   = "hostname"
+  status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
       target = "www.example.com"
@@ -23,11 +25,6 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
-    }
     ping {
       period = 60
     }
@@ -35,9 +32,9 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
       period   = 60
       protocol = "udp"
     }
-    port     = 443
-    protocol = "tcp"
-    family   = "IP_FAMILY_V6"
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }

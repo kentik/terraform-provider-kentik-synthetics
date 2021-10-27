@@ -54,8 +54,6 @@ func testSettingsToMapSlice(obj *synthetics.V202101beta1TestSettings) []map[stri
 		"protocol":            obj.Protocol,
 		"family":              obj.Family,
 		"servers":             obj.Servers,
-		"use_local_ip":        obj.UseLocalIp,
-		"reciprocal":          obj.Reciprocal,
 		"rollup_level":        obj.RollupLevel,
 	}}
 }
@@ -150,8 +148,7 @@ func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []
 	}
 
 	// Kentik API sets 0 values for omitted optional fields.
-	// Necessary conversion to nil, so Terraform configuration
-	// matches with actual state on the server.
+	// Necessary conversion to nil, so Terraform configuration matches with actual state on the server.
 	if obj.GetLatencyCritical() == 0 &&
 		obj.GetLatencyWarning() == 0 &&
 		obj.GetPacketLossCritical() == 0 &&
@@ -184,12 +181,14 @@ func testMonitoringSettingsToMapSlice(obj *synthetics.V202101beta1TestMonitoring
 		return nil
 	}
 
+	// Kentik API sets 0 values for omitted optional fields.
+	// Necessary conversion to nil, so Terraform configuration matches with actual state on the server.
+	if len(obj.GetNotificationChannels()) == 0 {
+		return nil
+	}
+
 	return []map[string]interface{}{{
-		"activation_grace_period": obj.ActivationGracePeriod,
-		"activation_time_unit":    obj.ActivationTimeUnit,
-		"activation_time_window":  obj.ActivationTimeWindow,
-		"activation_times":        obj.ActivationTimes,
-		"notification_channels":   obj.NotificationChannels,
+		"notification_channels": obj.NotificationChannels,
 	}}
 }
 
@@ -237,7 +236,6 @@ func resourceDataToTest(d *schema.ResourceData) (*synthetics.V202101beta1Test, e
 	test := synthetics.NewV202101beta1Test()
 	test.SetName(d.Get("name").(string))
 	test.SetType(d.Get("type").(string))
-	test.SetDeviceId("0") // 'device_id' parameter is required by the API, but ignored, hence we always set it to 0
 	test.SetStatus(synthetics.V202101beta1TestStatus(d.Get("status").(string)))
 
 	s, err := resourceDataToTestSettings(d.Get("settings"))
@@ -348,9 +346,6 @@ func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestS
 	}
 
 	obj.SetServers(ifSliceToStringSlice(m["servers"].([]interface{})))
-
-	obj.SetUseLocalIp(m["use_local_ip"].(bool))
-	obj.SetReciprocal(m["reciprocal"].(bool))
 	obj.SetRollupLevel(int64(m["rollup_level"].(int)))
 
 	return obj, nil
@@ -516,10 +511,6 @@ func resourceDataToTestMonitoringSettings(data interface{}) (*synthetics.V202101
 	}
 
 	obj := synthetics.NewV202101beta1TestMonitoringSettings()
-	obj.SetActivationGracePeriod(m["activation_grace_period"].(string))
-	obj.SetActivationTimeUnit(m["activation_time_unit"].(string))
-	obj.SetActivationTimeWindow(m["activation_time_window"].(string))
-	obj.SetActivationTimes(m["activation_times"].(string))
 	obj.SetNotificationChannels(ifSliceToStringSlice(m["notification_channels"].([]interface{})))
 
 	return obj, nil

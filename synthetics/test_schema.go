@@ -48,6 +48,7 @@ func makeTestSchema(mode schemaMode) map[string]*schema.Schema {
 	}
 }
 
+// makeTestSettingsSchema omits following internal attributes: use_local_ip, reciprocal.
 func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 	return makeRequiredNestedObjectSchema(mode, map[string]*schema.Schema{
 		"hostname": makeTestHostnameSchema(mode),
@@ -121,16 +122,6 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
 			},
-		},
-		"use_local_ip": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Computed: computedOnRead(mode),
-		},
-		"reciprocal": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Computed: computedOnRead(mode),
 		},
 		"rollup_level": {
 			Type:     schema.TypeInt,
@@ -299,28 +290,10 @@ func makeTestHealthSettingsSchema(mode schemaMode) *schema.Schema {
 	})
 }
 
+// makeTestMonitoringSettingsSchema omits following internal attributes: activation_grace_period, activation_time_unit,
+// activation_time_window, activation_times.
 func makeTestMonitoringSettingsSchema(mode schemaMode) *schema.Schema {
-	return makeRequiredNestedObjectSchema(mode, map[string]*schema.Schema{
-		"activation_grace_period": {
-			Type:     schema.TypeString,
-			Optional: true,
-			Computed: computedOnRead(mode),
-		},
-		"activation_time_unit": {
-			Type:     schema.TypeString,
-			Required: requiredOnCreate(mode),
-			Computed: computedOnRead(mode),
-		},
-		"activation_time_window": {
-			Type:     schema.TypeString,
-			Required: requiredOnCreate(mode),
-			Computed: computedOnRead(mode),
-		},
-		"activation_times": {
-			Type:     schema.TypeString,
-			Required: requiredOnCreate(mode),
-			Computed: computedOnRead(mode),
-		},
+	return makeOptionalNestedObjectSchema(mode, map[string]*schema.Schema{
 		"notification_channels": {
 			Type:     schema.TypeList,
 			Optional: true,
