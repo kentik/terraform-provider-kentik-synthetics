@@ -31,8 +31,10 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 		return diag.FromErr(err)
 	}
 
+	setRequiredInternalTestAttributes(test)
+
 	req := *synthetics.NewV202101beta1CreateTestRequest()
-	req.SetTest(*test)
+	req.Test = test
 
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestCreate(ctx).
@@ -82,8 +84,10 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 			return diag.FromErr(err)
 		}
 
+		setRequiredInternalTestAttributes(test)
+
 		req := *synthetics.NewV202101beta1PatchTestRequest()
-		req.SetTest(*test)
+		req.Test = test
 		req.SetMask(strings.Join(patchTestFields(test), ","))
 
 		_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
@@ -99,7 +103,17 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 	return resourceTestRead(ctx, d, m)
 }
 
-// patchTestFields returns all non-nil updatable fields for PATCH operation.
+func setRequiredInternalTestAttributes(test *synthetics.V202101beta1Test) {
+	test.SetDeviceId("0")
+	if test.Settings.MonitoringSettings == nil {
+		test.Settings.MonitoringSettings = synthetics.NewV202101beta1TestMonitoringSettings()
+	}
+	test.Settings.MonitoringSettings.SetActivationTimeUnit("m")
+	test.Settings.MonitoringSettings.SetActivationTimeWindow("5")
+	test.Settings.MonitoringSettings.SetActivationTimes("3")
+}
+
+// patchTestFields returns all fields that are: non-nil, non-internal and updatable.
 // TODO(dfurman): use JSON struct tags.
 func patchTestFields(test *synthetics.V202101beta1Test) []string {
 	var fields []string
@@ -203,14 +217,6 @@ func testSettingsFields(ts *synthetics.V202101beta1TestSettings) []string {
 		fields = append(fields, "test.settings.servers")
 	}
 
-	if ts.HasUseLocalIp() {
-		fields = append(fields, "test.settings.useLocalIp")
-	}
-
-	if ts.HasReciprocal() {
-		fields = append(fields, "test.settings.reciprocal")
-	}
-
 	if ts.HasRollupLevel() {
 		fields = append(fields, "test.settings.rollupLevel")
 	}
@@ -268,22 +274,6 @@ func healthSettingsFields(hs *synthetics.V202101beta1HealthSettings) []string {
 
 func monitoringSettingsFields(ms *synthetics.V202101beta1TestMonitoringSettings) []string {
 	var fields []string
-
-	if ms.HasActivationGracePeriod() {
-		fields = append(fields, "test.settings.monitoringSettings.activationGracePeriod")
-	}
-
-	if ms.HasActivationTimeUnit() {
-		fields = append(fields, "test.settings.monitoringSettings.activationTimeUnit")
-	}
-
-	if ms.HasActivationTimeWindow() {
-		fields = append(fields, "test.settings.monitoringSettings.activationTimeWindow")
-	}
-
-	if ms.HasActivationTimes() {
-		fields = append(fields, "test.settings.monitoringSettings.activationTimes")
-	}
 
 	// TODO(dfurman): remove list length check when API accepts such payload
 	if ms.HasNotificationChannels() &&

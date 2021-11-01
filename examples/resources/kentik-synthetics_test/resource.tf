@@ -38,17 +38,13 @@ resource "kentik-synthetics_test" "example-hostname-test" {
         3
       ]
     }
-    monitoring_settings {
-      activation_grace_period = "2"
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
-      // Notice: currently "notification_channels" field cannot be manipulated
-      // notification_channels = [
-      //  "dummy-channel-1",
-      //  "dummy-channel-2",
-      // ]
-    }
+    #    monitoring_settings {
+    #      // Notice: currently "notification_channels" field cannot be manipulated
+    #      notification_channels = [
+    #      "dummy-channel-1",
+    #      "dummy-channel-2",
+    #      ]
+    #    }
     ping {
       period = 60
       count  = 5
@@ -64,13 +60,11 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     }
     port     = 443
     protocol = "tcp"
-    family   = "IP_FAMILY_V6"
+    family   = "IP_FAMILY_V4"
     servers = [
       "server-one",
       "server-two",
     ]
-    use_local_ip = true
-    reciprocal   = false
     rollup_level = 1
   }
 }
@@ -96,11 +90,6 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -110,7 +99,7 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -135,11 +124,6 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -149,7 +133,7 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -171,11 +155,6 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -185,7 +164,7 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -209,11 +188,6 @@ resource "kentik-synthetics_test" "minimal-url-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -223,7 +197,7 @@ resource "kentik-synthetics_test" "minimal-url-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }

@@ -71,10 +71,10 @@ func checkResourceTestCreate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.health_settings.0.dns_valid_codes.#", "2"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.health_settings.0.dns_valid_codes.0", "21"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.health_settings.0.dns_valid_codes.1", "37"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_grace_period", "1"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_unit", "m"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_window", "2"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_times", "3"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_grace_period"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_unit"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_window"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_times"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.notification_channels.#", "2"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.notification_channels.0", "nc-1"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.notification_channels.1", "nc-2"),
@@ -93,8 +93,8 @@ func checkResourceTestCreate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.#", "2"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "server-one"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.1", "server-two"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.use_local_ip", "true"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.reciprocal", "false"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.use_local_ip"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.reciprocal"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.rollup_level", "1"),
 	)
 }
@@ -143,10 +143,10 @@ func checkResourceTestUpdate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.health_settings.0.http_valid_codes.2", "203"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.health_settings.0.dns_valid_codes.#", "1"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.health_settings.0.dns_valid_codes.0", "21"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_grace_period", "10"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_unit", "y"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_window", "20"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_times", "30"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_grace_period"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_unit"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_time_window"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.monitoring_settings.0.activation_times"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.notification_channels.#", "3"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.notification_channels.0", "nc-1"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.monitoring_settings.0.notification_channels.1", "nc-2"),
@@ -165,8 +165,8 @@ func checkResourceTestUpdate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.family", "IP_FAMILY_V6"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.#", "1"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "server-one"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.use_local_ip", "false"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.reciprocal", "true"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.use_local_ip"),
+		resource.TestCheckNoResourceAttr(testResource, "settings.0.reciprocal"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.rollup_level", "10"),
 	)
 }
@@ -188,9 +188,9 @@ const (
 					target = "dummy-ht"
 				}
 				ip {
-					targets = tolist([
+					targets = [
 						"101.102.103.104"
-					])
+					]
 				}
 				agent {
 					target = "dummy-at"
@@ -213,19 +213,19 @@ const (
 				url {
 					target = "dummy-ut"
 				}
-				agent_ids = tolist([
+				agent_ids = [
 					"1",
 					"2",
 					"3"
-				])
+				]
 				period = 1
 				count  = 2
 				expiry = 3
 				limit  = 4
-				tasks = tolist([
+				tasks = [
 					"ping",
 					"traceroute"
-				])
+				]
 				health_settings {
 					latency_critical      = 1
 					latency_warning       = 2
@@ -235,24 +235,20 @@ const (
 					jitter_warning        = 6
 					http_latency_critical = 7
 					http_latency_warning  = 8
-					http_valid_codes = tolist([
+					http_valid_codes = [
 						200,
 						201,
-					])
-					dns_valid_codes = tolist([
+					]
+					dns_valid_codes = [
 						21,
 						37
-					])
+					]
 				}
 				monitoring_settings {
-					activation_grace_period = "1"
-					activation_time_unit    = "m"
-					activation_time_window  = "2"
-					activation_times        = "3"
-					notification_channels = tolist([
+					notification_channels = [
 						"nc-1",
 						"nc-2",
-					])
+					]
 				}
 				ping {
 					period = 1
@@ -270,12 +266,10 @@ const (
 				port     = 443
 				protocol = "icmp"
 				family   = "IP_FAMILY_DUAL"
-				servers = tolist([
+				servers = [
 					"server-one",
 					"server-two",
-				])
-				use_local_ip = true
-				reciprocal   = false
+				]
 				rollup_level = 1
 			}
 		}
@@ -294,10 +288,10 @@ const (
 					target = "updated-ht"
 				}
 				ip {
-					targets = tolist([
+					targets = [
 						"101.102.103.104",
 						"201.202.203.204"
-					])
+					]
 				}
 				agent {
 					target = "updated-at"
@@ -320,19 +314,19 @@ const (
 				url {
 					target = "updated-ut"
 				}
-				agent_ids = tolist([
+				agent_ids = [
 					"1",
 					"2"
-				])
+				]
 				period = 10
 				count  = 20
 				expiry = 30
 				limit  = 40
-				tasks = tolist([
+				tasks = [
 					"ping",
 					"traceroute",
 					"brew-coffee"
-				])
+				]
 				health_settings {
 					latency_critical      = 10
 					latency_warning       = 20
@@ -342,25 +336,21 @@ const (
 					jitter_warning        = 60
 					http_latency_critical = 70
 					http_latency_warning  = 80
-					http_valid_codes = tolist([
+					http_valid_codes = [
 						200,
 						201,
 						203
-					])
-					dns_valid_codes = tolist([
+					]
+					dns_valid_codes = [
 						21
-					])
+					]
 				}
 				monitoring_settings {
-					activation_grace_period = "10"
-					activation_time_unit    = "y"
-					activation_time_window  = "20"
-					activation_times        = "30"
-					notification_channels = tolist([
+					notification_channels = [
 						"nc-1",
 						"nc-2",
 						"nc-3",
-					])
+					]
 				}
 				ping {
 					period = 10
@@ -378,11 +368,9 @@ const (
 				port     = 80
 				protocol = "pigeon"
 				family   = "IP_FAMILY_V6"
-				servers = tolist([
+				servers = [
 					"server-one"
-				])
-				use_local_ip = false
-				reciprocal   = true
+				]
 				rollup_level = 10
 			}
 		}
