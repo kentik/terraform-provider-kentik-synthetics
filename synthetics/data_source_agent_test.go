@@ -38,7 +38,7 @@ func checkDataSourceAgent() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(agentDS, "asn", "20473"),
 		resource.TestCheckResourceAttr(agentDS, "site_id", "0"),
 		resource.TestCheckResourceAttr(agentDS, "version", "0.0.2"),
-		resource.TestCheckResourceAttr(agentDS, "challenge", ""),
+		resource.TestCheckResourceAttr(agentDS, "challenge", "dummy-challenge"),
 		resource.TestCheckResourceAttr(agentDS, "city", "Amsterdam"),
 		resource.TestCheckResourceAttr(agentDS, "region", "Noord-Holland"),
 		resource.TestCheckResourceAttr(agentDS, "country", "Netherlands"),
@@ -46,7 +46,9 @@ func checkDataSourceAgent() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(agentDS, "test_ids.0", "13"),
 		resource.TestCheckResourceAttr(agentDS, "test_ids.1", "133"),
 		resource.TestCheckResourceAttr(agentDS, "test_ids.2", "1337"),
-		resource.TestCheckResourceAttr(agentDS, "local_ip", ""),
+		resource.TestCheckResourceAttr(agentDS, "local_ip", "192.168.1.2"),
+		resource.TestCheckResourceAttr(agentDS, "cloud_vpc", "dummy-cloud-vpc"),
+		resource.TestCheckResourceAttr(agentDS, "agent_impl", "IMPLEMENT_TYPE_RUST"),
 	)
 }
 

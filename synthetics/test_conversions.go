@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi/synthetics"
+	"github.com/kentik/community_sdk_golang/kentikapi/synthetics"
 )
 
 func testToMap(obj *synthetics.V202101beta1Test) map[string]interface{} {
@@ -40,6 +40,9 @@ func testSettingsToMapSlice(obj *synthetics.V202101beta1TestSettings) []map[stri
 		"tag":                 testTagToMapSlice(obj.Tag),
 		"dns":                 testDNSToMapSlice(obj.Dns),
 		"url":                 testURLToMapSlice(obj.Url),
+		"network_grid":        testNetworkGridToMapSlice(obj.NetworkGrid),
+		"page_load":           testPageLoadToMapSlice(obj.PageLoad),
+		"dns_grid":            testDNSGridToMapSlice(obj.DnsGrid),
 		"agent_ids":           obj.AgentIds,
 		"period":              obj.Period,
 		"count":               obj.Count,
@@ -55,6 +58,7 @@ func testSettingsToMapSlice(obj *synthetics.V202101beta1TestSettings) []map[stri
 		"family":              obj.Family,
 		"servers":             obj.Servers,
 		"rollup_level":        obj.RollupLevel,
+		"http":                testHTTPToMapSlice(obj.Http),
 	}}
 }
 
@@ -98,6 +102,8 @@ func testFlowToMapSlice(obj *synthetics.V202101beta1FlowTest) []map[string]inter
 		"target_refresh_interval_millis": obj.TargetRefreshIntervalMillis,
 		"max_tasks":                      obj.MaxTasks,
 		"type":                           obj.Type,
+		"inet_direction":                 obj.InetDirection,
+		"direction":                      obj.Direction,
 	}}
 }
 
@@ -128,6 +134,7 @@ func testDNSToMapSlice(obj *synthetics.V202101beta1DnsTest) []map[string]interfa
 
 	return []map[string]interface{}{{
 		"target": obj.Target,
+		"type":   obj.Type,
 	}}
 }
 
@@ -141,7 +148,37 @@ func testURLToMapSlice(obj *synthetics.V202101beta1UrlTest) []map[string]interfa
 	}}
 }
 
-//nolint: gocyclo
+func testNetworkGridToMapSlice(obj *synthetics.V202101beta1GridTest) []map[string]interface{} {
+	if obj == nil {
+		return nil
+	}
+
+	return []map[string]interface{}{{
+		"targets": obj.Targets,
+	}}
+}
+
+func testPageLoadToMapSlice(obj *synthetics.V202101beta1UrlTest) []map[string]interface{} {
+	if obj == nil {
+		return nil
+	}
+
+	return []map[string]interface{}{{
+		"target": obj.Target,
+	}}
+}
+
+func testDNSGridToMapSlice(obj *synthetics.V202101beta1DnsGridTest) []map[string]interface{} {
+	if obj == nil {
+		return nil
+	}
+
+	return []map[string]interface{}{{
+		"targets": obj.Targets,
+		"type":    obj.Type,
+	}}
+}
+
 func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []map[string]interface{} {
 	if obj == nil {
 		return nil
@@ -149,7 +186,33 @@ func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []
 
 	// Kentik API sets 0 values for omitted optional fields.
 	// Necessary conversion to nil, so Terraform configuration matches with actual state on the server.
-	if obj.GetLatencyCritical() == 0 &&
+	if areAllHSFieldsZeroValue(obj) {
+		return nil
+	}
+
+	return []map[string]interface{}{{
+		"latency_critical":             obj.LatencyCritical,
+		"latency_warning":              obj.LatencyWarning,
+		"packet_loss_critical":         obj.PacketLossCritical,
+		"packet_loss_warning":          obj.PacketLossWarning,
+		"jitter_critical":              obj.JitterCritical,
+		"jitter_warning":               obj.JitterWarning,
+		"http_latency_critical":        obj.HttpLatencyCritical,
+		"http_latency_warning":         obj.HttpLatencyWarning,
+		"http_valid_codes":             obj.HttpValidCodes,
+		"dns_valid_codes":              obj.DnsValidCodes,
+		"latency_critical_stddev":      obj.LatencyCriticalStddev,
+		"latency_warning_stddev":       obj.LatencyWarningStddev,
+		"jitter_critical_stddev":       obj.JitterCriticalStddev,
+		"jitter_warning_stddev":        obj.JitterWarningStddev,
+		"http_latency_critical_stddev": obj.HttpLatencyCriticalStddev,
+		"http_latency_warning_stddev":  obj.HttpLatencyWarningStddev,
+	}}
+}
+
+//nolint: gocyclo, gocognit
+func areAllHSFieldsZeroValue(obj *synthetics.V202101beta1HealthSettings) bool {
+	return obj.GetLatencyCritical() == 0 &&
 		obj.GetLatencyWarning() == 0 &&
 		obj.GetPacketLossCritical() == 0 &&
 		obj.GetPacketLossWarning() == 0 &&
@@ -158,22 +221,13 @@ func testHealthSettingsToMapSlice(obj *synthetics.V202101beta1HealthSettings) []
 		obj.GetHttpLatencyCritical() == 0 &&
 		obj.GetHttpLatencyWarning() == 0 &&
 		len(obj.GetHttpValidCodes()) == 0 &&
-		len(obj.GetDnsValidCodes()) == 0 {
-		return nil
-	}
-
-	return []map[string]interface{}{{
-		"latency_critical":      obj.LatencyCritical,
-		"latency_warning":       obj.LatencyWarning,
-		"packet_loss_critical":  obj.PacketLossCritical,
-		"packet_loss_warning":   obj.PacketLossWarning,
-		"jitter_critical":       obj.JitterCritical,
-		"jitter_warning":        obj.JitterWarning,
-		"http_latency_critical": obj.HttpLatencyCritical,
-		"http_latency_warning":  obj.HttpLatencyWarning,
-		"http_valid_codes":      obj.HttpValidCodes,
-		"dns_valid_codes":       obj.DnsValidCodes,
-	}}
+		len(obj.GetDnsValidCodes()) == 0 &&
+		obj.GetLatencyCriticalStddev() == 0 &&
+		obj.GetLatencyWarningStddev() == 0 &&
+		obj.GetJitterCriticalStddev() == 0 &&
+		obj.GetJitterWarningStddev() == 0 &&
+		obj.GetHttpLatencyCriticalStddev() == 0 &&
+		obj.GetHttpLatencyWarningStddev() == 0
 }
 
 func testMonitoringSettingsToMapSlice(obj *synthetics.V202101beta1TestMonitoringSettings) []map[string]interface{} {
@@ -201,6 +255,7 @@ func testPingToMapSlice(obj *synthetics.V202101beta1TestPingSettings) []map[stri
 		"period": obj.Period,
 		"count":  obj.Count,
 		"expiry": obj.Expiry,
+		"delay":  obj.Delay,
 	}}
 }
 
@@ -216,7 +271,40 @@ func testTraceToMapSlice(obj *synthetics.V202101beta1TestTraceSettings) []map[st
 		"port":     obj.Port,
 		"expiry":   obj.Expiry,
 		"limit":    obj.Limit,
+		"delay":    obj.Delay,
 	}}
+}
+
+func testHTTPToMapSlice(obj *synthetics.V202101beta1HTTPConfig) []map[string]interface{} {
+	if obj == nil {
+		return nil
+	}
+
+	// Kentik API sets 0 values for omitted optional fields.
+	// Necessary conversion to nil, so Terraform configuration matches with actual state on the server.
+	if areAllHTTPFieldsZeroValue(obj) {
+		return nil
+	}
+
+	return []map[string]interface{}{{
+		"period":            obj.Period,
+		"expiry":            obj.Expiry,
+		"method":            obj.Method,
+		"headers":           stringMapPtrToStringMap(obj.Headers),
+		"body":              obj.Body,
+		"ignore_tls_errors": obj.IgnoreTlsErrors,
+		"css_selectors":     stringMapPtrToStringMap(obj.CssSelectors),
+	}}
+}
+
+func areAllHTTPFieldsZeroValue(obj *synthetics.V202101beta1HTTPConfig) bool {
+	return obj.GetPeriod() == 0 &&
+		obj.GetExpiry() == 0 &&
+		obj.GetMethod() == "" &&
+		len(obj.GetHeaders()) == 0 &&
+		obj.GetBody() == "" &&
+		!obj.GetIgnoreTlsErrors() &&
+		len(obj.GetCssSelectors()) == 0
 }
 
 func userInfoToMapSlice(obj *synthetics.V202101beta1UserInfo) []map[string]interface{} {
@@ -307,6 +395,24 @@ func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestS
 	}
 	obj.Url = url
 
+	ng, err := resourceDataToTestNetworkGrid(m["network_grid"])
+	if err != nil {
+		return nil, err
+	}
+	obj.NetworkGrid = ng
+
+	pg, err := resourceDataToTestPageLoad(m["page_load"])
+	if err != nil {
+		return nil, err
+	}
+	obj.PageLoad = pg
+
+	dg, err := resourceDataToTestDNSGrid(m["dns_grid"])
+	if err != nil {
+		return nil, err
+	}
+	obj.DnsGrid = dg
+
 	obj.SetAgentIds(ifSliceToStringSlice(m["agent_ids"].([]interface{})))
 	obj.SetPeriod(int64(m["period"].(int)))
 	obj.SetCount(int64(m["count"].(int)))
@@ -347,6 +453,12 @@ func resourceDataToTestSettings(data interface{}) (*synthetics.V202101beta1TestS
 
 	obj.SetServers(ifSliceToStringSlice(m["servers"].([]interface{})))
 	obj.SetRollupLevel(int64(m["rollup_level"].(int)))
+
+	http, err := resourceDataToTestHTTP(m["http"])
+	if err != nil {
+		return nil, err
+	}
+	obj.Http = http
 
 	return obj, nil
 }
@@ -410,6 +522,8 @@ func resourceDataToTestFlow(data interface{}) (*synthetics.V202101beta1FlowTest,
 	obj.SetTargetRefreshIntervalMillis(int64(m["target_refresh_interval_millis"].(int)))
 	obj.SetMaxTasks(int64(m["max_tasks"].(int)))
 	obj.SetType(m["type"].(string))
+	obj.SetInetDirection(m["inet_direction"].(string))
+	obj.SetDirection(m["direction"].(string))
 
 	return obj, nil
 }
@@ -455,6 +569,7 @@ func resourceDataToTestDNS(data interface{}) (*synthetics.V202101beta1DnsTest, e
 
 	obj := synthetics.NewV202101beta1DnsTest()
 	obj.SetTarget(m["target"].(string))
+	obj.SetType(synthetics.V202101beta1DNSRecord(m["type"].(string)))
 
 	return obj, nil
 }
@@ -470,6 +585,41 @@ func resourceDataToTestURL(data interface{}) (*synthetics.V202101beta1UrlTest, e
 
 	obj := synthetics.NewV202101beta1UrlTest()
 	obj.SetTarget(m["target"].(string))
+
+	return obj, nil
+}
+
+func resourceDataToTestNetworkGrid(data interface{}) (*synthetics.V202101beta1GridTest, error) {
+	m, err := getObjectFromNestedResourceData(data)
+	if err != nil {
+		return nil, fmt.Errorf("resourceDataToTestNetworkGrid: %v", err)
+	}
+	if m == nil {
+		return nil, nil
+	}
+
+	obj := synthetics.NewV202101beta1GridTest()
+	obj.SetTargets(ifSliceToStringSlice(m["targets"].([]interface{})))
+
+	return obj, nil
+}
+
+func resourceDataToTestPageLoad(data interface{}) (*synthetics.V202101beta1UrlTest, error) {
+	return resourceDataToTestURL(data)
+}
+
+func resourceDataToTestDNSGrid(data interface{}) (*synthetics.V202101beta1DnsGridTest, error) {
+	m, err := getObjectFromNestedResourceData(data)
+	if err != nil {
+		return nil, fmt.Errorf("resourceDataToTestDNSGrid: %v", err)
+	}
+	if m == nil {
+		return nil, nil
+	}
+
+	obj := synthetics.NewV202101beta1DnsGridTest()
+	obj.SetTargets(ifSliceToStringSlice(m["targets"].([]interface{})))
+	obj.SetType(synthetics.V202101beta1DNSRecord(m["type"].(string)))
 
 	return obj, nil
 }
@@ -497,6 +647,12 @@ func resourceDataToTestHealthSettings(data interface{}) (*synthetics.V202101beta
 	obj.SetHttpLatencyWarning(float32(m["http_latency_warning"].(float64)))
 	obj.SetHttpValidCodes(ifSliceToInt64Slice(m["http_valid_codes"].([]interface{})))
 	obj.SetDnsValidCodes(ifSliceToInt64Slice(m["dns_valid_codes"].([]interface{})))
+	obj.SetLatencyCriticalStddev(float32(m["latency_critical_stddev"].(float64)))
+	obj.SetLatencyWarningStddev(float32(m["latency_warning_stddev"].(float64)))
+	obj.SetJitterCriticalStddev(float32(m["jitter_critical_stddev"].(float64)))
+	obj.SetJitterWarningStddev(float32(m["jitter_warning_stddev"].(float64)))
+	obj.SetHttpLatencyCriticalStddev(float32(m["http_latency_critical_stddev"].(float64)))
+	obj.SetHttpLatencyWarningStddev(float32(m["http_latency_warning_stddev"].(float64)))
 
 	return obj, nil
 }
@@ -529,6 +685,7 @@ func resourceDataToTestPing(data interface{}) (*synthetics.V202101beta1TestPingS
 	obj.SetPeriod(float32(m["period"].(float64)))
 	obj.SetCount(float32(m["count"].(float64)))
 	obj.SetExpiry(float32(m["expiry"].(float64)))
+	obj.SetDelay(float32(m["delay"].(float64)))
 
 	return obj, nil
 }
@@ -549,6 +706,39 @@ func resourceDataToTestTrace(data interface{}) (*synthetics.V202101beta1TestTrac
 	obj.SetPort(float32(m["port"].(float64)))
 	obj.SetExpiry(float32(m["expiry"].(float64)))
 	obj.SetLimit(float32(m["limit"].(float64)))
+	obj.SetDelay(float32(m["delay"].(float64)))
+
+	return obj, nil
+}
+
+func resourceDataToTestHTTP(data interface{}) (*synthetics.V202101beta1HTTPConfig, error) {
+	m, err := getObjectFromNestedResourceData(data)
+	if err != nil {
+		return nil, fmt.Errorf("resourceDataToTestHTTP: %v", err)
+	}
+	if m == nil {
+		return nil, nil
+	}
+
+	obj := synthetics.NewV202101beta1HTTPConfig()
+	obj.SetPeriod(int64(m["period"].(int)))
+	obj.SetExpiry(int64(m["expiry"].(int)))
+	obj.SetMethod(m["method"].(string))
+
+	h, err := stringInterfaceMapToStringMap(m["headers"].(map[string]interface{}))
+	if err != nil {
+		return nil, fmt.Errorf("resourceDataToTestHTTP (headers): %v", err)
+	}
+	obj.SetHeaders(h)
+
+	obj.SetBody(m["body"].(string))
+	obj.SetIgnoreTlsErrors(m["ignore_tls_errors"].(bool))
+
+	css, err := stringInterfaceMapToStringMap(m["css_selectors"].(map[string]interface{}))
+	if err != nil {
+		return nil, fmt.Errorf("resourceDataToTestHTTP (css_selectors): %v", err)
+	}
+	obj.SetCssSelectors(css)
 
 	return obj, nil
 }

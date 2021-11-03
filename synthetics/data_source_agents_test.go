@@ -38,7 +38,7 @@ func checkDataSourceAgents() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(agentsDS, "items.0.asn", "20473"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.site_id", "0"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.version", "0.0.2"),
-		resource.TestCheckResourceAttr(agentsDS, "items.0.challenge", ""),
+		resource.TestCheckResourceAttr(agentsDS, "items.0.challenge", "dummy-challenge"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.city", "Amsterdam"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.region", "Noord-Holland"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.country", "Netherlands"),
@@ -46,7 +46,9 @@ func checkDataSourceAgents() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(agentsDS, "items.0.test_ids.0", "13"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.test_ids.1", "133"),
 		resource.TestCheckResourceAttr(agentsDS, "items.0.test_ids.2", "1337"),
-		resource.TestCheckResourceAttr(agentsDS, "items.0.local_ip", ""),
+		resource.TestCheckResourceAttr(agentsDS, "items.0.local_ip", "192.168.1.2"),
+		resource.TestCheckResourceAttr(agentsDS, "items.0.cloud_vpc", "dummy-cloud-vpc"),
+		resource.TestCheckResourceAttr(agentsDS, "items.0.agent_impl", "IMPLEMENT_TYPE_RUST"),
 
 		resource.TestCheckResourceAttr(agentsDS, "items.1.id", "1717"),
 		resource.TestCheckResourceAttr(agentsDS, "items.1.name", "private-agent"),
@@ -71,7 +73,9 @@ func checkDataSourceAgents() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(agentsDS, "items.1.region", "Oregon"),
 		resource.TestCheckResourceAttr(agentsDS, "items.1.country", "US"),
 		resource.TestCheckResourceAttr(agentsDS, "items.1.test_ids.#", "0"),
-		resource.TestCheckResourceAttr(agentsDS, "items.1.local_ip", ""),
+		resource.TestCheckResourceAttr(agentsDS, "items.1.local_ip", "192.168.1.2"),
+		resource.TestCheckResourceAttr(agentsDS, "items.1.cloud_vpc", "dummy-cloud-vpc"),
+		resource.TestCheckResourceAttr(agentsDS, "items.1.agent_impl", "IMPLEMENT_TYPE_NODE"),
 
 		// TODO(dfurman): modify stub API server to return invalid_agents_count key
 		// resource.TestCheckResourceAttr(agentsDS, "invalid_agents_count", "5"),

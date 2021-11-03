@@ -16,7 +16,7 @@ install: build
 	mv ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 
 test:
-	TEST_API_SERVER_ENDPOINT=${TEST_API_SERVER_ENDPOINT} ./tools/run_test_api_server.sh
+	TEST_API_SERVER_ENDPOINT=${TEST_API_SERVER_ENDPOINT} ./tools/start_test_api_server.sh
 	sleep 1 # give the server some warm up time
 
 	# run tests:

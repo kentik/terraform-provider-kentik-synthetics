@@ -7,8 +7,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi/synthetics"
+	"github.com/kentik/community_sdk_golang/kentikapi"
+	"github.com/kentik/community_sdk_golang/kentikapi/synthetics"
 )
 
 // Note the file is named "resource_test_impl.go" instead of "resource_test.go", so that
@@ -152,6 +152,8 @@ func testSettingsFields(ts *synthetics.V202101beta1TestSettings) []string {
 			"test.settings.flow.targetRefreshIntervalMillis",
 			"test.settings.flow.maxTasks",
 			"test.settings.flow.type",
+			"test.settings.flow.inetDirection",
+			"test.settings.flow.direction",
 		)
 	}
 
@@ -164,11 +166,23 @@ func testSettingsFields(ts *synthetics.V202101beta1TestSettings) []string {
 	}
 
 	if ts.HasDns() {
-		fields = append(fields, "test.settings.dns.target")
+		fields = append(fields, "test.settings.dns.target", "test.settings.dns.type")
 	}
 
 	if ts.HasUrl() {
 		fields = append(fields, "test.settings.url.target")
+	}
+
+	if ts.HasNetworkGrid() {
+		fields = append(fields, "test.settings.networkGrid.targets")
+	}
+
+	if ts.HasPageLoad() {
+		fields = append(fields, "test.settings.pageLoad.target")
+	}
+
+	if ts.HasDnsGrid() {
+		fields = append(fields, "test.settings.dnsGrid.targets", "test.settings.dnsGrid.type")
 	}
 
 	if ts.HasAgentIds() {
@@ -220,6 +234,11 @@ func testSettingsFields(ts *synthetics.V202101beta1TestSettings) []string {
 	if ts.HasRollupLevel() {
 		fields = append(fields, "test.settings.rollupLevel")
 	}
+
+	if ts.HasHttp() {
+		fields = append(fields, httpSettingsFields(ts.Http)...)
+	}
+
 	return fields
 }
 
@@ -269,6 +288,30 @@ func healthSettingsFields(hs *synthetics.V202101beta1HealthSettings) []string {
 		fields = append(fields, "test.settings.healthSettings.dnsValidCodes")
 	}
 
+	if hs.HasLatencyCriticalStddev() {
+		fields = append(fields, "test.settings.healthSettings.latencyCriticalStddev")
+	}
+
+	if hs.HasLatencyWarningStddev() {
+		fields = append(fields, "test.settings.healthSettings.latencyWarningStddev")
+	}
+
+	if hs.HasJitterCriticalStddev() {
+		fields = append(fields, "test.settings.healthSettings.jitterCriticalStddev")
+	}
+
+	if hs.HasJitterWarningStddev() {
+		fields = append(fields, "test.settings.healthSettings.jitterWarningStddev")
+	}
+
+	if hs.HasHttpLatencyCriticalStddev() {
+		fields = append(fields, "test.settings.healthSettings.httpLatencyCriticalStddev")
+	}
+
+	if hs.HasHttpLatencyWarningStddev() {
+		fields = append(fields, "test.settings.healthSettings.httpLatencyWarningStddev")
+	}
+
 	return fields
 }
 
@@ -299,6 +342,10 @@ func pingSettingsFields(ps *synthetics.V202101beta1TestPingSettings) []string {
 		fields = append(fields, "test.settings.ping.expiry")
 	}
 
+	if ps.HasDelay() {
+		fields = append(fields, "test.settings.ping.delay")
+	}
+
 	return fields
 }
 
@@ -327,6 +374,44 @@ func traceSettingsFields(ts *synthetics.V202101beta1TestTraceSettings) []string 
 
 	if ts.HasLimit() {
 		fields = append(fields, "test.settings.trace.limit")
+	}
+
+	if ts.HasDelay() {
+		fields = append(fields, "test.settings.trace.delay")
+	}
+
+	return fields
+}
+
+func httpSettingsFields(h *synthetics.V202101beta1HTTPConfig) []string {
+	var fields []string
+
+	if h.HasPeriod() {
+		fields = append(fields, "test.settings.http.period")
+	}
+
+	if h.HasExpiry() {
+		fields = append(fields, "test.settings.http.expiry")
+	}
+
+	if h.HasMethod() {
+		fields = append(fields, "test.settings.http.method")
+	}
+
+	if h.HasHeaders() {
+		fields = append(fields, "test.settings.http.headers")
+	}
+
+	if h.HasBody() {
+		fields = append(fields, "test.settings.http.body")
+	}
+
+	if h.HasIgnoreTlsErrors() {
+		fields = append(fields, "test.settings.http.ignoreTlsErrors")
+	}
+
+	if h.HasCssSelectors() {
+		fields = append(fields, "test.settings.http.cssSelectors")
 	}
 
 	return fields

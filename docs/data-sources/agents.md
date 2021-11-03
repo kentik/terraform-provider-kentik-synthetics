@@ -3,12 +3,12 @@
 page_title: "kentik-synthetics_agents Data Source - terraform-provider-kentik-synthetics"
 subcategory: ""
 description: |-
-  DataSource representing list of synthetic test agents
+  Data source representing list of synthetic test agents
 ---
 
 # kentik-synthetics_agents (Data Source)
 
-DataSource representing list of synthetic test agents
+Data source representing list of synthetic test agents
 
 ## Example Usage
 
@@ -41,10 +41,12 @@ output "agents_list" {
 
 Read-Only:
 
+- **agent_impl** (String)
 - **alias** (String)
 - **asn** (Number)
 - **challenge** (String)
 - **city** (String)
+- **cloud_vpc** (String)
 - **country** (String)
 - **family** (String)
 - **id** (String)
