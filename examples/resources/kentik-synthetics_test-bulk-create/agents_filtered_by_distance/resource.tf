@@ -18,7 +18,7 @@ resource "kentik-synthetics_test" "agents-within-distance-test" {
   status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
-      target = "www.example.com"
+      target = "www.example.test"
     }
     agent_ids = local.agents_ids
     tasks = [

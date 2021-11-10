@@ -18,7 +18,7 @@ resource "kentik-synthetics_test" "one_agent_per_country-test" {
   status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
-      target = "www.example.com"
+      target = "www.example.test"
     }
     agent_ids = local.agent_ids
     tasks = [

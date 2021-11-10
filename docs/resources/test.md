@@ -19,7 +19,7 @@ resource "kentik-synthetics_test" "example-hostname-test" {
   status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
-      target = "www.example.com"
+      target = "www.example.test"
     }
     agent_ids = [
       "817",
@@ -52,6 +52,12 @@ resource "kentik-synthetics_test" "example-hostname-test" {
         2,
         3
       ]
+      latency_critical_stddev      = 11
+      latency_warning_stddev       = 12
+      jitter_critical_stddev       = 13
+      jitter_warning_stddev        = 14
+      http_latency_critical_stddev = 15
+      http_latency_warning_stddev  = 16
     }
     #    monitoring_settings {
     #      // Notice: currently "notification_channels" field cannot be manipulated
@@ -64,6 +70,7 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       period = 60
       count  = 5
       expiry = 3000
+      delay  = 4
     }
     trace {
       period   = 60
@@ -72,6 +79,7 @@ resource "kentik-synthetics_test" "example-hostname-test" {
       port     = 33434
       expiry   = 22500
       limit    = 30
+      delay    = 7
     }
     port     = 443
     protocol = "tcp"
@@ -94,7 +102,7 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
   status = "TEST_STATUS_PAUSED"
   settings {
     hostname {
-      target = "www.example.com"
+      target = "www.example.test"
     }
     agent_ids = [
       "817",
@@ -184,13 +192,50 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
   }
 }
 
+resource "kentik-synthetics_test" "minimal-dns-test" {
+  name   = "minimal-dns-test"
+  type   = "dns"
+  status = "TEST_STATUS_PAUSED"
+  settings {
+    dns {
+      target = "www.example.test"
+      type   = "DNS_RECORD_CNAME"
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    ping {
+      period = 60
+    }
+
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    port     = 443
+    protocol = "tcp"
+    family   = "IP_FAMILY_V4"
+    servers = [
+      "server-one",
+      "server-two",
+    ]
+    rollup_level = 1
+  }
+}
+
 resource "kentik-synthetics_test" "minimal-url-test" {
   name   = "minimal-url-test"
   type   = "url"
   status = "TEST_STATUS_PAUSED"
   settings {
     url {
-      target = "https://dummy.url"
+      target = "https://example.test"
     }
     agent_ids = [
       "817",
@@ -199,6 +244,132 @@ resource "kentik-synthetics_test" "minimal-url-test" {
     ]
     period = 60
     expiry = 5000
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V4"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-network-grid-test" {
+  name   = "minimal-network-grid-test"
+  type   = "network_grid"
+  status = "TEST_STATUS_PAUSED"
+  settings {
+    network_grid {
+      targets = ["127.0.0.1"]
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V4"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-page-load-test" {
+  name   = "minimal-page-load-test"
+  type   = "page_load"
+  status = "TEST_STATUS_PAUSED"
+  settings {
+    page_load {
+      target = "https://example.test"
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    period = 60
+    expiry = 5000
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    port         = 443
+    protocol     = "tcp"
+    family       = "IP_FAMILY_V4"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-dns-grid-test" {
+  name   = "minimal-dns-grid-test"
+  type   = "dns_grid"
+  status = "TEST_STATUS_PAUSED"
+  settings {
+    dns_grid {
+      targets = ["www.example.test"]
+      type    = "DNS_RECORD_CNAME"
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    ping {
+      period = 60
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+    }
+    port     = 443
+    protocol = "tcp"
+    family   = "IP_FAMILY_V4"
+    servers = [
+      "server-one",
+      "server-two",
+    ]
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-application-mesh-test" {
+  name   = "minimal-application-mesh-test"
+  type   = "application_mesh"
+  status = "TEST_STATUS_PAUSED"
+  settings {
+    agent_ids = [
+      "1717" # ID of private agent
+    ]
     tasks = [
       "ping",
       "traceroute"
