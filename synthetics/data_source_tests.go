@@ -7,8 +7,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi/synthetics"
+	"github.com/kentik/community_sdk_golang/kentikapi"
+	"github.com/kentik/community_sdk_golang/kentikapi/synthetics"
 )
 
 const (
@@ -17,7 +17,7 @@ const (
 
 func dataSourceTests() *schema.Resource {
 	return &schema.Resource{
-		Description: "DataSource representing list of synthetic test tests",
+		Description: "Data source representing list of synthetic tests",
 		ReadContext: dataSourceTestsRead,
 		Schema: map[string]*schema.Schema{
 			itemsKey: {

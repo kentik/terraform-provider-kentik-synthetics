@@ -53,17 +53,13 @@ resource "kentik-synthetics_test" "example-hostname-test" {
         3
       ]
     }
-    monitoring_settings {
-      activation_grace_period = "2"
-      activation_time_unit    = "m"
-      activation_time_window  = "5"
-      activation_times        = "3"
-      // Notice: currently "notification_channels" field cannot be manipulated
-      // notification_channels = [
-      //  "dummy-channel-1",
-      //  "dummy-channel-2",
-      // ]
-    }
+    #    monitoring_settings {
+    #      // Notice: currently "notification_channels" field cannot be manipulated
+    #      notification_channels = [
+    #      "dummy-channel-1",
+    #      "dummy-channel-2",
+    #      ]
+    #    }
     ping {
       period = 60
       count  = 5
@@ -79,13 +75,11 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     }
     port     = 443
     protocol = "tcp"
-    family   = "IP_FAMILY_V6"
+    family   = "IP_FAMILY_V4"
     servers = [
       "server-one",
       "server-two",
     ]
-    use_local_ip = true
-    reciprocal   = false
     rollup_level = 1
   }
 }
@@ -111,11 +105,6 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -125,7 +114,7 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -150,11 +139,6 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -164,7 +148,7 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -186,11 +170,6 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -200,7 +179,7 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -224,11 +203,6 @@ resource "kentik-synthetics_test" "minimal-url-test" {
       "ping",
       "traceroute"
     ]
-    monitoring_settings {
-      activation_time_unit   = "m"
-      activation_time_window = "5"
-      activation_times       = "3"
-    }
     ping {
       period = 60
     }
@@ -238,7 +212,7 @@ resource "kentik-synthetics_test" "minimal-url-test" {
     }
     port         = 443
     protocol     = "tcp"
-    family       = "IP_FAMILY_V6"
+    family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
 }
@@ -270,7 +244,6 @@ Required:
 
 - **agent_ids** (List of String)
 - **family** (String)
-- **monitoring_settings** (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings--monitoring_settings))
 - **protocol** (String)
 - **rollup_level** (Number)
 - **tasks** (List of String)
@@ -281,36 +254,24 @@ Optional:
 - **agent** (Block List) (see [below for nested schema](#nestedblock--settings--agent))
 - **count** (Number)
 - **dns** (Block List) (see [below for nested schema](#nestedblock--settings--dns))
+- **dns_grid** (Block List) (see [below for nested schema](#nestedblock--settings--dns_grid))
 - **expiry** (Number)
 - **flow** (Block List) (see [below for nested schema](#nestedblock--settings--flow))
 - **health_settings** (Block List) (see [below for nested schema](#nestedblock--settings--health_settings))
 - **hostname** (Block List) (see [below for nested schema](#nestedblock--settings--hostname))
+- **http** (Block List) (see [below for nested schema](#nestedblock--settings--http))
 - **ip** (Block List) (see [below for nested schema](#nestedblock--settings--ip))
 - **limit** (Number)
+- **monitoring_settings** (Block List) (see [below for nested schema](#nestedblock--settings--monitoring_settings))
+- **network_grid** (Block List) (see [below for nested schema](#nestedblock--settings--network_grid))
+- **page_load** (Block List) (see [below for nested schema](#nestedblock--settings--page_load))
 - **period** (Number)
 - **ping** (Block List) (see [below for nested schema](#nestedblock--settings--ping))
 - **port** (Number)
-- **reciprocal** (Boolean)
 - **servers** (List of String)
 - **site** (Block List) (see [below for nested schema](#nestedblock--settings--site))
 - **tag** (Block List) (see [below for nested schema](#nestedblock--settings--tag))
 - **url** (Block List) (see [below for nested schema](#nestedblock--settings--url))
-- **use_local_ip** (Boolean)
-
-<a id="nestedblock--settings--monitoring_settings"></a>
-### Nested Schema for `settings.monitoring_settings`
-
-Required:
-
-- **activation_time_unit** (String)
-- **activation_time_window** (String)
-- **activation_times** (String)
-
-Optional:
-
-- **activation_grace_period** (String)
-- **notification_channels** (List of String)
-
 
 <a id="nestedblock--settings--trace"></a>
 ### Nested Schema for `settings.trace`
@@ -323,6 +284,7 @@ Required:
 Optional:
 
 - **count** (Number)
+- **delay** (Number)
 - **expiry** (Number)
 - **limit** (Number)
 - **port** (Number)
@@ -343,6 +305,19 @@ Required:
 
 - **target** (String)
 
+Optional:
+
+- **type** (String)
+
+
+<a id="nestedblock--settings--dns_grid"></a>
+### Nested Schema for `settings.dns_grid`
+
+Required:
+
+- **targets** (List of String)
+- **type** (String)
+
 
 <a id="nestedblock--settings--flow"></a>
 ### Nested Schema for `settings.flow`
@@ -354,6 +329,8 @@ Required:
 
 Optional:
 
+- **direction** (String)
+- **inet_direction** (String)
 - **max_tasks** (Number)
 - **target_refresh_interval_millis** (Number)
 
@@ -365,12 +342,18 @@ Optional:
 
 - **dns_valid_codes** (List of Number)
 - **http_latency_critical** (Number)
+- **http_latency_critical_stddev** (Number)
 - **http_latency_warning** (Number)
+- **http_latency_warning_stddev** (Number)
 - **http_valid_codes** (List of Number)
 - **jitter_critical** (Number)
+- **jitter_critical_stddev** (Number)
 - **jitter_warning** (Number)
+- **jitter_warning_stddev** (Number)
 - **latency_critical** (Number)
+- **latency_critical_stddev** (Number)
 - **latency_warning** (Number)
+- **latency_warning_stddev** (Number)
 - **packet_loss_critical** (Number)
 - **packet_loss_warning** (Number)
 
@@ -383,12 +366,50 @@ Required:
 - **target** (String)
 
 
+<a id="nestedblock--settings--http"></a>
+### Nested Schema for `settings.http`
+
+Optional:
+
+- **body** (String)
+- **css_selectors** (Map of String)
+- **expiry** (Number)
+- **headers** (Map of String)
+- **ignore_tls_errors** (Boolean)
+- **method** (String)
+- **period** (Number)
+
+
 <a id="nestedblock--settings--ip"></a>
 ### Nested Schema for `settings.ip`
 
 Required:
 
 - **targets** (List of String)
+
+
+<a id="nestedblock--settings--monitoring_settings"></a>
+### Nested Schema for `settings.monitoring_settings`
+
+Optional:
+
+- **notification_channels** (List of String)
+
+
+<a id="nestedblock--settings--network_grid"></a>
+### Nested Schema for `settings.network_grid`
+
+Required:
+
+- **targets** (List of String)
+
+
+<a id="nestedblock--settings--page_load"></a>
+### Nested Schema for `settings.page_load`
+
+Required:
+
+- **target** (String)
 
 
 <a id="nestedblock--settings--ping"></a>
@@ -401,6 +422,7 @@ Required:
 Optional:
 
 - **count** (Number)
+- **delay** (Number)
 - **expiry** (Number)
 
 

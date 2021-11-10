@@ -9,8 +9,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	geo "github.com/kellydunn/golang-geo"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi/synthetics"
+	"github.com/kentik/community_sdk_golang/kentikapi"
+	"github.com/kentik/community_sdk_golang/kentikapi/synthetics"
 )
 
 const (
@@ -24,7 +24,7 @@ const (
 
 func dataSourceAgents() *schema.Resource {
 	return &schema.Resource{
-		Description: "DataSource representing list of synthetic test agents",
+		Description: "Data source representing list of synthetic test agents",
 		ReadContext: dataSourceAgentsRead,
 		Schema: map[string]*schema.Schema{
 			itemsKey: {

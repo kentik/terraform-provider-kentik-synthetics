@@ -3,12 +3,12 @@
 page_title: "kentik-synthetics_tests Data Source - terraform-provider-kentik-synthetics"
 subcategory: ""
 description: |-
-  DataSource representing list of synthetic test tests
+  Data source representing list of synthetic tests
 ---
 
 # kentik-synthetics_tests (Data Source)
 
-DataSource representing list of synthetic test tests
+Data source representing list of synthetic tests
 
 ## Example Usage
 
@@ -77,19 +77,22 @@ Read-Only:
 - **agent_ids** (List of String)
 - **count** (Number)
 - **dns** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--dns))
+- **dns_grid** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--dns_grid))
 - **expiry** (Number)
 - **family** (String)
 - **flow** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--flow))
 - **health_settings** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--health_settings))
 - **hostname** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--hostname))
+- **http** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--http))
 - **ip** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--ip))
 - **limit** (Number)
 - **monitoring_settings** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--monitoring_settings))
+- **network_grid** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--network_grid))
+- **page_load** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--page_load))
 - **period** (Number)
 - **ping** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--ping))
 - **port** (Number)
 - **protocol** (String)
-- **reciprocal** (Boolean)
 - **rollup_level** (Number)
 - **servers** (List of String)
 - **site** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--site))
@@ -97,7 +100,6 @@ Read-Only:
 - **tasks** (List of String)
 - **trace** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--trace))
 - **url** (List of Object) (see [below for nested schema](#nestedobjatt--items--settings--url))
-- **use_local_ip** (Boolean)
 
 <a id="nestedobjatt--items--settings--agent"></a>
 ### Nested Schema for `items.settings.agent`
@@ -113,6 +115,16 @@ Read-Only:
 Read-Only:
 
 - **target** (String)
+- **type** (String)
+
+
+<a id="nestedobjatt--items--settings--dns_grid"></a>
+### Nested Schema for `items.settings.dns_grid`
+
+Read-Only:
+
+- **targets** (List of String)
+- **type** (String)
 
 
 <a id="nestedobjatt--items--settings--flow"></a>
@@ -120,6 +132,8 @@ Read-Only:
 
 Read-Only:
 
+- **direction** (String)
+- **inet_direction** (String)
 - **max_tasks** (Number)
 - **target** (String)
 - **target_refresh_interval_millis** (Number)
@@ -133,12 +147,18 @@ Read-Only:
 
 - **dns_valid_codes** (List of Number)
 - **http_latency_critical** (Number)
+- **http_latency_critical_stddev** (Number)
 - **http_latency_warning** (Number)
+- **http_latency_warning_stddev** (Number)
 - **http_valid_codes** (List of Number)
 - **jitter_critical** (Number)
+- **jitter_critical_stddev** (Number)
 - **jitter_warning** (Number)
+- **jitter_warning_stddev** (Number)
 - **latency_critical** (Number)
+- **latency_critical_stddev** (Number)
 - **latency_warning** (Number)
+- **latency_warning_stddev** (Number)
 - **packet_loss_critical** (Number)
 - **packet_loss_warning** (Number)
 
@@ -149,6 +169,20 @@ Read-Only:
 Read-Only:
 
 - **target** (String)
+
+
+<a id="nestedobjatt--items--settings--http"></a>
+### Nested Schema for `items.settings.http`
+
+Read-Only:
+
+- **body** (String)
+- **css_selectors** (Map of String)
+- **expiry** (Number)
+- **headers** (Map of String)
+- **ignore_tls_errors** (Boolean)
+- **method** (String)
+- **period** (Number)
 
 
 <a id="nestedobjatt--items--settings--ip"></a>
@@ -164,11 +198,23 @@ Read-Only:
 
 Read-Only:
 
-- **activation_grace_period** (String)
-- **activation_time_unit** (String)
-- **activation_time_window** (String)
-- **activation_times** (String)
 - **notification_channels** (List of String)
+
+
+<a id="nestedobjatt--items--settings--network_grid"></a>
+### Nested Schema for `items.settings.network_grid`
+
+Read-Only:
+
+- **targets** (List of String)
+
+
+<a id="nestedobjatt--items--settings--page_load"></a>
+### Nested Schema for `items.settings.page_load`
+
+Read-Only:
+
+- **target** (String)
 
 
 <a id="nestedobjatt--items--settings--ping"></a>
@@ -177,6 +223,7 @@ Read-Only:
 Read-Only:
 
 - **count** (Number)
+- **delay** (Number)
 - **expiry** (Number)
 - **period** (Number)
 
@@ -203,6 +250,7 @@ Read-Only:
 Read-Only:
 
 - **count** (Number)
+- **delay** (Number)
 - **expiry** (Number)
 - **limit** (Number)
 - **period** (Number)

@@ -60,3 +60,26 @@ func ifSliceToInt64Slice(s []interface{}) []int64 {
 	}
 	return result
 }
+
+func stringInterfaceMapToStringMap(m map[string]interface{}) (map[string]string, error) {
+	if m == nil {
+		return nil, nil
+	}
+
+	result := make(map[string]string, len(m))
+	for k, v := range m {
+		vv, ok := v.(string)
+		if !ok {
+			return nil, fmt.Errorf("stringInterfaceMapToStringMap: m[%v] should be string, got: %#v", k, v)
+		}
+		result[k] = vv
+	}
+	return result, nil
+}
+
+func stringMapPtrToStringMap(p *map[string]string) map[string]string {
+	if p == nil {
+		return nil
+	}
+	return *p
+}

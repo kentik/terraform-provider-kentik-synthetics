@@ -8,12 +8,12 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi"
+	"github.com/kentik/community_sdk_golang/kentikapi"
 )
 
 func dataSourceTest() *schema.Resource {
 	return &schema.Resource{
-		Description: "DataSource representing single synthetic test",
+		Description: "Data source representing single synthetic test",
 		ReadContext: dataSourceTestRead,
 		Schema:      makeTestSchema(readSingle),
 	}

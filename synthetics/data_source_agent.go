@@ -6,13 +6,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi"
-	"github.com/kentik/community_sdk_golang/apiv6/kentikapi/synthetics"
+	"github.com/kentik/community_sdk_golang/kentikapi"
+	"github.com/kentik/community_sdk_golang/kentikapi/synthetics"
 )
 
 func dataSourceAgent() *schema.Resource {
 	return &schema.Resource{
-		Description: "DataSource representing single synthetic test agent",
+		Description: "Data source representing single synthetic test agent",
 		ReadContext: dataSourceAgentRead,
 		Schema:      makeAgentSchema(readSingle),
 	}
@@ -64,5 +64,7 @@ func agentToMap(obj *synthetics.V202101beta1Agent) map[string]interface{} {
 	m["country"] = obj.Country
 	m["test_ids"] = obj.TestIds
 	m["local_ip"] = obj.LocalIp
+	m["cloud_vpc"] = obj.CloudVpc
+	m["agent_impl"] = obj.AgentImpl
 	return m
 }

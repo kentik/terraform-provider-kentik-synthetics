@@ -20,7 +20,6 @@ func makeAgentSchema(mode schemaMode) map[string]*schema.Schema {
 		"status": {
 			Type:     schema.TypeString,
 			Computed: computedOnRead(mode),
-			// enumeration: AGENT_STATUS_UNSPECIFIED, AGENT_STATUS_OK, AGENT_STATUS_WAIT, AGENT_STATUS_DELETED
 		},
 		"alias": {
 			Type:     schema.TypeString,
@@ -53,7 +52,6 @@ func makeAgentSchema(mode schemaMode) map[string]*schema.Schema {
 		"family": {
 			Type:     schema.TypeString,
 			Computed: computedOnRead(mode),
-			// enumeration: IP_FAMILY_UNSPECIFIED, IP_FAMILY_V4, IP_FAMILY_V6, IP_FAMILY_DUAL
 		},
 		"asn": {
 			Type:     schema.TypeInt,
@@ -91,6 +89,14 @@ func makeAgentSchema(mode schemaMode) map[string]*schema.Schema {
 			},
 		},
 		"local_ip": {
+			Type:     schema.TypeString,
+			Computed: computedOnRead(mode),
+		},
+		"cloud_vpc": {
+			Type:     schema.TypeString,
+			Computed: computedOnRead(mode),
+		},
+		"agent_impl": {
 			Type:     schema.TypeString,
 			Computed: computedOnRead(mode),
 		},

@@ -3,12 +3,12 @@
 page_title: "kentik-synthetics_agent Data Source - terraform-provider-kentik-synthetics"
 subcategory: ""
 description: |-
-  DataSource representing single synthetic test agent
+  Data source representing single synthetic test agent
 ---
 
 # kentik-synthetics_agent (Data Source)
 
-DataSource representing single synthetic test agent
+Data source representing single synthetic test agent
 
 ## Example Usage
 
@@ -31,10 +31,12 @@ output "agent_get" {
 
 ### Read-Only
 
+- **agent_impl** (String)
 - **alias** (String)
 - **asn** (Number)
 - **challenge** (String)
 - **city** (String)
+- **cloud_vpc** (String)
 - **country** (String)
 - **family** (String)
 - **ip** (String)
