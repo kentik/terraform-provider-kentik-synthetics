@@ -44,7 +44,6 @@ Read-Only:
 - **agent_impl** (String)
 - **alias** (String)
 - **asn** (Number)
-- **challenge** (String)
 - **city** (String)
 - **cloud_vpc** (String)
 - **country** (String)

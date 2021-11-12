@@ -14,7 +14,7 @@ locals {
 resource "kentik-synthetics_test" "agents-filtered-by-asn-test" {
   name   = "agents-filtered-by-asn-test"
   type   = "hostname"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
       target = "www.example.com"

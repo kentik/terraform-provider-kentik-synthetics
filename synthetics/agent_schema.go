@@ -65,10 +65,6 @@ func makeAgentSchema(mode schemaMode) map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Computed: computedOnRead(mode),
 		},
-		"challenge": {
-			Type:     schema.TypeString,
-			Computed: computedOnRead(mode),
-		},
 		"city": {
 			Type:     schema.TypeString,
 			Computed: computedOnRead(mode),

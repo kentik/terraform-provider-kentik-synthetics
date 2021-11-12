@@ -58,7 +58,6 @@ func agentToMap(obj *synthetics.V202101beta1Agent) map[string]interface{} {
 	m["asn"] = obj.Asn
 	m["site_id"] = obj.SiteId
 	m["version"] = obj.Version
-	m["challenge"] = obj.Challenge
 	m["city"] = obj.City
 	m["region"] = obj.Region
 	m["country"] = obj.Country

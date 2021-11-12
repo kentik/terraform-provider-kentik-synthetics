@@ -15,7 +15,7 @@ locals {
 resource "kentik-synthetics_test" "one_agent_per_country-test" {
   name   = "agents-filtered-by-country-test"
   type   = "hostname"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
       target = "www.example.com"
