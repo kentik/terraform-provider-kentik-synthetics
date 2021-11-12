@@ -38,7 +38,6 @@ func checkDataSourceAgent() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(agentDS, "asn", "20473"),
 		resource.TestCheckResourceAttr(agentDS, "site_id", "0"),
 		resource.TestCheckResourceAttr(agentDS, "version", "0.0.2"),
-		resource.TestCheckResourceAttr(agentDS, "challenge", "dummy-challenge"),
 		resource.TestCheckResourceAttr(agentDS, "city", "Amsterdam"),
 		resource.TestCheckResourceAttr(agentDS, "region", "Noord-Holland"),
 		resource.TestCheckResourceAttr(agentDS, "country", "Netherlands"),

@@ -5,7 +5,7 @@
       "name": "github.com ip test",
       "type": "ip",
       "deviceId": "75702",
-      "status": "TEST_STATUS_PAUSED",
+      "status": "TEST_STATUS_ACTIVE",
       "settings": {
         "hostname": {
           "target": "dummy-ht"
@@ -117,8 +117,8 @@
         "protocol": "icmp",
         "family": "IP_FAMILY_DUAL",
         "servers": [
-          "server-one",
-          "server-two"
+          "192.0.2.1",
+          "192.0.2.2"
         ],
         "rollupLevel": 1,
         "http": {
@@ -227,7 +227,6 @@
       "asn": 20473,
       "siteId": "0",
       "version": "0.0.2",
-      "challenge": "dummy-challenge",
       "city": "Amsterdam",
       "region": "Noord-Holland",
       "country": "Netherlands",
@@ -255,7 +254,6 @@
       "asn": 16509,
       "siteId": "7970",
       "version": "0.0.9",
-      "challenge": "0f5243bbc1585a86711a5eca37ea4fd35fd859155246e11dc85c52af006eb679",
       "city": "San Francisco",
       "region": "Oregon",
       "country": "US",

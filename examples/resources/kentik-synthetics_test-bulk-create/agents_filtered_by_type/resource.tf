@@ -11,10 +11,10 @@ locals {
 resource "kentik-synthetics_test" "agents-filtered-by-type-test" {
   name   = "agents-filtered-by-type-test"
   type   = "hostname"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
-      target = "www.example.test"
+      target = "www.example.com"
     }
     agent_ids = local.agents_ids
     tasks = [

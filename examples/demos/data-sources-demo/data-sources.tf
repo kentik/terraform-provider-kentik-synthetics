@@ -5,7 +5,7 @@ output "agents_list" {
 }
 
 data "kentik-synthetics_agent" "agent" {
-  id = "1207" # ID of Amsterdam synthetics agent
+  id = "1207" # ID of existing synthetics agent
 }
 
 output "agent_get" {
@@ -19,7 +19,7 @@ output "tests_list" {
 }
 
 data "kentik-synthetics_test" "test" {
-  id = "3271" # ID of "Monitor 127.0.0.1" synthetics test
+  id = "3271" # ID of existing synthetics test
 }
 
 output "test_get" {

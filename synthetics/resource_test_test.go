@@ -110,8 +110,8 @@ func checkResourceTestCreate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.protocol", "icmp"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.family", "IP_FAMILY_DUAL"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.#", "2"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "server-one"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.servers.1", "server-two"),
+		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "192.0.2.1"),
+		resource.TestCheckResourceAttr(testResource, "settings.0.servers.1", "192.0.2.2"),
 		resource.TestCheckNoResourceAttr(testResource, "settings.0.use_local_ip"),
 		resource.TestCheckNoResourceAttr(testResource, "settings.0.reciprocal"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.rollup_level", "1"),
@@ -211,7 +211,7 @@ func checkResourceTestUpdate() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testResource, "settings.0.protocol", "pigeon"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.family", "IP_FAMILY_V6"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.servers.#", "1"),
-		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "server-one"),
+		resource.TestCheckResourceAttr(testResource, "settings.0.servers.0", "192.0.2.1"),
 		resource.TestCheckNoResourceAttr(testResource, "settings.0.use_local_ip"),
 		resource.TestCheckNoResourceAttr(testResource, "settings.0.reciprocal"),
 		resource.TestCheckResourceAttr(testResource, "settings.0.rollup_level", "10"),
@@ -346,8 +346,8 @@ const (
 				protocol = "icmp"
 				family   = "IP_FAMILY_DUAL"
 				servers = [
-					"server-one",
-					"server-two",
+				  "192.0.2.1",
+				  "192.0.2.2",
 				]
 				rollup_level = 1
 				http {
@@ -483,7 +483,7 @@ const (
 				protocol = "pigeon"
 				family   = "IP_FAMILY_V6"
 				servers = [
-					"server-one"
+					"192.0.2.1"
 				]
 				rollup_level = 10
 				http {

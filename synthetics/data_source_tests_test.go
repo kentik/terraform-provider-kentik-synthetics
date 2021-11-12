@@ -27,7 +27,7 @@ func checkDataSourceTests() resource.TestCheckFunc {
 		resource.TestCheckResourceAttr(testsDS, "items.0.name", "github.com ip test"),
 		resource.TestCheckResourceAttr(testsDS, "items.0.type", "ip"),
 		resource.TestCheckNoResourceAttr(testsDS, "items.0.device_id"),
-		resource.TestCheckResourceAttr(testsDS, "items.0.status", "TEST_STATUS_PAUSED"),
+		resource.TestCheckResourceAttr(testsDS, "items.0.status", "TEST_STATUS_ACTIVE"),
 		resource.TestCheckResourceAttrSet(testsDS, "items.0.settings.0.count"),
 		resource.TestCheckResourceAttr(testsDS, "items.0.expires_on", "2021-04-08T12:24:19.765Z"),
 		resource.TestCheckResourceAttr(testsDS, "items.0.cdate", "2021-04-08T12:24:18.75Z"),

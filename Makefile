@@ -17,7 +17,6 @@ install: build
 
 test:
 	TEST_API_SERVER_ENDPOINT=${TEST_API_SERVER_ENDPOINT} ./tools/start_test_api_server.sh
-	sleep 1 # give the server some warm up time
 
 	# run tests:
 	# - set KTAPI_URL to our test API server URL - otherwise the provider will try to connect to live Kentik server

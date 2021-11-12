@@ -16,10 +16,10 @@ Resource representing synthetic test
 resource "kentik-synthetics_test" "example-hostname-test" {
   name   = "example-hostname-test"
   type   = "hostname"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
-      target = "www.example.test"
+      target = "www.example.com"
     }
     agent_ids = [
       "817",
@@ -85,8 +85,8 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     protocol = "tcp"
     family   = "IP_FAMILY_V4"
     servers = [
-      "server-one",
-      "server-two",
+      "192.0.2.1",
+      "192.0.2.2",
     ]
     rollup_level = 1
   }
@@ -99,10 +99,10 @@ output "hostname-test" {
 resource "kentik-synthetics_test" "minimal-hostname-test" {
   name   = "minimal-hostname-test"
   type   = "hostname"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     hostname {
-      target = "www.example.test"
+      target = "www.example.com"
     }
     agent_ids = [
       "817",
@@ -130,12 +130,12 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
 resource "kentik-synthetics_test" "minimal-ip-test" {
   name   = "minimal-ip-test"
   type   = "ip"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     ip {
       targets = [
-        "127.0.0.1",
-        "127.0.0.2"
+        "192.0.2.1",
+        "192.0.2.2"
       ]
     }
     agent_ids = [
@@ -164,7 +164,7 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
 resource "kentik-synthetics_test" "minimal-agent-test" {
   name   = "minimal-agent-test"
   type   = "agent"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     agent {
       target = "1717" # ID of private agent
@@ -195,10 +195,10 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
 resource "kentik-synthetics_test" "minimal-dns-test" {
   name   = "minimal-dns-test"
   type   = "dns"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     dns {
-      target = "www.example.test"
+      target = "www.example.com"
       type   = "DNS_RECORD_CNAME"
     }
     agent_ids = [
@@ -206,6 +206,7 @@ resource "kentik-synthetics_test" "minimal-dns-test" {
       "818",
       "819"
     ]
+    period = 60
     tasks = [
       "ping",
       "traceroute"
@@ -222,8 +223,8 @@ resource "kentik-synthetics_test" "minimal-dns-test" {
     protocol = "tcp"
     family   = "IP_FAMILY_V4"
     servers = [
-      "server-one",
-      "server-two",
+      "192.0.2.1",
+      "192.0.2.2",
     ]
     rollup_level = 1
   }
@@ -232,10 +233,10 @@ resource "kentik-synthetics_test" "minimal-dns-test" {
 resource "kentik-synthetics_test" "minimal-url-test" {
   name   = "minimal-url-test"
   type   = "url"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     url {
-      target = "https://example.test"
+      target = "https://example.com"
     }
     agent_ids = [
       "817",
@@ -265,10 +266,10 @@ resource "kentik-synthetics_test" "minimal-url-test" {
 resource "kentik-synthetics_test" "minimal-network-grid-test" {
   name   = "minimal-network-grid-test"
   type   = "network_grid"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     network_grid {
-      targets = ["127.0.0.1"]
+      targets = ["192.0.2.1"]
     }
     agent_ids = [
       "817",
@@ -296,10 +297,10 @@ resource "kentik-synthetics_test" "minimal-network-grid-test" {
 resource "kentik-synthetics_test" "minimal-page-load-test" {
   name   = "minimal-page-load-test"
   type   = "page_load"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     page_load {
-      target = "https://example.test"
+      target = "https://example.com"
     }
     agent_ids = [
       "817",
@@ -309,8 +310,7 @@ resource "kentik-synthetics_test" "minimal-page-load-test" {
     period = 60
     expiry = 5000
     tasks = [
-      "ping",
-      "traceroute"
+      "page_load"
     ]
     ping {
       period = 60
@@ -319,9 +319,13 @@ resource "kentik-synthetics_test" "minimal-page-load-test" {
       period   = 60
       protocol = "udp"
     }
-    port         = 443
-    protocol     = "tcp"
-    family       = "IP_FAMILY_V4"
+    port     = 443
+    protocol = "tcp"
+    family   = "IP_FAMILY_V4"
+    servers = [
+      "192.0.2.1",
+      "192.0.2.2",
+    ]
     rollup_level = 1
   }
 }
@@ -329,10 +333,10 @@ resource "kentik-synthetics_test" "minimal-page-load-test" {
 resource "kentik-synthetics_test" "minimal-dns-grid-test" {
   name   = "minimal-dns-grid-test"
   type   = "dns_grid"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     dns_grid {
-      targets = ["www.example.test"]
+      targets = ["www.example.com"]
       type    = "DNS_RECORD_CNAME"
     }
     agent_ids = [
@@ -340,6 +344,7 @@ resource "kentik-synthetics_test" "minimal-dns-grid-test" {
       "818",
       "819"
     ]
+    period = 60
     tasks = [
       "ping",
       "traceroute"
@@ -355,8 +360,8 @@ resource "kentik-synthetics_test" "minimal-dns-grid-test" {
     protocol = "tcp"
     family   = "IP_FAMILY_V4"
     servers = [
-      "server-one",
-      "server-two",
+      "192.0.2.1",
+      "192.0.2.2",
     ]
     rollup_level = 1
   }
@@ -365,10 +370,12 @@ resource "kentik-synthetics_test" "minimal-dns-grid-test" {
 resource "kentik-synthetics_test" "minimal-application-mesh-test" {
   name   = "minimal-application-mesh-test"
   type   = "application_mesh"
-  status = "TEST_STATUS_PAUSED"
+  status = "TEST_STATUS_ACTIVE"
   settings {
     agent_ids = [
-      "1717" # ID of private agent
+      "817",
+      "818",
+      "819"
     ]
     tasks = [
       "ping",
@@ -382,7 +389,7 @@ resource "kentik-synthetics_test" "minimal-application-mesh-test" {
       protocol = "udp"
     }
     port         = 443
-    protocol     = "tcp"
+    protocol     = "icmp"
     family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
