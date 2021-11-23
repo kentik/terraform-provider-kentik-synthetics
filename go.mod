@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/hashicorp/terraform-plugin-docs v0.5.1
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.8.0
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.9.0
 	github.com/kellydunn/golang-geo v0.7.0
 	github.com/kentik/community_sdk_golang v0.2.1-0.20211101172018-4f8bab1e8b07
 	github.com/stretchr/testify v1.7.0
