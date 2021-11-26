@@ -1,0 +1,47 @@
+---
+layout: ""
+page_title: "Provider: Kentik Synthetics"
+description: |-
+  The Kentik Synthetics provider provides resources to interact with Kentik Synthetics API.
+---
+
+# Kentik Synthetics Provider
+
+The Kentik Synthetics provider provides resources to interact with Kentik Synthetics API.
+
+## Example usage
+
+Go to folder with Terraform `.tf` definition files for Synthetics resources/data sources ([./examples/**](./examples)):
+
+1. Configure provider with parameters:
+
+```terraform
+provider "kentik-synthetics" {
+  // Authorization email (required). Can also be specified with KTAPI_AUTH_EMAIL environment variable.
+  email = "john@acme.com"
+  // Authorization token (required). Can also be specified with KTAPI_AUTH_TOKEN environment variable.
+  token = "token"
+}
+```
+
+or environment variables:
+
+```bash
+export KTAPI_AUTH_EMAIL="john@acme.com"
+export KTAPI_AUTH_TOKEN="token"
+```
+
+2. Apply Terraform configuration:
+
+```bash
+terraform init
+terraform apply # creates resources in Kentik platform
+```
+
+3. Clean up resources:
+
+```bash
+terraform destroy
+```
+
+{{ .SchemaMarkdown | trimspace }}

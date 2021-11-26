@@ -32,6 +32,6 @@ function pause_and_run() {
 }
 
 function die() {
-    echo "Error. Exit 1"
+    echo "Error - exit 1"
     exit 1
 }
