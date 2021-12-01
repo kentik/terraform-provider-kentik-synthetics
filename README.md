@@ -24,6 +24,7 @@ Development steps:
 - Format the code: `make fmt`
 - Generate the documentation: `make docs`
 - Check if generated documentation is up-to-date: `make check-docs`
+- Check if Go module consistency: `make check-go-mod`
 
 ### Test
 

@@ -14,6 +14,9 @@ build:
 check-docs:
 	./tools/check_docs.sh
 
+check-go-mod:
+	./tools/check_go_mod.sh
+
 docs:
 	go generate
 
