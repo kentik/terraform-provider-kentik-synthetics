@@ -27,7 +27,7 @@ Development steps:
 
 ### Test
 
-Tests run the provider against a `test-api-server` that serves data read from `/synthetics/test-data.json`
+Tests run the provider against a `test-api-server` that serves data read from [test-data.json](synthetics/test-data.json)
 
 This allows to:
 - avoid the necessity of providing valid API credentials
@@ -50,3 +50,12 @@ r -debug
 c
 # attach with terraform following the just-printed out instruction in your terminal
 ```
+
+## Release
+
+Release process for the provider is based on Git repository tags that follow [semantic versioning](https://semver.org/). Every tag with format v[0-9].[0-9].[0-9] will trigger automatic build of package and publish it in [Terraform registry](https://registry.terraform.io/providers/kentik/kentik-synthetics).
+
+To release the provider:
+1. Make sure that all code that you want to release is in _master_ branch.
+2. Navigate to [repository releases page](https://github.com/kentik/terraform-provider-kentik-synthetics/releases), click _Draft a new release_ button and put tag version (in _v[0-9].[0-9].[0-9]_ format), name and description.
+3. Go to [GitHub Actions](https://github.com/kentik/terraform-provider-kentik-synthetics/actions) to observe the release job.
