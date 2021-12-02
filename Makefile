@@ -11,9 +11,21 @@ default: install
 build:
 	go build -o ${BINARY}
 
+check-docs:
+	./tools/check_docs.sh
+
+docs:
+	go generate
+
+fmt:
+	./tools/fmt.sh
+
 install: build
 	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 	mv ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
+
+lint:
+	golangci-lint run
 
 test:
 	TEST_API_SERVER_ENDPOINT=${TEST_API_SERVER_ENDPOINT} ./tools/start_test_api_server.sh
@@ -28,3 +40,5 @@ test:
 		go test ./... $(TESTARGS) -timeout=5m -count=1 || (./tools/stop_test_api_server.sh && exit 1)
 
 	 ./tools/stop_test_api_server.sh
+
+.PHONY: build check-docs docs fmt install lint test

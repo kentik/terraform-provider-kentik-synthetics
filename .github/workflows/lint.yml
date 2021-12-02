@@ -28,4 +28,13 @@ jobs:
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v2.5.2
         with:
-          version: v1.42
+          version: v1.43
+
+  check-docs:
+    name: Check if generated documentation is up-to-date
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.4.0
+      - name: Check if generated documentation is up-to-date
+        run: make check-docs
