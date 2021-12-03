@@ -14,8 +14,7 @@ function run() {
         git diff -- go.mod go.sum
 
         echo -e "\nThis means that Go module definition is not consistent."
-        echo "Please run 'go mod tidy' and commit changes."
-        die
+        die "Please run 'go mod tidy' and commit changes."
     fi
 }
 

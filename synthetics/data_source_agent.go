@@ -23,7 +23,7 @@ func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interfac
 		AgentGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {
-		return detailedDiagError("failed to read agent", err, httpResp)
+		return detailedDiagError("Failed to read agent", err, httpResp)
 	}
 
 	for k, v := range agentToMap(resp.Agent) {

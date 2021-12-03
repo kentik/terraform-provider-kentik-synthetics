@@ -24,7 +24,7 @@ func dataSourceTestRead(ctx context.Context, d *schema.ResourceData, m interface
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {
-		return detailedDiagError("failed to read test", err, httpResp)
+		return detailedDiagError("Failed to read test", err, httpResp)
 	}
 
 	for k, v := range testToMap(resp.Test) {

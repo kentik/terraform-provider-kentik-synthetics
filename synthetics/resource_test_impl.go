@@ -41,7 +41,7 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 		Body(req).
 		Execute()
 	if err != nil {
-		return detailedDiagError("failed to create test", err, httpResp)
+		return detailedDiagError("Failed to create test", err, httpResp)
 	}
 
 	err = d.Set(idKey, resp.Test.GetId())
@@ -64,7 +64,7 @@ func resourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}
 			d.SetId("") // delete the resource in TF state
 			return nil
 		}
-		return detailedDiagError("failed to read test", err, httpResp)
+		return detailedDiagError("Failed to read test", err, httpResp)
 	}
 
 	for k, v := range testToMap(resp.Test) {
@@ -95,7 +95,7 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 			Body(req).
 			Execute()
 		if err != nil {
-			return detailedDiagError("failed to patch test", err, httpResp)
+			return detailedDiagError("Failed to patch test", err, httpResp)
 		}
 	}
 
@@ -422,7 +422,7 @@ func resourceTestDelete(ctx context.Context, d *schema.ResourceData, m interface
 		TestDelete(ctx, d.Get(idKey).(string)).
 		Execute()
 	if err != nil {
-		return detailedDiagError("failed to delete test", err, httpResp)
+		return detailedDiagError("Failed to delete test", err, httpResp)
 	}
 
 	return nil

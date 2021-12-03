@@ -6,19 +6,19 @@ source "tools/utility_functions.sh" || exit 1
 
 function run() {
     stage "Generate docs"
-    go generate || die
+    make docs || die
 
     stage "Check if docs directory has changed"
-    if [[ -n $(git status --porcelain -- docs) ]]; then
+    changes=$(git status --porcelain -- docs)
+    if [[ -n "${changes}" ]]; then
         echo "Found changes in docs directory:"
-        git status --porcelain -- docs
+        echo "${changes}"
 
         echo -e "\nDiff for docs directory:"
         git diff -- docs
 
         echo -e "\nThis means that the documentation is not up-to-date."
-        echo "Please run 'make docs' and commit changes."
-        die
+        die "Please run 'make docs' and commit changes."
     fi
 }
 
