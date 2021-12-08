@@ -8,6 +8,7 @@ require (
 	github.com/kellydunn/golang-geo v0.7.0
 	github.com/kentik/community_sdk_golang v0.2.1-0.20211123051715-62e10d7f63f0
 	github.com/stretchr/testify v1.7.0
+	mvdan.cc/gofumpt v0.2.0
 )
 
 require (

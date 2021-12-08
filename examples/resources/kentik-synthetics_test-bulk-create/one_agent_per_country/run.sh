@@ -45,13 +45,11 @@ function set_test_env() {
 
 function check_env() {
     if [[ -z "$KTAPI_AUTH_EMAIL" ]]; then
-        echo "KTAPI_AUTH_EMAIL env variable must be set to Kentik API account email"
-        die
+        die "KTAPI_AUTH_EMAIL env variable must be set to Kentik API account email"
     fi
 
     if [[ -z "$KTAPI_AUTH_TOKEN" ]]; then
-        echo "KTAPI_AUTH_TOKEN env variable must be set to Kentik API authorization token"
-        die
+        die "KTAPI_AUTH_TOKEN env variable must be set to Kentik API authorization token"
     fi
 }
 

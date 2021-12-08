@@ -2,20 +2,12 @@
 # Bash utility functions used within the project.
 
 function stage() {
-    BOLD_BLUE="\e[1m\e[96m"
-    RESET="\e[0m"
-    msg="$1"
-
     echo
-    echo -e "$BOLD_BLUE$msg$RESET"
+    colored_echo BOLD_BLUE "$1"
 }
 
 function warn() {
-    RED="\e[31m"
-    RESET="\e[0m"
-    msg="$1"
-
-    echo -e "$RED$msg$RESET"
+    colored_echo RED "$1"
 }
 
 function pause() {
@@ -23,15 +15,37 @@ function pause() {
 }
 
 function pause_and_run() {
-    YELLOW="\e[33m"
-    RESET="\e[0m"
-
-    echo -e "Press any key to run $YELLOW'$*'$RESET or use Ctrl-C to stop..."
+    echo "Press any key to run '$*' or use Ctrl-C to stop..."
     read -r
     "$@"
 }
 
 function die() {
-    echo "Error - exit 1"
+    colored_echo RED "$*" 1>&2
     exit 1
+}
+
+function colored_echo() {
+    local color="$1"
+    local msg="$2"
+
+    if [[ ${BASH_VERSINFO[0]} -lt 4 ]]; then
+        # Bash 3.2 distributed with macOS does not support control sequences in echo -e
+        color_code=""
+    else
+        # shellcheck disable=SC2034
+        {
+            BOLD_BLUE="\e[1m\e[96m"
+            RED="\e[31m"
+            YELLOW="\e[33m"
+        }
+        RESET="\e[0m"
+        color_code=$(eval echo "\$$color")
+    fi
+
+    if [ -n "${color_code}" ]; then
+        echo -e "${color_code}${2}${RESET}"
+    else
+        echo "$msg"
+    fi
 }

@@ -9,6 +9,7 @@ TEST_API_SERVER_ENDPOINT=localhost:9955
 default: install
 
 build:
+	go mod tidy
 	go build -o ${BINARY}
 
 check-docs:

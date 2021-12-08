@@ -38,7 +38,7 @@ func dataSourceTests() *schema.Resource {
 func dataSourceTestsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.TestsList(ctx).Execute()
 	if err != nil {
-		return detailedDiagError("failed to read tests", err, httpResp)
+		return detailedDiagError("Failed to read tests", err, httpResp)
 	}
 
 	if resp.Tests != nil {

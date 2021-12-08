@@ -38,18 +38,15 @@ function run() {
 
 function check_prerequisites() {
     if ! pygmentize -V > /dev/null 2>&1; then
-        echo "Please install Pygments: https://pygments.org/"
-        die
+        die "Please install Pygments: https://pygments.org/"
     fi
 
     if ! curl -V > /dev/null 2>&1; then
-        echo "Please install cURL: https://curl.se/"
-        die
+        die "Please install cURL: https://curl.se/"
     fi
 
     if ! jq -V > /dev/null 2>&1; then
-        echo "Please install jq: https://stedolan.github.io/jq/"
-        die
+        die "Please install jq: https://stedolan.github.io/jq/"
     fi
 }
 
@@ -57,13 +54,11 @@ function check_env() {
     stage "Check auth env variables"
 
     if [[ -z "$KTAPI_AUTH_EMAIL" ]]; then
-        echo "KTAPI_AUTH_EMAIL env variable must be set to Kentik API account email"
-        die
+        die "KTAPI_AUTH_EMAIL env variable must be set to Kentik API account email"
     fi
 
     if [[ -z "$KTAPI_AUTH_TOKEN" ]]; then
-        echo "KTAPI_AUTH_TOKEN env variable must be set to Kentik API authorization token"
-        die
+        die "KTAPI_AUTH_TOKEN env variable must be set to Kentik API authorization token"
     fi
 
     echo "Print KTAPI_AUTH_EMAIL"

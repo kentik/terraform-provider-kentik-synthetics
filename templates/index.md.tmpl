@@ -2,12 +2,12 @@
 layout: ""
 page_title: "Provider: Kentik Synthetics"
 description: |-
-  The Kentik Synthetics provider provides resources to interact with Kentik Synthetics API.
+  The Kentik Synthetics provider is used to work with Kentik synthetics tests.
 ---
 
-# Kentik Synthetics Provider
+# Kentik Synthetics provider
 
-The Kentik Synthetics provider provides resources to interact with Kentik Synthetics API.
+The Kentik Synthetics provider is used to work with Kentik synthetics tests.
 
 ## Example usage
 
