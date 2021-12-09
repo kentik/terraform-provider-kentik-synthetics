@@ -1,1 +1,3 @@
-docs/ linguist-generated=true
+docs/ linguist-generated
+go.mod linguist-generated
+go.sum linguist-generated
