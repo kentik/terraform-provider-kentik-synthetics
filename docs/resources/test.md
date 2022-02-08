@@ -115,10 +115,12 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port         = 443
     protocol     = "tcp"
@@ -149,10 +151,12 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port         = 443
     protocol     = "tcp"
@@ -180,10 +184,12 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port         = 443
     protocol     = "tcp"
@@ -213,11 +219,13 @@ resource "kentik-synthetics_test" "minimal-dns-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
 
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port     = 443
     protocol = "tcp"
@@ -251,10 +259,12 @@ resource "kentik-synthetics_test" "minimal-url-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port         = 443
     protocol     = "tcp"
@@ -282,10 +292,12 @@ resource "kentik-synthetics_test" "minimal-network-grid-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port         = 443
     protocol     = "tcp"
@@ -351,10 +363,12 @@ resource "kentik-synthetics_test" "minimal-dns-grid-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port     = 443
     protocol = "tcp"
@@ -383,13 +397,51 @@ resource "kentik-synthetics_test" "minimal-application-mesh-test" {
     ]
     ping {
       period = 60
+      count = 1
     }
     trace {
       period   = 60
       protocol = "udp"
+      count = 1
     }
     port         = 443
     protocol     = "icmp"
+    family       = "IP_FAMILY_V4"
+    rollup_level = 1
+  }
+}
+
+resource "kentik-synthetics_test" "minimal-flow-test" {
+  name   = "minimal-agent-test"
+  type   = "flow"
+  status = "TEST_STATUS_ACTIVE"
+  settings {
+    flow {
+      type   = "region"
+      target = "europe"
+      direction = "src"
+      inet_direction = "dst"
+    }
+    agent_ids = [
+      "817",
+      "818",
+      "819"
+    ]
+    tasks = [
+      "ping",
+      "traceroute"
+    ]
+    ping {
+      period = 60
+      count = 1
+    }
+    trace {
+      period   = 60
+      protocol = "udp"
+      count = 1
+    }
+    port         = 443
+    protocol     = "tcp"
     family       = "IP_FAMILY_V4"
     rollup_level = 1
   }
