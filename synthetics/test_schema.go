@@ -2,6 +2,7 @@ package synthetics
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 // TODO(dfurman): provide descriptions, when they are specified in the OpenAPI definitions
@@ -70,24 +71,28 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 			},
 		},
 		"period": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"count": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"expiry": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"limit": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"tasks": {
 			Type:     schema.TypeList,
@@ -102,9 +107,10 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 		"ping":                makeTestPingSchema(mode),
 		"trace":               makeTestTraceSchema(mode),
 		"port": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"protocol": {
 			Type:     schema.TypeString,
@@ -174,14 +180,16 @@ func makeTestFlowSchema(mode schemaMode) *schema.Schema {
 			Computed: computedOnRead(mode),
 		},
 		"target_refresh_interval_millis": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"max_tasks": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"type": {
 			Type:     schema.TypeString,
@@ -334,7 +342,8 @@ func makeTestHealthSettingsSchema(mode schemaMode) *schema.Schema {
 			Optional: true,
 			Computed: computedOnRead(mode),
 			Elem: &schema.Schema{
-				Type: schema.TypeInt,
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
 			},
 		},
 		"dns_valid_codes": {
@@ -342,7 +351,8 @@ func makeTestHealthSettingsSchema(mode schemaMode) *schema.Schema {
 			Optional: true,
 			Computed: computedOnRead(mode),
 			Elem: &schema.Schema{
-				Type: schema.TypeInt,
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
 			},
 		},
 		"latency_critical_stddev": {
@@ -461,14 +471,16 @@ func makeTestTraceSchema(mode schemaMode) *schema.Schema {
 func makeTestHTTPSchema(mode schemaMode) *schema.Schema {
 	return makeOptionalNestedObjectSchema(mode, map[string]*schema.Schema{
 		"period": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"expiry": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Computed: computedOnRead(mode),
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Computed:     computedOnRead(mode),
+			ValidateFunc: validation.IntAtLeast(0),
 		},
 		"method": {
 			Type:     schema.TypeString,
