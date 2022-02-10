@@ -121,6 +121,8 @@ func makeTestSettingsSchema(mode schemaMode) *schema.Schema {
 			Type:     schema.TypeString,
 			Required: requiredOnCreate(mode),
 			Computed: computedOnRead(mode),
+			ValidateDiagFunc: skipOnRead(mode, validation.ToDiagFunc(validation.StringInSlice(
+				[]string{"IP_FAMILY_V4", "IP_FAMILY_V6", "IP_FAMILY_DUAL", "IP_FAMILY_UNSP", "ECIFIED"}, false))),
 		},
 		"servers": {
 			Type:     schema.TypeList,
@@ -240,8 +242,21 @@ func makeTestDNSSchema(mode schemaMode) *schema.Schema {
 			Type:     schema.TypeString,
 			Optional: true,
 			Computed: computedOnRead(mode),
+			ValidateDiagFunc: skipOnRead(mode, validation.ToDiagFunc(validation.StringInSlice(
+				[]string{
+					"DNS_RECORD_UNSPECIFIED", "DNS_RECORD_A", "DNS_RECORD_AAAA", "DNS_RECORD_CNAME",
+					"DNS_RECORD_DNAME", "DNS_RECORD_NS", "DNS_RECORD_MX", "DNS_RECORD_PTR", "DNS_RECORD_SOA",
+				},
+				false))),
 		},
 	})
+}
+
+func skipOnRead(mode schemaMode, diagFunc schema.SchemaValidateDiagFunc) schema.SchemaValidateDiagFunc {
+	if mode != create {
+		return nil
+	}
+	return diagFunc
 }
 
 func makeTestURLSchema(mode schemaMode) *schema.Schema {
