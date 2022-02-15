@@ -75,7 +75,7 @@ resource "kentik-synthetics_test" "example-hostname-test" {
     trace {
       period   = 60
       count    = 3
-      protocol = "udp"
+      protocol = "icmp"
       port     = 33434
       expiry   = 22500
       limit    = 30
@@ -119,7 +119,7 @@ resource "kentik-synthetics_test" "minimal-hostname-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
@@ -155,7 +155,7 @@ resource "kentik-synthetics_test" "minimal-ip-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
@@ -188,7 +188,7 @@ resource "kentik-synthetics_test" "minimal-agent-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
@@ -214,8 +214,7 @@ resource "kentik-synthetics_test" "minimal-dns-test" {
     ]
     period = 60
     tasks = [
-      "ping",
-      "traceroute"
+      "dns"
     ]
     ping {
       period = 60
@@ -224,7 +223,7 @@ resource "kentik-synthetics_test" "minimal-dns-test" {
 
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port     = 443
@@ -255,7 +254,8 @@ resource "kentik-synthetics_test" "minimal-url-test" {
     expiry = 5000
     tasks = [
       "ping",
-      "traceroute"
+      "traceroute",
+      "http"
     ]
     ping {
       period = 60
@@ -263,7 +263,7 @@ resource "kentik-synthetics_test" "minimal-url-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
@@ -296,7 +296,7 @@ resource "kentik-synthetics_test" "minimal-network-grid-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
@@ -329,7 +329,7 @@ resource "kentik-synthetics_test" "minimal-page-load-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
     }
     port     = 443
     protocol = "tcp"
@@ -358,8 +358,7 @@ resource "kentik-synthetics_test" "minimal-dns-grid-test" {
     ]
     period = 60
     tasks = [
-      "ping",
-      "traceroute"
+      "dns"
     ]
     ping {
       period = 60
@@ -367,7 +366,7 @@ resource "kentik-synthetics_test" "minimal-dns-grid-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port     = 443
@@ -401,7 +400,7 @@ resource "kentik-synthetics_test" "minimal-application-mesh-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
@@ -412,7 +411,7 @@ resource "kentik-synthetics_test" "minimal-application-mesh-test" {
 }
 
 resource "kentik-synthetics_test" "minimal-flow-test" {
-  name   = "minimal-agent-test"
+  name   = "minimal-flow-test"
   type   = "flow"
   status = "TEST_STATUS_ACTIVE"
   settings {
@@ -437,7 +436,7 @@ resource "kentik-synthetics_test" "minimal-flow-test" {
     }
     trace {
       period   = 60
-      protocol = "udp"
+      protocol = "icmp"
       count = 1
     }
     port         = 443
