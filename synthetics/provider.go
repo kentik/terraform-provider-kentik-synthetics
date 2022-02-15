@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"time"
 
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/kentik/community_sdk_golang/kentikapi"
@@ -119,8 +119,8 @@ func retryProperties() map[string]*schema.Schema {
 	}
 }
 
-func configure(_ context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
-	rc, err := getRetryConfig(d)
+func configure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+	rc, err := getRetryConfig(ctx, d)
 	if err != nil {
 		return nil, diag.FromErr(err)
 	}
@@ -135,13 +135,13 @@ func configure(_ context.Context, d *schema.ResourceData) (interface{}, diag.Dia
 
 	strippedCfg := stripSensitiveData(cfg)
 	cfgJSON, _ := json.Marshal(strippedCfg) //nolint: errcheck
-	log.Printf("Creating Kentik API client with config: %+v, JSON: %v", strippedCfg, string(cfgJSON))
+	tflog.Debug(ctx, fmt.Sprintf("Creating Kentik API client with config: %+v, JSON: %v", strippedCfg, string(cfgJSON)))
 
 	return kentikapi.NewClient(cfg), nil
 }
 
-func getRetryConfig(d *schema.ResourceData) (kentikapi.RetryConfig, error) {
-	log.Printf("Getting retry config: %v", d.Get(retryKey))
+func getRetryConfig(ctx context.Context, d *schema.ResourceData) (kentikapi.RetryConfig, error) {
+	tflog.Debug(ctx, fmt.Sprintf("Getting retry config: %v", d.Get(retryKey)))
 	retryCfg, err := getObjectFromNestedResourceData(d.Get(retryKey))
 	if err != nil {
 		return kentikapi.RetryConfig{}, fmt.Errorf("get retry configuration: %v", err)
