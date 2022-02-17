@@ -49,3 +49,45 @@ function colored_echo() {
         echo "$msg"
     fi
 }
+
+function run_examples() {
+    if [[ $1 == "production" ]]; then
+        stage "Running the example using production Kentik API server"
+        warn "Warning: Kentik production resources might be modified"
+        pause
+    else
+        stage "Running the example using test API server"
+        echo "Please make sure that test API server is running at $TEST_API_SERVER_ENDPOINT"
+        set_test_env_examples
+    fi
+
+    check_env_examples
+
+    stage "Build & install plugin"
+    make --directory "$REPO_DIR" install || die
+
+    stage "Terraform init & apply"
+    pushd "$SCRIPT_DIR" > /dev/null || die
+    rm -rf .terraform .terraform.lock.hcl
+
+    terraform init || die
+    terraform apply
+
+    popd > /dev/null || die
+}
+
+function set_test_env_examples() {
+    export KTAPI_URL="http://$TEST_API_SERVER_ENDPOINT"
+    export KTAPI_AUTH_EMAIL="dummy@acme.com"
+    export KTAPI_AUTH_TOKEN="dummy"
+}
+
+function check_env_examples() {
+    if [[ -z "$KTAPI_AUTH_EMAIL" ]]; then
+        die "KTAPI_AUTH_EMAIL env variable must be set to Kentik API account email"
+    fi
+
+    if [[ -z "$KTAPI_AUTH_TOKEN" ]]; then
+        die "KTAPI_AUTH_TOKEN env variable must be set to Kentik API authorization token"
+    fi
+}
