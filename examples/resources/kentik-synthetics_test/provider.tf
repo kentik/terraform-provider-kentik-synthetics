@@ -1,11 +1,1 @@
-# Note: configuration for locally-built provider
-terraform {
-  required_providers {
-    kentik-synthetics = {
-      version = ">= 0.1.0"
-      source  = "kentik/automation/kentik-synthetics"
-    }
-  }
-}
-
-provider "kentik-synthetics" {}
+../../common/provider.tf
