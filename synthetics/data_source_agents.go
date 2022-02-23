@@ -2,10 +2,12 @@ package synthetics
 
 import (
 	"context"
+	"fmt"
 	"math"
 	"strconv"
 	"time"
 
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	geo "github.com/kellydunn/golang-geo"
@@ -59,7 +61,9 @@ func dataSourceAgents() *schema.Resource {
 }
 
 func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	tflog.Debug(ctx, "Kentik API request - read agents")
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.AgentsList(ctx).Execute()
+	tflog.Debug(ctx, fmt.Sprintf("Kentik API response - read:\n%s\n", httpResp.Body))
 	if err != nil {
 		return detailedDiagError("Failed to read agents", err, httpResp)
 	}

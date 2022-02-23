@@ -5,7 +5,9 @@ package synthetics
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/kentik/community_sdk_golang/kentikapi"
@@ -20,9 +22,11 @@ func dataSourceTest() *schema.Resource {
 }
 
 func dataSourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	tflog.Debug(ctx, fmt.Sprintf("Kentik API request - read test with ID: %s\n", d.Get(idKey).(string)))
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
+	tflog.Debug(ctx, fmt.Sprintf("Kentik API response - read:\n%s\n", httpResp.Body))
 	if err != nil {
 		return detailedDiagError("Failed to read test", err, httpResp)
 	}
