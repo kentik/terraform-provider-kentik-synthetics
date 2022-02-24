@@ -2,7 +2,6 @@ package synthetics
 
 import (
 	"context"
-	"fmt"
 	"math"
 	"strconv"
 	"time"
@@ -61,9 +60,9 @@ func dataSourceAgents() *schema.Resource {
 }
 
 func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, "Kentik API request - read agents")
+	tflog.Debug(ctx, "List synthetic Kentik API request")
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.AgentsList(ctx).Execute()
-	tflog.Debug(ctx, fmt.Sprintf("Kentik API response - read:\n%s\n", httpResp.Body))
+	tflog.Debug(ctx, "List synthetic Kentik API response", resp)
 	if err != nil {
 		return detailedDiagError("Failed to read agents", err, httpResp)
 	}
@@ -118,7 +117,8 @@ func filterAgents(agents []synthetics.V202101beta1Agent, d *schema.ResourceData)
 }
 
 func filterAgentsByDistance(agents []synthetics.V202101beta1Agent,
-	lat float64, long float64, minDist float64, maxDist float64) []synthetics.V202101beta1Agent {
+	lat float64, long float64, minDist float64, maxDist float64,
+) []synthetics.V202101beta1Agent {
 	var filteredAgents []synthetics.V202101beta1Agent
 	referencePoint := geo.NewPoint(lat, long)
 	for _, agent := range agents {
