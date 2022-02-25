@@ -21,11 +21,11 @@ func dataSourceTest() *schema.Resource {
 }
 
 func dataSourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, "Get synthetic Kentik API request", "ID", d.Get(idKey).(string))
+	tflog.Debug(ctx, "Get Test Kentik API request", "ID", d.Get(idKey).(string))
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
-	tflog.Debug(ctx, "Get synthetic Kentik API response", resp)
+	tflog.Debug(ctx, "Get Test Kentik API response", "response", resp)
 	if err != nil {
 		return detailedDiagError("Failed to read test", err, httpResp)
 	}
