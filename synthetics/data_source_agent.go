@@ -2,7 +2,6 @@ package synthetics
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -21,11 +20,11 @@ func dataSourceAgent() *schema.Resource {
 }
 
 func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, fmt.Sprintf("Kentik API request - read agent with ID: %s\n", d.Get(idKey).(string)))
+	tflog.Debug(ctx, "Get Agent Kentik API request", "ID", d.Get(idKey).(string))
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		AgentGet(ctx, d.Get(idKey).(string)).
 		Execute()
-	tflog.Debug(ctx, fmt.Sprintf("Kentik API response - read:\n%s\n", httpResp.Body))
+	tflog.Debug(ctx, "Get Agent Kentik API response", "response", resp)
 	if err != nil {
 		return detailedDiagError("Failed to read agent", err, httpResp)
 	}

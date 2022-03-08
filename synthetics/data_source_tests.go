@@ -2,7 +2,6 @@ package synthetics
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 	"time"
 
@@ -38,9 +37,9 @@ func dataSourceTests() *schema.Resource {
 }
 
 func dataSourceTestsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, "Kentik API request - read tests")
+	tflog.Debug(ctx, "List Tests Kentik API request")
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.TestsList(ctx).Execute()
-	tflog.Debug(ctx, fmt.Sprintf("Kentik API response - read:\n%s\n", httpResp.Body))
+	tflog.Debug(ctx, "List Tests Kentik API response", "response", resp)
 	if err != nil {
 		return detailedDiagError("Failed to read tests", err, httpResp)
 	}
