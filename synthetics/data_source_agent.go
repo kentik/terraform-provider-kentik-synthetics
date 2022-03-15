@@ -20,11 +20,11 @@ func dataSourceAgent() *schema.Resource {
 }
 
 func dataSourceAgentRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, "Get Agent Kentik API request", "ID", d.Get(idKey).(string))
+	tflog.Debug(ctx, "Get Agent Kentik API request", map[string]interface{}{"ID": d.Get(idKey).(string)})
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		AgentGet(ctx, d.Get(idKey).(string)).
 		Execute()
-	tflog.Debug(ctx, "Get Agent Kentik API response", "response", resp)
+	tflog.Debug(ctx, "Get Agent Kentik API response", map[string]interface{}{"response": resp})
 	if err != nil {
 		return detailedDiagError("Failed to read agent", err, httpResp)
 	}

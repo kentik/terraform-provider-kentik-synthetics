@@ -39,7 +39,7 @@ func dataSourceTests() *schema.Resource {
 func dataSourceTestsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	tflog.Debug(ctx, "List Tests Kentik API request")
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.TestsList(ctx).Execute()
-	tflog.Debug(ctx, "List Tests Kentik API response", "response", resp)
+	tflog.Debug(ctx, "List Tests Kentik API response", map[string]interface{}{"response": resp})
 	if err != nil {
 		return detailedDiagError("Failed to read tests", err, httpResp)
 	}
