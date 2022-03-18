@@ -1,5 +1,6 @@
 //go:build tools
 
+//nolint:typecheck
 package tools
 
 import (
