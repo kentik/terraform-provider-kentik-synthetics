@@ -62,7 +62,7 @@ func dataSourceAgents() *schema.Resource {
 func dataSourceAgentsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	tflog.Debug(ctx, "List Agent Kentik API request")
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.AgentsList(ctx).Execute()
-	tflog.Debug(ctx, "List Agent Kentik API response", "response", resp)
+	tflog.Debug(ctx, "List Agent Kentik API response", map[string]interface{}{"response": resp})
 	if err != nil {
 		return detailedDiagError("Failed to read agents", err, httpResp)
 	}

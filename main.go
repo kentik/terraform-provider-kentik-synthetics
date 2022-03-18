@@ -3,9 +3,7 @@
 package main
 
 import (
-	"context"
 	"flag"
-	"log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 	"github.com/kentik/terraform-provider-kentik-synthetics/synthetics"
@@ -16,14 +14,7 @@ func main() {
 	flag.BoolVar(&debugMode, "debug", false, "set to true to run the provider with support for debuggers like Delve")
 	flag.Parse()
 
-	opts := &plugin.ServeOpts{ProviderFunc: synthetics.NewProvider}
+	opts := &plugin.ServeOpts{ProviderFunc: synthetics.NewProvider, Debug: debugMode}
 
-	if debugMode {
-		err := plugin.Debug(context.Background(), "kentik/automation/kentik-synthetics", opts)
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-	} else {
-		plugin.Serve(opts)
-	}
+	plugin.Serve(opts)
 }

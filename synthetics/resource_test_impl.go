@@ -36,12 +36,12 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 
 	req := *synthetics.NewV202101beta1CreateTestRequest()
 	req.Test = test
-	tflog.Debug(ctx, "Create Test Kentik API request", "request", req)
+	tflog.Debug(ctx, "Create Test Kentik API request", map[string]interface{}{"request": req})
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestCreate(ctx).
 		Body(req).
 		Execute()
-	tflog.Debug(ctx, "Create Test Kentik API response", "response", resp)
+	tflog.Debug(ctx, "Create Test Kentik API response", map[string]interface{}{"response": resp})
 	if err != nil {
 		return detailedDiagError("Failed to create test", err, httpResp)
 	}
@@ -58,11 +58,11 @@ func resourceTestCreate(ctx context.Context, d *schema.ResourceData, m interface
 }
 
 func resourceTestRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, "Get Test Kentik API request", "ID", d.Get(idKey).(string))
+	tflog.Debug(ctx, "Get Test Kentik API request", map[string]interface{}{"ID": d.Get(idKey).(string)})
 	resp, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestGet(ctx, d.Get(idKey).(string)).
 		Execute()
-	tflog.Debug(ctx, "Get Test Kentik API response", "response", resp)
+	tflog.Debug(ctx, "Get Test Kentik API response", map[string]interface{}{"response": resp})
 	if err != nil {
 		if httpResp.StatusCode == http.StatusNotFound {
 			d.SetId("") // delete the resource in TF state
@@ -93,13 +93,13 @@ func resourceTestUpdate(ctx context.Context, d *schema.ResourceData, m interface
 		req := *synthetics.NewV202101beta1PatchTestRequest()
 		req.Test = test
 		req.SetMask(strings.Join(patchTestFields(test), ","))
-		tflog.Debug(ctx, "Update Test Kentik API request", "request", req)
+		tflog.Debug(ctx, "Update Test Kentik API request", map[string]interface{}{"request": req})
 
 		_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 			TestPatch(ctx, d.Get(idKey).(string)).
 			Body(req).
 			Execute()
-		tflog.Debug(ctx, "Update Test Kentik API response", "response", httpResp.Body)
+		tflog.Debug(ctx, "Update Test Kentik API response", map[string]interface{}{"response": httpResp.Body})
 		if err != nil {
 			return detailedDiagError("Failed to update test", err, httpResp)
 		}
@@ -424,11 +424,11 @@ func httpSettingsFields(h *synthetics.V202101beta1HTTPConfig) []string {
 }
 
 func resourceTestDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	tflog.Debug(ctx, "Delete Test Kentik API request", "ID", d.Get(idKey).(string))
+	tflog.Debug(ctx, "Delete Test Kentik API request", map[string]interface{}{"ID": d.Get(idKey).(string)})
 	_, httpResp, err := m.(*kentikapi.Client).SyntheticsAdminServiceAPI.
 		TestDelete(ctx, d.Get(idKey).(string)).
 		Execute()
-	tflog.Debug(ctx, "Delete Test Kentik API response", "response", httpResp.Body)
+	tflog.Debug(ctx, "Delete Test Kentik API response", map[string]interface{}{"response": httpResp.Body})
 	if err != nil {
 		return detailedDiagError("Failed to delete test", err, httpResp)
 	}
