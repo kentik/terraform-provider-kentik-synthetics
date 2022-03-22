@@ -25,42 +25,42 @@ output "agents_list" {
 
 ### Optional
 
-- **id** (String) The ID of this resource.
-- **latitude** (Number)
-- **longitude** (Number)
-- **max_distance** (Number)
-- **min_distance** (Number)
+- `id` (String) The ID of this resource.
+- `latitude` (Number)
+- `longitude` (Number)
+- `max_distance` (Number)
+- `min_distance` (Number)
 
 ### Read-Only
 
-- **invalid_agents_count** (Number)
-- **items** (List of Object) (see [below for nested schema](#nestedatt--items))
+- `invalid_agents_count` (Number)
+- `items` (List of Object) (see [below for nested schema](#nestedatt--items))
 
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
 Read-Only:
 
-- **agent_impl** (String)
-- **alias** (String)
-- **asn** (Number)
-- **city** (String)
-- **cloud_vpc** (String)
-- **country** (String)
-- **family** (String)
-- **id** (String)
-- **ip** (String)
-- **last_authed** (String)
-- **lat** (Number)
-- **local_ip** (String)
-- **long** (Number)
-- **name** (String)
-- **os** (String)
-- **region** (String)
-- **site_id** (String)
-- **status** (String)
-- **test_ids** (List of String)
-- **type** (String)
-- **version** (String)
+- `agent_impl` (String)
+- `alias` (String)
+- `asn` (Number)
+- `city` (String)
+- `cloud_vpc` (String)
+- `country` (String)
+- `family` (String)
+- `id` (String)
+- `ip` (String)
+- `last_authed` (String)
+- `lat` (Number)
+- `local_ip` (String)
+- `long` (Number)
+- `name` (String)
+- `os` (String)
+- `region` (String)
+- `site_id` (String)
+- `status` (String)
+- `test_ids` (List of String)
+- `type` (String)
+- `version` (String)
 
 
