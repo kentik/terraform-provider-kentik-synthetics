@@ -452,71 +452,71 @@ resource "kentik-synthetics_test" "minimal-flow-test" {
 
 ### Required
 
-- **name** (String)
-- **settings** (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings))
-- **status** (String)
-- **type** (String)
+- `name` (String)
+- `settings` (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings))
+- `status` (String)
+- `type` (String)
 
 ### Read-Only
 
-- **cdate** (String)
-- **created_by** (List of Object) (see [below for nested schema](#nestedatt--created_by))
-- **edate** (String)
-- **expires_on** (String)
-- **id** (String) The ID of this resource.
-- **last_updated_by** (List of Object) (see [below for nested schema](#nestedatt--last_updated_by))
+- `cdate` (String)
+- `created_by` (List of Object) (see [below for nested schema](#nestedatt--created_by))
+- `edate` (String)
+- `expires_on` (String)
+- `id` (String) The ID of this resource.
+- `last_updated_by` (List of Object) (see [below for nested schema](#nestedatt--last_updated_by))
 
 <a id="nestedblock--settings"></a>
 ### Nested Schema for `settings`
 
 Required:
 
-- **agent_ids** (List of String)
-- **family** (String)
-- **protocol** (String)
-- **rollup_level** (Number)
-- **tasks** (List of String)
-- **trace** (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings--trace))
+- `agent_ids` (List of String)
+- `family` (String)
+- `protocol` (String)
+- `rollup_level` (Number)
+- `tasks` (List of String)
+- `trace` (Block List, Min: 1) (see [below for nested schema](#nestedblock--settings--trace))
 
 Optional:
 
-- **agent** (Block List) (see [below for nested schema](#nestedblock--settings--agent))
-- **count** (Number)
-- **dns** (Block List) (see [below for nested schema](#nestedblock--settings--dns))
-- **dns_grid** (Block List) (see [below for nested schema](#nestedblock--settings--dns_grid))
-- **expiry** (Number)
-- **flow** (Block List) (see [below for nested schema](#nestedblock--settings--flow))
-- **health_settings** (Block List) (see [below for nested schema](#nestedblock--settings--health_settings))
-- **hostname** (Block List) (see [below for nested schema](#nestedblock--settings--hostname))
-- **http** (Block List) (see [below for nested schema](#nestedblock--settings--http))
-- **ip** (Block List) (see [below for nested schema](#nestedblock--settings--ip))
-- **limit** (Number)
-- **monitoring_settings** (Block List) (see [below for nested schema](#nestedblock--settings--monitoring_settings))
-- **network_grid** (Block List) (see [below for nested schema](#nestedblock--settings--network_grid))
-- **page_load** (Block List) (see [below for nested schema](#nestedblock--settings--page_load))
-- **period** (Number)
-- **ping** (Block List) (see [below for nested schema](#nestedblock--settings--ping))
-- **port** (Number)
-- **servers** (List of String)
-- **site** (Block List) (see [below for nested schema](#nestedblock--settings--site))
-- **tag** (Block List) (see [below for nested schema](#nestedblock--settings--tag))
-- **url** (Block List) (see [below for nested schema](#nestedblock--settings--url))
+- `agent` (Block List) (see [below for nested schema](#nestedblock--settings--agent))
+- `count` (Number)
+- `dns` (Block List) (see [below for nested schema](#nestedblock--settings--dns))
+- `dns_grid` (Block List) (see [below for nested schema](#nestedblock--settings--dns_grid))
+- `expiry` (Number)
+- `flow` (Block List) (see [below for nested schema](#nestedblock--settings--flow))
+- `health_settings` (Block List) (see [below for nested schema](#nestedblock--settings--health_settings))
+- `hostname` (Block List) (see [below for nested schema](#nestedblock--settings--hostname))
+- `http` (Block List) (see [below for nested schema](#nestedblock--settings--http))
+- `ip` (Block List) (see [below for nested schema](#nestedblock--settings--ip))
+- `limit` (Number)
+- `monitoring_settings` (Block List) (see [below for nested schema](#nestedblock--settings--monitoring_settings))
+- `network_grid` (Block List) (see [below for nested schema](#nestedblock--settings--network_grid))
+- `page_load` (Block List) (see [below for nested schema](#nestedblock--settings--page_load))
+- `period` (Number)
+- `ping` (Block List) (see [below for nested schema](#nestedblock--settings--ping))
+- `port` (Number)
+- `servers` (List of String)
+- `site` (Block List) (see [below for nested schema](#nestedblock--settings--site))
+- `tag` (Block List) (see [below for nested schema](#nestedblock--settings--tag))
+- `url` (Block List) (see [below for nested schema](#nestedblock--settings--url))
 
 <a id="nestedblock--settings--trace"></a>
 ### Nested Schema for `settings.trace`
 
 Required:
 
-- **period** (Number)
-- **protocol** (String)
+- `period` (Number)
+- `protocol` (String)
 
 Optional:
 
-- **count** (Number)
-- **delay** (Number)
-- **expiry** (Number)
-- **limit** (Number)
-- **port** (Number)
+- `count` (Number)
+- `delay` (Number)
+- `expiry` (Number)
+- `limit` (Number)
+- `port` (Number)
 
 
 <a id="nestedblock--settings--agent"></a>
@@ -524,7 +524,7 @@ Optional:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedblock--settings--dns"></a>
@@ -532,11 +532,11 @@ Required:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 Optional:
 
-- **type** (String)
+- `type` (String)
 
 
 <a id="nestedblock--settings--dns_grid"></a>
@@ -544,8 +544,8 @@ Optional:
 
 Required:
 
-- **targets** (List of String)
-- **type** (String)
+- `targets` (List of String)
+- `type` (String)
 
 
 <a id="nestedblock--settings--flow"></a>
@@ -553,15 +553,15 @@ Required:
 
 Required:
 
-- **target** (String)
-- **type** (String)
+- `target` (String)
+- `type` (String)
 
 Optional:
 
-- **direction** (String)
-- **inet_direction** (String)
-- **max_tasks** (Number)
-- **target_refresh_interval_millis** (Number)
+- `direction` (String)
+- `inet_direction` (String)
+- `max_tasks` (Number)
+- `target_refresh_interval_millis` (Number)
 
 
 <a id="nestedblock--settings--health_settings"></a>
@@ -569,22 +569,22 @@ Optional:
 
 Optional:
 
-- **dns_valid_codes** (List of Number)
-- **http_latency_critical** (Number)
-- **http_latency_critical_stddev** (Number)
-- **http_latency_warning** (Number)
-- **http_latency_warning_stddev** (Number)
-- **http_valid_codes** (List of Number)
-- **jitter_critical** (Number)
-- **jitter_critical_stddev** (Number)
-- **jitter_warning** (Number)
-- **jitter_warning_stddev** (Number)
-- **latency_critical** (Number)
-- **latency_critical_stddev** (Number)
-- **latency_warning** (Number)
-- **latency_warning_stddev** (Number)
-- **packet_loss_critical** (Number)
-- **packet_loss_warning** (Number)
+- `dns_valid_codes` (List of Number)
+- `http_latency_critical` (Number)
+- `http_latency_critical_stddev` (Number)
+- `http_latency_warning` (Number)
+- `http_latency_warning_stddev` (Number)
+- `http_valid_codes` (List of Number)
+- `jitter_critical` (Number)
+- `jitter_critical_stddev` (Number)
+- `jitter_warning` (Number)
+- `jitter_warning_stddev` (Number)
+- `latency_critical` (Number)
+- `latency_critical_stddev` (Number)
+- `latency_warning` (Number)
+- `latency_warning_stddev` (Number)
+- `packet_loss_critical` (Number)
+- `packet_loss_warning` (Number)
 
 
 <a id="nestedblock--settings--hostname"></a>
@@ -592,7 +592,7 @@ Optional:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedblock--settings--http"></a>
@@ -600,13 +600,13 @@ Required:
 
 Optional:
 
-- **body** (String)
-- **css_selectors** (Map of String)
-- **expiry** (Number)
-- **headers** (Map of String)
-- **ignore_tls_errors** (Boolean)
-- **method** (String)
-- **period** (Number)
+- `body` (String)
+- `css_selectors` (Map of String)
+- `expiry` (Number)
+- `headers` (Map of String)
+- `ignore_tls_errors` (Boolean)
+- `method` (String)
+- `period` (Number)
 
 
 <a id="nestedblock--settings--ip"></a>
@@ -614,7 +614,7 @@ Optional:
 
 Required:
 
-- **targets** (List of String)
+- `targets` (List of String)
 
 
 <a id="nestedblock--settings--monitoring_settings"></a>
@@ -622,7 +622,7 @@ Required:
 
 Optional:
 
-- **notification_channels** (List of String)
+- `notification_channels` (List of String)
 
 
 <a id="nestedblock--settings--network_grid"></a>
@@ -630,7 +630,7 @@ Optional:
 
 Required:
 
-- **targets** (List of String)
+- `targets` (List of String)
 
 
 <a id="nestedblock--settings--page_load"></a>
@@ -638,7 +638,7 @@ Required:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedblock--settings--ping"></a>
@@ -646,13 +646,13 @@ Required:
 
 Required:
 
-- **period** (Number)
+- `period` (Number)
 
 Optional:
 
-- **count** (Number)
-- **delay** (Number)
-- **expiry** (Number)
+- `count` (Number)
+- `delay` (Number)
+- `expiry` (Number)
 
 
 <a id="nestedblock--settings--site"></a>
@@ -660,7 +660,7 @@ Optional:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedblock--settings--tag"></a>
@@ -668,7 +668,7 @@ Required:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedblock--settings--url"></a>
@@ -676,7 +676,7 @@ Required:
 
 Required:
 
-- **target** (String)
+- `target` (String)
 
 
 
@@ -685,9 +685,9 @@ Required:
 
 Read-Only:
 
-- **email** (String)
-- **full_name** (String)
-- **id** (String)
+- `email` (String)
+- `full_name` (String)
+- `id` (String)
 
 
 <a id="nestedatt--last_updated_by"></a>
@@ -695,8 +695,8 @@ Read-Only:
 
 Read-Only:
 
-- **email** (String)
-- **full_name** (String)
-- **id** (String)
+- `email` (String)
+- `full_name` (String)
+- `id` (String)
 
 

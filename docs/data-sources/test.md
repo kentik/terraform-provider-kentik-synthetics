@@ -27,28 +27,28 @@ output "test_get" {
 
 ### Required
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 ### Read-Only
 
-- **cdate** (String)
-- **created_by** (List of Object) (see [below for nested schema](#nestedatt--created_by))
-- **edate** (String)
-- **expires_on** (String)
-- **last_updated_by** (List of Object) (see [below for nested schema](#nestedatt--last_updated_by))
-- **name** (String)
-- **settings** (List of Object) (see [below for nested schema](#nestedatt--settings))
-- **status** (String)
-- **type** (String)
+- `cdate` (String)
+- `created_by` (List of Object) (see [below for nested schema](#nestedatt--created_by))
+- `edate` (String)
+- `expires_on` (String)
+- `last_updated_by` (List of Object) (see [below for nested schema](#nestedatt--last_updated_by))
+- `name` (String)
+- `settings` (List of Object) (see [below for nested schema](#nestedatt--settings))
+- `status` (String)
+- `type` (String)
 
 <a id="nestedatt--created_by"></a>
 ### Nested Schema for `created_by`
 
 Read-Only:
 
-- **email** (String)
-- **full_name** (String)
-- **id** (String)
+- `email` (String)
+- `full_name` (String)
+- `id` (String)
 
 
 <a id="nestedatt--last_updated_by"></a>
@@ -56,9 +56,9 @@ Read-Only:
 
 Read-Only:
 
-- **email** (String)
-- **full_name** (String)
-- **id** (String)
+- `email` (String)
+- `full_name` (String)
+- `id` (String)
 
 
 <a id="nestedatt--settings"></a>
@@ -66,40 +66,40 @@ Read-Only:
 
 Read-Only:
 
-- **agent** (List of Object) (see [below for nested schema](#nestedobjatt--settings--agent))
-- **agent_ids** (List of String)
-- **count** (Number)
-- **dns** (List of Object) (see [below for nested schema](#nestedobjatt--settings--dns))
-- **dns_grid** (List of Object) (see [below for nested schema](#nestedobjatt--settings--dns_grid))
-- **expiry** (Number)
-- **family** (String)
-- **flow** (List of Object) (see [below for nested schema](#nestedobjatt--settings--flow))
-- **health_settings** (List of Object) (see [below for nested schema](#nestedobjatt--settings--health_settings))
-- **hostname** (List of Object) (see [below for nested schema](#nestedobjatt--settings--hostname))
-- **http** (List of Object) (see [below for nested schema](#nestedobjatt--settings--http))
-- **ip** (List of Object) (see [below for nested schema](#nestedobjatt--settings--ip))
-- **limit** (Number)
-- **monitoring_settings** (List of Object) (see [below for nested schema](#nestedobjatt--settings--monitoring_settings))
-- **network_grid** (List of Object) (see [below for nested schema](#nestedobjatt--settings--network_grid))
-- **page_load** (List of Object) (see [below for nested schema](#nestedobjatt--settings--page_load))
-- **period** (Number)
-- **ping** (List of Object) (see [below for nested schema](#nestedobjatt--settings--ping))
-- **port** (Number)
-- **protocol** (String)
-- **rollup_level** (Number)
-- **servers** (List of String)
-- **site** (List of Object) (see [below for nested schema](#nestedobjatt--settings--site))
-- **tag** (List of Object) (see [below for nested schema](#nestedobjatt--settings--tag))
-- **tasks** (List of String)
-- **trace** (List of Object) (see [below for nested schema](#nestedobjatt--settings--trace))
-- **url** (List of Object) (see [below for nested schema](#nestedobjatt--settings--url))
+- `agent` (List of Object) (see [below for nested schema](#nestedobjatt--settings--agent))
+- `agent_ids` (List of String)
+- `count` (Number)
+- `dns` (List of Object) (see [below for nested schema](#nestedobjatt--settings--dns))
+- `dns_grid` (List of Object) (see [below for nested schema](#nestedobjatt--settings--dns_grid))
+- `expiry` (Number)
+- `family` (String)
+- `flow` (List of Object) (see [below for nested schema](#nestedobjatt--settings--flow))
+- `health_settings` (List of Object) (see [below for nested schema](#nestedobjatt--settings--health_settings))
+- `hostname` (List of Object) (see [below for nested schema](#nestedobjatt--settings--hostname))
+- `http` (List of Object) (see [below for nested schema](#nestedobjatt--settings--http))
+- `ip` (List of Object) (see [below for nested schema](#nestedobjatt--settings--ip))
+- `limit` (Number)
+- `monitoring_settings` (List of Object) (see [below for nested schema](#nestedobjatt--settings--monitoring_settings))
+- `network_grid` (List of Object) (see [below for nested schema](#nestedobjatt--settings--network_grid))
+- `page_load` (List of Object) (see [below for nested schema](#nestedobjatt--settings--page_load))
+- `period` (Number)
+- `ping` (List of Object) (see [below for nested schema](#nestedobjatt--settings--ping))
+- `port` (Number)
+- `protocol` (String)
+- `rollup_level` (Number)
+- `servers` (List of String)
+- `site` (List of Object) (see [below for nested schema](#nestedobjatt--settings--site))
+- `tag` (List of Object) (see [below for nested schema](#nestedobjatt--settings--tag))
+- `tasks` (List of String)
+- `trace` (List of Object) (see [below for nested schema](#nestedobjatt--settings--trace))
+- `url` (List of Object) (see [below for nested schema](#nestedobjatt--settings--url))
 
 <a id="nestedobjatt--settings--agent"></a>
 ### Nested Schema for `settings.agent`
 
 Read-Only:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedobjatt--settings--dns"></a>
@@ -107,8 +107,8 @@ Read-Only:
 
 Read-Only:
 
-- **target** (String)
-- **type** (String)
+- `target` (String)
+- `type` (String)
 
 
 <a id="nestedobjatt--settings--dns_grid"></a>
@@ -116,8 +116,8 @@ Read-Only:
 
 Read-Only:
 
-- **targets** (List of String)
-- **type** (String)
+- `targets` (List of String)
+- `type` (String)
 
 
 <a id="nestedobjatt--settings--flow"></a>
@@ -125,12 +125,12 @@ Read-Only:
 
 Read-Only:
 
-- **direction** (String)
-- **inet_direction** (String)
-- **max_tasks** (Number)
-- **target** (String)
-- **target_refresh_interval_millis** (Number)
-- **type** (String)
+- `direction` (String)
+- `inet_direction` (String)
+- `max_tasks` (Number)
+- `target` (String)
+- `target_refresh_interval_millis` (Number)
+- `type` (String)
 
 
 <a id="nestedobjatt--settings--health_settings"></a>
@@ -138,22 +138,22 @@ Read-Only:
 
 Read-Only:
 
-- **dns_valid_codes** (List of Number)
-- **http_latency_critical** (Number)
-- **http_latency_critical_stddev** (Number)
-- **http_latency_warning** (Number)
-- **http_latency_warning_stddev** (Number)
-- **http_valid_codes** (List of Number)
-- **jitter_critical** (Number)
-- **jitter_critical_stddev** (Number)
-- **jitter_warning** (Number)
-- **jitter_warning_stddev** (Number)
-- **latency_critical** (Number)
-- **latency_critical_stddev** (Number)
-- **latency_warning** (Number)
-- **latency_warning_stddev** (Number)
-- **packet_loss_critical** (Number)
-- **packet_loss_warning** (Number)
+- `dns_valid_codes` (List of Number)
+- `http_latency_critical` (Number)
+- `http_latency_critical_stddev` (Number)
+- `http_latency_warning` (Number)
+- `http_latency_warning_stddev` (Number)
+- `http_valid_codes` (List of Number)
+- `jitter_critical` (Number)
+- `jitter_critical_stddev` (Number)
+- `jitter_warning` (Number)
+- `jitter_warning_stddev` (Number)
+- `latency_critical` (Number)
+- `latency_critical_stddev` (Number)
+- `latency_warning` (Number)
+- `latency_warning_stddev` (Number)
+- `packet_loss_critical` (Number)
+- `packet_loss_warning` (Number)
 
 
 <a id="nestedobjatt--settings--hostname"></a>
@@ -161,7 +161,7 @@ Read-Only:
 
 Read-Only:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedobjatt--settings--http"></a>
@@ -169,13 +169,13 @@ Read-Only:
 
 Read-Only:
 
-- **body** (String)
-- **css_selectors** (Map of String)
-- **expiry** (Number)
-- **headers** (Map of String)
-- **ignore_tls_errors** (Boolean)
-- **method** (String)
-- **period** (Number)
+- `body` (String)
+- `css_selectors` (Map of String)
+- `expiry` (Number)
+- `headers` (Map of String)
+- `ignore_tls_errors` (Boolean)
+- `method` (String)
+- `period` (Number)
 
 
 <a id="nestedobjatt--settings--ip"></a>
@@ -183,7 +183,7 @@ Read-Only:
 
 Read-Only:
 
-- **targets** (List of String)
+- `targets` (List of String)
 
 
 <a id="nestedobjatt--settings--monitoring_settings"></a>
@@ -191,7 +191,7 @@ Read-Only:
 
 Read-Only:
 
-- **notification_channels** (List of String)
+- `notification_channels` (List of String)
 
 
 <a id="nestedobjatt--settings--network_grid"></a>
@@ -199,7 +199,7 @@ Read-Only:
 
 Read-Only:
 
-- **targets** (List of String)
+- `targets` (List of String)
 
 
 <a id="nestedobjatt--settings--page_load"></a>
@@ -207,7 +207,7 @@ Read-Only:
 
 Read-Only:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedobjatt--settings--ping"></a>
@@ -215,10 +215,10 @@ Read-Only:
 
 Read-Only:
 
-- **count** (Number)
-- **delay** (Number)
-- **expiry** (Number)
-- **period** (Number)
+- `count` (Number)
+- `delay` (Number)
+- `expiry` (Number)
+- `period` (Number)
 
 
 <a id="nestedobjatt--settings--site"></a>
@@ -226,7 +226,7 @@ Read-Only:
 
 Read-Only:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedobjatt--settings--tag"></a>
@@ -234,7 +234,7 @@ Read-Only:
 
 Read-Only:
 
-- **target** (String)
+- `target` (String)
 
 
 <a id="nestedobjatt--settings--trace"></a>
@@ -242,13 +242,13 @@ Read-Only:
 
 Read-Only:
 
-- **count** (Number)
-- **delay** (Number)
-- **expiry** (Number)
-- **limit** (Number)
-- **period** (Number)
-- **port** (Number)
-- **protocol** (String)
+- `count` (Number)
+- `delay` (Number)
+- `expiry` (Number)
+- `limit` (Number)
+- `period` (Number)
+- `port` (Number)
+- `protocol` (String)
 
 
 <a id="nestedobjatt--settings--url"></a>
@@ -256,6 +256,6 @@ Read-Only:
 
 Read-Only:
 
-- **target** (String)
+- `target` (String)
 
 

@@ -27,29 +27,29 @@ output "agent_get" {
 
 ### Required
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 ### Read-Only
 
-- **agent_impl** (String)
-- **alias** (String)
-- **asn** (Number)
-- **city** (String)
-- **cloud_vpc** (String)
-- **country** (String)
-- **family** (String)
-- **ip** (String)
-- **last_authed** (String)
-- **lat** (Number)
-- **local_ip** (String)
-- **long** (Number)
-- **name** (String)
-- **os** (String)
-- **region** (String)
-- **site_id** (String)
-- **status** (String)
-- **test_ids** (List of String)
-- **type** (String)
-- **version** (String)
+- `agent_impl` (String)
+- `alias` (String)
+- `asn` (Number)
+- `city` (String)
+- `cloud_vpc` (String)
+- `country` (String)
+- `family` (String)
+- `ip` (String)
+- `last_authed` (String)
+- `lat` (Number)
+- `local_ip` (String)
+- `long` (Number)
+- `name` (String)
+- `os` (String)
+- `region` (String)
+- `site_id` (String)
+- `status` (String)
+- `test_ids` (List of String)
+- `type` (String)
+- `version` (String)
 
 
