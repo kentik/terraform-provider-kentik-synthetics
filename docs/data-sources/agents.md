@@ -25,7 +25,6 @@ output "agents_list" {
 
 ### Optional
 
-- `id` (String) The ID of this resource.
 - `latitude` (Number)
 - `longitude` (Number)
 - `max_distance` (Number)
@@ -33,6 +32,7 @@ output "agents_list" {
 
 ### Read-Only
 
+- `id` (String) The ID of this resource.
 - `invalid_agents_count` (Number)
 - `items` (List of Object) (see [below for nested schema](#nestedatt--items))
 
