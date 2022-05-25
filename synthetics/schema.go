@@ -36,6 +36,13 @@ func computedOnRead(mode schemaMode) bool {
 	return mode == readSingle || mode == readList
 }
 
+func skipOnRead(mode schemaMode, diagFunc schema.SchemaValidateDiagFunc) schema.SchemaValidateDiagFunc {
+	if mode == readSingle || mode == readList {
+		return nil
+	}
+	return diagFunc
+}
+
 // makeRequiredNestedObjectSchema returns a list of 1 element to emulate a nested object.
 // See: https://learn.hashicorp.com/tutorials/terraform/provider-create?in=terraform/providers#define-order-schema
 func makeRequiredNestedObjectSchema(mode schemaMode, properties map[string]*schema.Schema) *schema.Schema {
