@@ -3,7 +3,7 @@ module github.com/kentik/terraform-provider-kentik-synthetics
 go 1.17
 
 require (
-	github.com/hashicorp/terraform-plugin-docs v0.9.0
+	github.com/hashicorp/terraform-plugin-docs v0.10.0
 	github.com/hashicorp/terraform-plugin-log v0.4.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/kellydunn/golang-geo v0.7.0
