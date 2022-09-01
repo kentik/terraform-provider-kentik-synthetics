@@ -7,3 +7,4 @@ terraform-provider-kentik-synthetics
 terraform.tfplan
 terraform.tfstate
 test-api-server
+.idea/
