@@ -8,7 +8,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.20.0
 	github.com/kellydunn/golang-geo v0.7.0
 	github.com/kentik/community_sdk_golang v0.2.1-0.20211123051715-62e10d7f63f0
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.4
 	mvdan.cc/gofumpt v0.3.1
 )
 
